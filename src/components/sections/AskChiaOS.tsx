@@ -6,9 +6,10 @@ import { answerFromLocalData } from "@/lib/assistant";
 import type { AssistantAnswer } from "@/types/portfolio";
 
 const starterQuestions = [
+  "What version is ChiaOS?",
   "What projects has Chia built?",
   "What skills does Chia have?",
-  "What is Chia's roadmap?",
+  "How can I contact Chia?",
 ];
 
 export function AskChiaOS() {

@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { Cpu } from "lucide-react";
+import { ChiaOSVersionBadge } from "@/components/system/ChiaOSVersionBadge";
 
 const bootLines = [
   "unlocking system core",
@@ -22,16 +23,19 @@ export function BootScreen() {
           transition={{ duration: 0.5 }}
           className="system-grid rounded-2xl border border-white/12 bg-[#0B0F17]/82 p-4 shadow-2xl shadow-[rgba(0,217,255,0.12)]"
         >
-          <div className="flex items-center gap-3 border-b border-white/12 pb-3">
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#00D9FF]/35 bg-[#00D9FF]/10 text-[#00D9FF]">
-              <Cpu className="h-4 w-4" aria-hidden />
-            </span>
-            <div>
-              <p className="font-code text-xs uppercase text-[#00D9FF]">
-                ChiaOS activation sequence
-              </p>
-              <p className="text-sm text-[#AAB4C0]">System Core online</p>
+          <div className="flex flex-col gap-3 border-b border-white/12 pb-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-center gap-3">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#00D9FF]/35 bg-[#00D9FF]/10 text-[#00D9FF]">
+                <Cpu className="h-4 w-4" aria-hidden />
+              </span>
+              <div>
+                <p className="font-code text-xs uppercase text-[#00D9FF]">
+                  ChiaOS activation sequence
+                </p>
+                <p className="text-sm text-[#AAB4C0]">System Core online</p>
+              </div>
             </div>
+            <ChiaOSVersionBadge showHint />
           </div>
           <div className="grid gap-2 pt-4 sm:grid-cols-2 lg:grid-cols-4">
             {bootLines.map((line, index) => (

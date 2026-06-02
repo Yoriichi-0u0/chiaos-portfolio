@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Command, Download, Home, Menu, X } from "lucide-react";
+import { ChiaOSVersionBadge } from "@/components/system/ChiaOSVersionBadge";
 import { cn } from "@/lib/utils";
 
 const systemLinks = [
@@ -41,9 +42,12 @@ export function Navbar({ onCommandOpen }: NavbarProps) {
   return (
     <header className="sticky top-0 z-40 border-b border-white/12 bg-[#05070B]/86 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-        <a href="#top" className="font-display text-lg font-semibold text-white">
-          ChiaOS System
-        </a>
+        <div className="flex min-w-0 items-center gap-3">
+          <a href="#top" className="font-display text-lg font-semibold text-white">
+            ChiaOS System
+          </a>
+          <ChiaOSVersionBadge className="hidden sm:inline-flex" />
+        </div>
         <div className="hidden items-center gap-1 lg:flex">
           {systemLinks.map((link) => (
             <a
@@ -111,6 +115,7 @@ export function Navbar({ onCommandOpen }: NavbarProps) {
               ))}
             </nav>
             <div className="mt-3 grid gap-3 rounded-2xl border border-white/12 bg-[#0B0F17]/92 p-3">
+              <ChiaOSVersionBadge showHint className="justify-center" />
               <Link
                 href="/"
                 onClick={() => setMobileMenuOpen(false)}

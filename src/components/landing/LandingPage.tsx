@@ -6,10 +6,12 @@ import {
   Download,
   GitBranch,
   GraduationCap,
+  Mail,
   Power,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import { ChiaOSVersionBadge } from "@/components/system/ChiaOSVersionBadge";
 import { missions } from "@/data/missions";
 import { profile } from "@/data/profile";
 import { skillGroups } from "@/data/skills";
@@ -25,9 +27,12 @@ export function LandingPage() {
       </a>
       <header className="sticky top-0 z-40 border-b border-[#D2D2D7]/80 bg-[#F5F5F7]/88 backdrop-blur-xl">
         <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
-          <a href="#top" className="font-display text-lg font-semibold">
-            ChiaOS
-          </a>
+          <div className="flex min-w-0 items-center gap-3">
+            <a href="#top" className="font-display text-lg font-semibold">
+              ChiaOS
+            </a>
+            <ChiaOSVersionBadge tone="light" />
+          </div>
           <div className="hidden items-center gap-1 md:flex">
             <a href="#cv" className="rounded-full px-3 py-2 text-sm text-[#6E6E73] transition hover:bg-white hover:text-[#1D1D1F]">
               CV
@@ -69,6 +74,9 @@ export function LandingPage() {
                       <Cpu className="h-5 w-5" aria-hidden />
                     </span>
                   </div>
+                  <div className="mt-5">
+                    <ChiaOSVersionBadge tone="light" showHint />
+                  </div>
                   <div className="mt-8 grid gap-3">
                     {profile.targetRoles.slice(0, 3).map((role) => (
                       <div
@@ -99,7 +107,7 @@ export function LandingPage() {
               </h2>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-[#6E6E73]">
                 {profile.name} is a {profile.degree} student at {profile.university},
-                focused on {profile.majors.join(" and ")}. ChiaOS starts as a calm CV
+                focused on {profile.majors.join(" and ")}. ChiaOS starts as Chia&apos;s calm CV
                 landing page, then opens into a full system built to show development
                 skill, creative direction, and career identity.
               </p>
@@ -121,8 +129,17 @@ export function LandingPage() {
               </div>
               <div className="mt-8 flex flex-wrap gap-2">
                 <a
+                  href={`mailto:${profile.contact.email}`}
+                  className="inline-flex items-center gap-2 rounded-full border border-[#D2D2D7] bg-white px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:border-[#0071E3]/40"
+                >
+                  <Mail className="h-4 w-4" aria-hidden />
+                  Email
+                </a>
+                <a
                   href={profile.contact.github}
                   className="inline-flex items-center gap-2 rounded-full border border-[#D2D2D7] bg-white px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:border-[#0071E3]/40"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <GitBranch className="h-4 w-4" aria-hidden />
                   GitHub
@@ -130,6 +147,8 @@ export function LandingPage() {
                 <a
                   href={profile.contact.linkedin}
                   className="inline-flex items-center gap-2 rounded-full border border-[#D2D2D7] bg-white px-4 py-2 text-sm font-medium text-[#1D1D1F] transition hover:border-[#0071E3]/40"
+                  target="_blank"
+                  rel="noreferrer"
                 >
                   <BriefcaseBusiness className="h-4 w-4" aria-hidden />
                   LinkedIn

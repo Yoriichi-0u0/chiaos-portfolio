@@ -21,6 +21,8 @@ export function Footer() {
           </a>
           <a
             href={profile.contact.github}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 transition hover:border-[#00D9FF]/60 hover:text-white"
             aria-label="Open Chia's GitHub"
           >
@@ -28,6 +30,8 @@ export function Footer() {
           </a>
           <a
             href={profile.contact.linkedin}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 transition hover:border-[#FFD400]/60 hover:text-white"
             aria-label="Open Chia's LinkedIn"
           >

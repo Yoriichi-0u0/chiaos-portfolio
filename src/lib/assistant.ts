@@ -8,12 +8,13 @@ import { skillGroups } from "@/data/skills";
 import { timeline } from "@/data/timeline";
 import type { AssistantAnswer } from "@/types/portfolio";
 import { normalizeText } from "@/lib/utils";
+import { getChiaOSVersion } from "@/lib/version";
 
 type CorpusItem = {
   source: string;
   keywords: string[];
   text: string;
-  answer: string;
+  answer: string | (() => string);
 };
 
 const corpus: CorpusItem[] = [
@@ -21,7 +22,16 @@ const corpus: CorpusItem[] = [
     source: "Profile",
     keywords: ["who", "profile", "identity", "about", "location", "role"],
     text: `${profile.name} ${profile.preferredName} ${profile.location} ${profile.identity} ${profile.positioning} ${profile.targetRoles.join(" ")}`,
-    answer: `${profile.name} is an undergraduate builder in ${profile.location}, focused on AI, cybersecurity, cloud architecture, and software systems. ChiaOS positions internship as one checkpoint inside a larger career journey: ${profile.positioning}`,
+    answer: `I'm Chia, an undergraduate builder in ${profile.location}, focused on AI, cybersecurity, cloud architecture, and software systems. ChiaOS is my career system for showing development skill, creative direction, project proof, and the way I keep building.`,
+  },
+  {
+    source: "ChiaOS Version",
+    keywords: ["version", "age", "birthday", "birth", "real age", "v20", "updates"],
+    text: "ChiaOS version follows Chia's real age and updates through the current age year.",
+    answer: () => {
+      const version = getChiaOSVersion();
+      return `${version.label} is live. The major version is my full age in years, and the minor version tracks progress through my current age year. ${version.tooltip}`;
+    },
   },
   {
     source: "Education",
@@ -38,17 +48,32 @@ const corpus: CorpusItem[] = [
     answer: experience
       .map(
         (item) =>
-          `${item.role} at ${item.organization}, ${item.location}: ${item.summary} Responsibilities included ${item.responsibilities.join(" ")}`
+          `My major work experience so far is ${item.role} at ${item.organization}, ${item.location}. ${item.summary} Responsibilities included ${item.responsibilities.join(" ")}`
       )
       .join(" "),
   },
   {
     source: "Missions",
-    keywords: ["project", "mission", "portfolio", "built", "proof", "camera", "aws", "database", "networking"],
+    keywords: [
+      "project",
+      "mission",
+      "portfolio",
+      "built",
+      "proof",
+      "cos30049",
+      "cos30018",
+      "automated",
+      "negotiation",
+      "aws",
+      "database",
+      "networking",
+      "repo",
+      "github",
+    ],
     text: missions
-      .map((mission) => `${mission.title} ${mission.category} ${mission.summary} ${mission.proof.join(" ")} ${mission.technologies.join(" ")}`)
+      .map((mission) => `${mission.title} ${mission.category} ${mission.summary} ${mission.proof.join(" ")} ${mission.technologies.join(" ")} ${mission.href}`)
       .join(" "),
-    answer: `Main mission files include ${missions.map((mission) => mission.title).join(", ")}. They show Chia's direction across AI, cloud architecture, software systems, databases, and networking/security foundations.`,
+    answer: `My flagship mission file is COS30049 Computing Technology Innovation Project, currently the university project I am most satisfied with. Repo: https://github.com/jostinchok/my-react-app.git. COS30018 Automated Negotiation System is an Intelligent Systems mission; the team repo is private for now, with a public copy coming soon at https://github.com/Yoriichi-0u0/cos30018-assignment.git while the final public repo details are still being confirmed. Other mission files stay described without invented links.`,
   },
   {
     source: "Skills",
@@ -80,9 +105,9 @@ const corpus: CorpusItem[] = [
   },
   {
     source: "Contact",
-    keywords: ["contact", "email", "github", "linkedin", "reach"],
+    keywords: ["contact", "email", "github", "linkedin", "reach", "mail"],
     text: `${profile.contact.email} ${profile.contact.github} ${profile.contact.linkedin}`,
-    answer: `Contact placeholders are currently configured for email, GitHub, and LinkedIn. Replace them with final links before public release.`,
+    answer: `You can reach me at ${profile.contact.email}, find my GitHub at ${profile.contact.github}, and connect on LinkedIn at ${profile.contact.linkedin}.`,
   },
 ];
 
@@ -153,7 +178,7 @@ export function answerFromLocalData(question: string): AssistantAnswer {
     .map((item) => item.source);
 
   return {
-    answer: best.answer,
+    answer: typeof best.answer === "function" ? best.answer() : best.answer,
     sources: relatedSources,
     confident: true,
   };

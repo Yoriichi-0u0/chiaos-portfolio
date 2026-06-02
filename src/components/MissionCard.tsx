@@ -11,6 +11,7 @@ type MissionCardProps = {
 
 export function MissionCard({ mission, index }: MissionCardProps) {
   const reduceMotion = useReducedMotion();
+  const isExternalLink = mission.href.startsWith("http");
 
   return (
     <motion.article
@@ -47,6 +48,11 @@ export function MissionCard({ mission, index }: MissionCardProps) {
           </div>
         ))}
       </div>
+      {mission.note ? (
+        <p className="mt-4 rounded-2xl border border-[#FFD400]/18 bg-[#FFD400]/8 px-4 py-3 text-sm leading-6 text-[#FFF4B8]">
+          {mission.note}
+        </p>
+      ) : null}
       <div className="mt-5 flex flex-wrap gap-2">
         {mission.technologies.map((technology) => (
           <span
@@ -59,6 +65,8 @@ export function MissionCard({ mission, index }: MissionCardProps) {
       </div>
       <a
         href={mission.href}
+        target={isExternalLink ? "_blank" : undefined}
+        rel={isExternalLink ? "noreferrer" : undefined}
         className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#00D9FF] transition group-hover:gap-3"
       >
         {mission.linkLabel}

@@ -2,20 +2,21 @@ import type { Mission } from "@/types/portfolio";
 
 export const missions: Mission[] = [
   {
-    id: "ai-camera-incident-detection",
-    title: "AI Camera Incident Detection System",
+    id: "cos30049-computing-technology-innovation-project",
+    title: "COS30049 Computing Technology Innovation Project",
     category: "AI",
     summary:
-      "A real-time monitoring concept focused on detecting incidents, capturing evidence, and turning camera feeds into actionable signals.",
+      "Chia's flagship university project: an AI, full-stack, and system integration mission that represents one of his strongest current proof-of-work projects.",
     proof: [
-      "Computer vision workflow thinking",
-      "Evidence capture and event-first design",
-      "AI model evaluation awareness",
+      "Flagship university project and current favorite build",
+      "AI-oriented direction with full-stack delivery",
+      "System integration work across a real project repo",
     ],
-    technologies: ["Python", "Computer Vision", "Model Evaluation", "AI Systems"],
-    status: "Portfolio proof",
-    linkLabel: "Project link pending",
-    href: "#contact",
+    technologies: ["AI", "Full-stack", "System Integration", "Software Delivery"],
+    status: "Built",
+    note: "Currently the university project Chia is most satisfied with.",
+    linkLabel: "Open COS30049 repo",
+    href: "https://github.com/jostinchok/my-react-app.git",
   },
   {
     id: "aws-cloud-architecture",
@@ -35,19 +36,20 @@ export const missions: Mission[] = [
   },
   {
     id: "automated-negotiation-system",
-    title: "Automated Negotiation System",
+    title: "COS30018 Automated Negotiation System",
     category: "Negotiation",
     summary:
-      "A software systems project exploring structured decision-making, negotiation flow, and rule-based interaction between agents.",
+      "An Intelligent Systems mission exploring automated negotiation, structured agent behavior, and decision flow. The team repo is private for now, with a public copy coming soon.",
     proof: [
-      "System behavior modeling",
-      "Decision logic design",
-      "Structured interaction flow",
+      "Automated negotiation workflow and agent decision logic",
+      "Intelligent Systems coursework mission",
+      "Public copy planned while final repo details are confirmed",
     ],
-    technologies: ["AI Concepts", "Rules", "Algorithms", "Software Design"],
-    status: "Built",
-    linkLabel: "Project link pending",
-    href: "#contact",
+    technologies: ["Intelligent Systems", "Negotiation Agents", "Decision Logic", "Software Design"],
+    status: "In progress",
+    note: "Private team repo exists; final public copy/name is still pending confirmation.",
+    linkLabel: "Public copy coming soon",
+    href: "https://github.com/Yoriichi-0u0/cos30018-assignment.git",
   },
   {
     id: "database-design-project",

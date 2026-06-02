@@ -31,6 +31,7 @@ export type Mission = {
   proof: string[];
   technologies: string[];
   status: "Built" | "In progress" | "Portfolio proof";
+  note?: string;
   linkLabel: string;
   href: string;
 };

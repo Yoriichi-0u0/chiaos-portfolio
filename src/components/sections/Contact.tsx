@@ -28,6 +28,8 @@ export function Contact() {
             </a>
             <a
               href={profile.contact.github}
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/12 px-5 text-sm font-semibold text-white transition hover:border-[#00D9FF]/50 sm:w-auto lg:w-full"
             >
               <GitBranch className="h-4 w-4" aria-hidden />
@@ -35,6 +37,8 @@ export function Contact() {
             </a>
             <a
               href={profile.contact.linkedin}
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/12 px-5 text-sm font-semibold text-white transition hover:border-[#FFD400]/55 sm:w-auto lg:w-full"
             >
               <BriefcaseBusiness className="h-4 w-4" aria-hidden />
