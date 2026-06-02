@@ -1,0 +1,38 @@
+{
+  "name": "chiaos",
+  "version": "0.1.0",
+  "description": "ChiaOS personal career operating system portfolio.",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "keywords": [
+    "portfolio",
+    "nextjs",
+    "typescript",
+    "career"
+  ],
+  "author": "Chia Yuen Kai",
+  "license": "UNLICENSED",
+  "type": "module",
+  "dependencies": {
+    "framer-motion": "^12.40.0",
+    "lucide-react": "^1.17.0",
+    "next": "^16.2.7",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.0",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.16",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^16.2.7",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^6.0.3"
+  }
+}
