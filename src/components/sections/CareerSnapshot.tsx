@@ -19,7 +19,7 @@ const snapshotItems = [
     icon: Cloud,
     label: "Next checkpoint",
     value: "Internship",
-    detail: "A step inside the larger builder journey.",
+    detail: "A step inside the larger career system.",
   },
   {
     icon: Shield,

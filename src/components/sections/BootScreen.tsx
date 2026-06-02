@@ -4,10 +4,10 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Cpu } from "lucide-react";
 
 const bootLines = [
-  "calibrating AI telemetry",
-  "arming mission files",
-  "syncing skill vectors",
-  "race control ready",
+  "unlocking system core",
+  "mounting mission files",
+  "warming 3D interface",
+  "activated system ready",
 ];
 
 export function BootScreen() {
@@ -20,7 +20,7 @@ export function BootScreen() {
           initial={reduceMotion ? false : { opacity: 0, y: -16 }}
           animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="builder-grid rounded-2xl border border-white/12 bg-[#0B0F17]/82 p-4 shadow-2xl shadow-[rgba(0,217,255,0.12)]"
+          className="system-grid rounded-2xl border border-white/12 bg-[#0B0F17]/82 p-4 shadow-2xl shadow-[rgba(0,217,255,0.12)]"
         >
           <div className="flex items-center gap-3 border-b border-white/12 pb-3">
             <span className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[#00D9FF]/35 bg-[#00D9FF]/10 text-[#00D9FF]">
@@ -28,9 +28,9 @@ export function BootScreen() {
             </span>
             <div>
               <p className="font-code text-xs uppercase text-[#00D9FF]">
-                ChiaOS startup telemetry
+                ChiaOS activation sequence
               </p>
-              <p className="text-sm text-[#AAB4C0]">AI cockpit data online</p>
+              <p className="text-sm text-[#AAB4C0]">System Core online</p>
             </div>
           </div>
           <div className="grid gap-2 pt-4 sm:grid-cols-2 lg:grid-cols-4">

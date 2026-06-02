@@ -25,7 +25,7 @@ export function AskChiaOS() {
   return (
     <section id="ask" className="px-4 py-16 sm:px-6 lg:px-8">
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div>
+        <div className="min-w-0">
           <p className="font-code text-sm uppercase text-[#00D9FF]">ask chiaos</p>
           <h2 className="mt-3 font-display text-4xl font-semibold text-[#F8FAFC] sm:text-5xl">
             Local answers from local data.
@@ -50,7 +50,7 @@ export function AskChiaOS() {
             ))}
           </div>
         </div>
-        <div className="rounded-3xl border border-[#00D9FF]/24 bg-[#0B0F17]/88 p-5 shadow-2xl shadow-[rgba(0,217,255,0.12)]">
+        <div className="min-w-0 rounded-3xl border border-[#00D9FF]/24 bg-[#0B0F17]/88 p-5 shadow-2xl shadow-[rgba(0,217,255,0.12)]">
           <div className="flex items-center gap-3 border-b border-white/12 pb-4">
             <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#00D9FF]/30 bg-[#00D9FF]/10 text-[#00D9FF]">
               <Bot className="h-5 w-5" aria-hidden />
@@ -61,7 +61,11 @@ export function AskChiaOS() {
             </div>
           </div>
           <form onSubmit={onSubmit} className="mt-5 flex gap-2">
+            <label htmlFor="ask-chiaos-question" className="screen-reader-only">
+              Ask ChiaOS a question
+            </label>
             <input
+              id="ask-chiaos-question"
               value={question}
               onChange={(event) => setQuestion(event.target.value)}
               placeholder="Ask about projects, skills, education, or roadmap"

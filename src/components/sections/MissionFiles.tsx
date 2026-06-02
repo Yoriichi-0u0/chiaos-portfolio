@@ -35,7 +35,11 @@ export function MissionFiles() {
               checkpoint can connect to real-world teams.
             </p>
           </div>
-          <div className="flex max-w-full items-center gap-2 overflow-x-auto rounded-full border border-white/12 bg-[#0B0F17]/72 p-1 scrollbar-hide">
+          <div
+            className="flex max-w-full items-center gap-2 overflow-x-auto rounded-full border border-white/12 bg-[#0B0F17]/72 p-1 scrollbar-hide"
+            role="group"
+            aria-label="Filter missions by category"
+          >
             <span className="hidden h-9 items-center gap-2 px-3 text-sm text-[#AAB4C0] sm:inline-flex">
               <Filter className="h-4 w-4" aria-hidden />
               Filter

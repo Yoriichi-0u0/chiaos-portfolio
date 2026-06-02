@@ -1,6 +1,8 @@
 # ChiaOS
 
-ChiaOS is Chia Yuen Kai's personal career operating system: a dual-mode portfolio for AI, cybersecurity, cloud architecture, software systems, project proof, and career direction.
+ChiaOS is Chia Yuen Kai's personal career operating system: a clean original setup landing page that unlocks into an activated system portfolio for development skill, creativity, vibe coding, project proof, and career identity.
+
+Live site: https://chiaos-portfolio.vercel.app/
 
 ## Tech Stack
 
@@ -9,8 +11,16 @@ ChiaOS is Chia Yuen Kai's personal career operating system: a dual-mode portfoli
 - Tailwind CSS
 - Framer Motion
 - Lucide React
+- Three.js
+- React Three Fiber
+- Drei
 - npm
 - Vercel deployment target
+
+## Routes
+
+- `/` is the Original Setup landing page: clean CV summary, key skills preview, featured mission preview, CV download, and Activate ChiaOS action.
+- `/system` is the Activated ChiaOS System: 3D system core, activation sequence, mission files, skill system, career timeline, build logs, roadmap, local Ask ChiaOS assistant, and command palette.
 
 ## Local Development
 
@@ -57,7 +67,12 @@ Recommended path:
 3. Use `npm install` as the install command.
 4. Use `npm run build` as the build command.
 5. Deploy from the `main` branch.
-6. Replace placeholder URLs after the production deployment succeeds.
+
+Production URL:
+
+```text
+https://chiaos-portfolio.vercel.app/
+```
 
 Optional CLI path:
 
@@ -69,8 +84,7 @@ vercel --prod
 
 ## Notes
 
-- Builder Mode is the default high-energy view.
-- Signal Mode is the clean recruiter-friendly view.
-- Mode preference is stored in `localStorage`.
+- The Original Setup route is the clean CV landing page.
+- The Activated ChiaOS System route is the full creative development experience.
 - Ask ChiaOS uses only local site data in v1 and does not call external APIs.
 - Replace all items in `TODO_PLACEHOLDERS.md` before treating the public site as final.

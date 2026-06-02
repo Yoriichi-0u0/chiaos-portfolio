@@ -1,5 +1,3 @@
-export type PortfolioMode = "builder" | "signal";
-
 export type Profile = {
   name: string;
   preferredName: string;

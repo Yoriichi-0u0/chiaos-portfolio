@@ -3,10 +3,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  BriefcaseBusiness,
   Download,
   FileText,
   FolderKanban,
+  Home,
   Map,
   RadioTower,
   Search,
@@ -15,7 +15,6 @@ import {
   X,
   Zap,
 } from "lucide-react";
-import type { PortfolioMode } from "@/types/portfolio";
 import { cn } from "@/lib/utils";
 
 type CommandAction = {
@@ -26,24 +25,19 @@ type CommandAction = {
 };
 
 type CommandPaletteProps = {
-  mode: PortfolioMode;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onModeChange: (mode: PortfolioMode) => void;
 };
 
 function scrollToTarget(selector: string) {
   document.querySelector(selector)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-export function CommandPalette({
-  mode,
-  open,
-  onOpenChange,
-  onModeChange,
-}: CommandPaletteProps) {
+export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const lastFocusedElementRef = useRef<HTMLElement | null>(null);
+  const wasOpenRef = useRef(false);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -63,59 +57,71 @@ export function CommandPalette({
 
   useEffect(() => {
     if (open) {
+      lastFocusedElementRef.current =
+        document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      wasOpenRef.current = true;
       window.setTimeout(() => inputRef.current?.focus(), 0);
+      return;
+    }
+
+    if (wasOpenRef.current) {
+      setQuery("");
+      lastFocusedElementRef.current?.focus({ preventScroll: true });
+      wasOpenRef.current = false;
     }
   }, [open]);
 
   const commands = useMemo<CommandAction[]>(
     () => [
       {
-        label: "Builder Mode",
-        detail: "Dark career cockpit",
+        label: "System Core",
+        detail: "Return to the activated hero scene",
         icon: Zap,
-        run: () => onModeChange("builder"),
-      },
-      {
-        label: "Signal Mode",
-        detail: "Clean professional view",
-        icon: BriefcaseBusiness,
-        run: () => onModeChange("signal"),
+        run: () => scrollToTarget("#top"),
       },
       {
         label: "Mission Files",
         detail: "Featured project proof",
         icon: FolderKanban,
-        run: () => scrollToTarget(mode === "builder" ? "#missions" : "#signal-projects"),
-      },
-      {
-        label: "Career Timeline",
-        detail: "Growth path",
-        icon: Timeline,
-        run: () => scrollToTarget(mode === "builder" ? "#timeline" : "#summary"),
+        run: () => scrollToTarget("#missions"),
       },
       {
         label: "Skill System",
         detail: "Evidence-based skills",
         icon: Sparkles,
-        run: () => scrollToTarget(mode === "builder" ? "#skills" : "#signal-skills"),
+        run: () => scrollToTarget("#skills"),
+      },
+      {
+        label: "Career Timeline",
+        detail: "Growth path",
+        icon: Timeline,
+        run: () => scrollToTarget("#timeline"),
+      },
+      {
+        label: "Build Logs",
+        detail: "Iteration history",
+        icon: FileText,
+        run: () => scrollToTarget("#logs"),
       },
       {
         label: "Roadmap",
         detail: "Now, next, later",
         icon: Map,
-        run: () => scrollToTarget(mode === "builder" ? "#roadmap" : "#summary"),
+        run: () => scrollToTarget("#roadmap"),
       },
       {
         label: "Ask ChiaOS",
         detail: "Local profile assistant",
         icon: RadioTower,
-        run: () => scrollToTarget(mode === "builder" ? "#ask" : "#contact"),
+        run: () => scrollToTarget("#ask"),
       },
       {
-        label: "Contact",
-        detail: "Email and links",
-        icon: FileText,
-        run: () => scrollToTarget("#contact"),
+        label: "Back to Landing",
+        detail: "Return to Original Setup",
+        icon: Home,
+        run: () => {
+          window.location.href = "/";
+        },
       },
       {
         label: "Download CV",
@@ -126,7 +132,7 @@ export function CommandPalette({
         },
       },
     ],
-    [mode, onModeChange]
+    []
   );
 
   const filteredCommands = commands.filter((command) => {
@@ -140,7 +146,7 @@ export function CommandPalette({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center bg-black/55 px-4 py-20 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-start justify-center bg-black/55 px-3 py-6 backdrop-blur-sm sm:px-4 sm:py-20"
       role="dialog"
       aria-modal="true"
       aria-label="Command palette"
@@ -150,35 +156,21 @@ export function CommandPalette({
         }
       }}
     >
-      <div
-        className={cn(
-          "w-full max-w-2xl overflow-hidden rounded-2xl border shadow-2xl",
-          mode === "builder"
-            ? "border-[#00D9FF]/30 bg-[#0B0F17] text-[#F8FAFC] shadow-[0_0_48px_rgba(0,217,255,0.18)]"
-            : "border-[#D2D2D7] bg-white text-[#1D1D1F]"
-        )}
-      >
-        <div
-          className={cn(
-            "flex items-center gap-3 border-b px-4 py-3",
-            mode === "builder" ? "border-white/12" : "border-[#D2D2D7]"
-          )}
-        >
+      <div className="max-h-[calc(100vh-3rem)] w-full max-w-2xl overflow-hidden rounded-2xl border border-[#00D9FF]/30 bg-[#0B0F17] text-[#F8FAFC] shadow-2xl shadow-[0_0_48px_rgba(0,217,255,0.18)]">
+        <div className="flex items-center gap-3 border-b border-white/12 px-4 py-3">
           <Search className="h-5 w-5 text-[#00D9FF]" aria-hidden />
           <input
             ref={inputRef}
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Search ChiaOS"
-            className="h-10 flex-1 bg-transparent text-base outline-none placeholder:text-[#AAB4C0]"
+            aria-label="Search ChiaOS commands"
+            placeholder="Search activated system"
+            className="h-10 min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-[#AAB4C0]"
           />
           <button
             type="button"
             onClick={() => onOpenChange(false)}
-            className={cn(
-              "inline-flex h-9 w-9 items-center justify-center rounded-full border",
-              mode === "builder" ? "border-white/12 hover:border-[#00D9FF]/50" : "border-[#D2D2D7]"
-            )}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/12 hover:border-[#00D9FF]/50"
             aria-label="Close command palette"
           >
             <X className="h-4 w-4" aria-hidden />
@@ -195,31 +187,14 @@ export function CommandPalette({
                   command.run();
                   onOpenChange(false);
                 }}
-                className={cn(
-                  "flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left transition",
-                  mode === "builder"
-                    ? "hover:bg-[#101624]"
-                    : "hover:bg-[#F5F5F7]"
-                )}
+                className="flex w-full items-center gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-[#101624]"
               >
-                <span
-                  className={cn(
-                    "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full",
-                    mode === "builder"
-                      ? "border border-[#00D9FF]/25 bg-[#00D9FF]/10 text-[#00D9FF]"
-                      : "bg-[#0071E3]/10 text-[#0071E3]"
-                  )}
-                >
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#00D9FF]/25 bg-[#00D9FF]/10 text-[#00D9FF]">
                   <Icon className="h-5 w-5" aria-hidden />
                 </span>
                 <span className="min-w-0">
                   <span className="block font-medium">{command.label}</span>
-                  <span
-                    className={cn(
-                      "block text-sm",
-                      mode === "builder" ? "text-[#AAB4C0]" : "text-[#6E6E73]"
-                    )}
-                  >
+                  <span className={cn("block text-sm text-[#AAB4C0]")}>
                     {command.detail}
                   </span>
                 </span>

@@ -1,5 +1,7 @@
+"use client";
+
 import { ArrowUpRight, Cpu, ShieldCheck } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import type { Mission } from "@/types/portfolio";
 
 type MissionCardProps = {
@@ -8,12 +10,14 @@ type MissionCardProps = {
 };
 
 export function MissionCard({ mission, index }: MissionCardProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.45, delay: index * 0.05 }}
+      transition={reduceMotion ? undefined : { duration: 0.45, delay: index * 0.05 }}
       className="group relative overflow-hidden rounded-2xl border border-white/12 bg-[#101624]/90 p-5 shadow-2xl shadow-black/25 transition hover:border-[#00D9FF]/45 hover:shadow-[0_0_34px_rgba(0,217,255,0.14)]"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00D9FF] to-transparent" />

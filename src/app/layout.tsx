@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 
+const siteUrl = "https://chiaos-portfolio.vercel.app/";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -18,13 +20,16 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://chiaos-portfolio.vercel.app"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: "ChiaOS | Chia Yuen Kai",
     template: "%s | ChiaOS",
   },
+  alternates: {
+    canonical: siteUrl,
+  },
   description:
-    "ChiaOS is Chia Yuen Kai's personal career operating system for AI, cybersecurity, cloud architecture, and software systems.",
+    "ChiaOS is Chia Yuen Kai's original setup and activated system portfolio for development skill, creativity, and career identity.",
   keywords: [
     "Chia Yuen Kai",
     "ChiaOS",
@@ -38,8 +43,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ChiaOS | Chia Yuen Kai",
     description:
-      "A living career command center for Chia Yuen Kai's projects, skills, roadmap, and proof of work.",
-    url: "https://chiaos-portfolio.vercel.app",
+      "A clean setup landing page and activated system experience for Chia Yuen Kai's development skill, creative direction, and proof of work.",
+    url: siteUrl,
     siteName: "ChiaOS",
     images: [
       {
@@ -56,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "ChiaOS | Chia Yuen Kai",
     description:
-      "A dual-mode personal career operating system for AI, cybersecurity, cloud, and software systems.",
+      "Original setup and activated ChiaOS system for AI, cybersecurity, cloud, and software systems.",
     images: ["/og-placeholder.svg"],
   },
 };

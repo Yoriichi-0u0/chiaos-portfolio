@@ -7,24 +7,22 @@
 }
 
 :root {
-  --builder-bg: #05070b;
-  --builder-panel: #0b0f17;
-  --builder-card: #101624;
-  --builder-text: #f8fafc;
-  --builder-muted: #aab4c0;
-  --builder-cyan: #00d9ff;
-  --builder-yellow: #ffd400;
-  --builder-red: #ff3b30;
-  --builder-silver: #e5e7eb;
-  --builder-border: rgba(255, 255, 255, 0.12);
-  --builder-cyan-glow: rgba(0, 217, 255, 0.35);
-  --builder-yellow-glow: rgba(255, 212, 0, 0.25);
-  --signal-bg: #f5f5f7;
-  --signal-card: #ffffff;
-  --signal-text: #1d1d1f;
-  --signal-muted: #6e6e73;
-  --signal-border: #d2d2d7;
-  --signal-blue: #0071e3;
+  --system-bg: #05070b;
+  --system-panel: #0b0f17;
+  --system-card: #101624;
+  --system-text: #f8fafc;
+  --system-muted: #aab4c0;
+  --system-cyan: #00d9ff;
+  --system-yellow: #ffd400;
+  --system-red: #ff3b30;
+  --system-silver: #e5e7eb;
+  --system-border: rgba(255, 255, 255, 0.12);
+  --original-bg: #f5f5f7;
+  --original-card: #ffffff;
+  --original-text: #1d1d1f;
+  --original-muted: #6e6e73;
+  --original-border: #d2d2d7;
+  --original-blue: #0071e3;
 }
 
 * {
@@ -50,6 +48,46 @@ textarea {
   letter-spacing: 0;
 }
 
+:where(a, button, input, textarea):focus-visible {
+  outline: 2px solid #00d9ff;
+  outline-offset: 3px;
+}
+
+#main-content:focus {
+  outline: none;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(calc(-100% - 1rem));
+  border-radius: 999px;
+  background: #00d9ff;
+  color: #05070b;
+  font-size: 0.875rem;
+  font-weight: 700;
+  padding: 0.625rem 1rem;
+  transition: transform 160ms ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.screen-reader-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 ::selection {
   background: rgba(0, 217, 255, 0.35);
   color: #f8fafc;
@@ -65,7 +103,7 @@ textarea {
     Monaco, Consolas, monospace;
 }
 
-.builder-grid {
+.system-grid {
   background-image:
     linear-gradient(rgba(229, 231, 235, 0.055) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 217, 255, 0.08) 1px, transparent 1px),
@@ -73,24 +111,25 @@ textarea {
   background-size: 56px 56px, 56px 56px, 180px 180px;
 }
 
-.builder-radial {
+.system-radial {
   background:
     linear-gradient(128deg, rgba(0, 217, 255, 0.15), transparent 30%),
     linear-gradient(238deg, rgba(255, 212, 0, 0.12), transparent 34%),
     linear-gradient(180deg, #05070b 0%, #0b0f17 46%, #05070b 100%);
 }
 
-.builder-speedlines {
+.system-speedlines {
   background-image:
     linear-gradient(100deg, transparent 0 14%, rgba(0, 217, 255, 0.18) 15%, transparent 16% 100%),
     linear-gradient(100deg, transparent 0 65%, rgba(255, 212, 0, 0.14) 66%, transparent 67% 100%);
   background-size: 240px 100%, 320px 100%;
 }
 
-.signal-surface {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(245, 245, 247, 0.9)),
-    radial-gradient(circle at 60% 0%, rgba(0, 113, 227, 0.12), transparent 36%);
+.system-scene canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .scrollbar-hide {
