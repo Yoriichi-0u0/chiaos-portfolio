@@ -2,6 +2,7 @@ export type Profile = {
   name: string;
   preferredName: string;
   location: string;
+  hometown?: string;
   university: string;
   degree: string;
   majors: string[];
@@ -19,6 +20,7 @@ export type Profile = {
 export type MissionCategory =
   | "AI"
   | "Cloud"
+  | "Design"
   | "Negotiation"
   | "Database"
   | "Networking";
@@ -28,6 +30,7 @@ export type Mission = {
   title: string;
   category: MissionCategory;
   summary: string;
+  role?: string;
   proof: string[];
   technologies: string[];
   status: "Built" | "In progress" | "Portfolio proof";
@@ -50,8 +53,16 @@ export type Experience = {
   organization: string;
   location: string;
   role: string;
+  startDate?: string;
+  endDate?: string;
   summary: string;
   responsibilities: string[];
+  metrics?: string[];
+  events?: string[];
+  caseStudy?: {
+    title: string;
+    summary: string;
+  };
 };
 
 export type Education = {
@@ -59,7 +70,18 @@ export type Education = {
   degree: string;
   majors: string[];
   location: string;
+  orientation?: string;
+  firstSemester?: string;
+  currentStage?: string;
+  expectedGraduation?: string;
+  cgpaSnapshot?: string;
   focus: string[];
+  foundation?: {
+    institution: string;
+    program: string;
+    completed: string;
+    cgpa: string;
+  };
 };
 
 export type TimelineItem = {

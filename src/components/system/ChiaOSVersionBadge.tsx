@@ -29,7 +29,7 @@ export function ChiaOSVersionBadge({
     return () => window.clearInterval(intervalId);
   }, []);
 
-  const label = version?.shortLabel ?? "v--";
+  const label = version?.shortLabel ?? "Live age build";
   const accessibleLabel = version
     ? `${version.label}. ${version.tooltip}`
     : `ChiaOS version loading. ${tooltip}`;
@@ -48,7 +48,7 @@ export function ChiaOSVersionBadge({
       aria-live="polite"
     >
       <span>{label}</span>
-      {showHint ? (
+      {showHint && version ? (
         <span
           className={cn(
             "hidden font-normal sm:inline",

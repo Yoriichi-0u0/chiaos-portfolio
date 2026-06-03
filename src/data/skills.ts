@@ -4,7 +4,7 @@ export const skillGroups: SkillGroup[] = [
   {
     title: "AI and Data",
     description:
-      "Building practical understanding of model workflows, evaluation, and AI-assisted product thinking.",
+      "AI is the main direction: model workflows, experimentation, and practical product thinking.",
     skills: [
       {
         name: "Python",
@@ -13,12 +13,12 @@ export const skillGroups: SkillGroup[] = [
       },
       {
         name: "Machine learning workflows",
-        evidence: "Explored KNIME, model evaluation, and structured experimentation.",
+        evidence: "Built through university AI work, model evaluation practice, and structured experimentation.",
         stage: "Building",
       },
       {
-        name: "Computer vision systems",
-        evidence: "Applied in the AI camera incident detection mission.",
+        name: "AI project delivery",
+        evidence: "Represented most strongly by COS30049 and ongoing AI-related design project work.",
         stage: "Building",
       },
     ],
@@ -40,15 +40,37 @@ export const skillGroups: SkillGroup[] = [
       },
       {
         name: "Secure design thinking",
-        evidence: "Applied in cloud and network architecture planning.",
+        evidence: "Applied across cybersecurity study, cloud architecture planning, and system boundary decisions.",
         stage: "Building",
       },
     ],
   },
   {
-    title: "Cloud and Software Systems",
+    title: "Full-stack / Web Systems",
     description:
-      "Combining web systems, architecture decisions, and data-backed application foundations.",
+      "Building practical web systems that connect interface, logic, data, and deployment decisions.",
+    skills: [
+      {
+        name: "React and Next.js",
+        evidence: "Used to build ChiaOS and refine a public portfolio system with real routes and components.",
+        stage: "Building",
+      },
+      {
+        name: "Full-stack integration",
+        evidence: "Shown through COS30049 full-stack and system integration work.",
+        stage: "Applied",
+      },
+      {
+        name: "UI implementation",
+        evidence: "Practiced through ChiaOS landing/system interfaces and coursework web delivery.",
+        stage: "Building",
+      },
+    ],
+  },
+  {
+    title: "Cloud and Architecture",
+    description:
+      "Architecture thinking for systems that need clear boundaries, reliability, and safe deployment paths.",
     skills: [
       {
         name: "AWS architecture",
@@ -56,25 +78,47 @@ export const skillGroups: SkillGroup[] = [
         stage: "Building",
       },
       {
-        name: "Web systems",
-        evidence: "Built from HTML, CSS, PHP, and database integration foundations.",
-        stage: "Applied",
+        name: "System boundaries",
+        evidence: "Applied when mapping ChiaOS routes, project modules, and architecture tradeoffs.",
+        stage: "Building",
       },
       {
-        name: "Database design",
-        evidence: "Practiced relational modeling, SQL, and normalization.",
+        name: "Deployment thinking",
+        evidence: "Practiced through Vercel deployment, production checks, and live-site QA.",
         stage: "Applied",
       },
     ],
   },
   {
-    title: "Builder Workflow",
+    title: "Database and Documentation",
+    description:
+      "Turning project details into structured data, readable proof, and maintainable records.",
+    skills: [
+      {
+        name: "Database design",
+        evidence: "Practiced relational modeling, SQL, normalization, and database-backed workflows.",
+        stage: "Applied",
+      },
+      {
+        name: "Operational tracking",
+        evidence: "Built through Realfun attendance, payment/admin tracking, and progress report support.",
+        stage: "Applied",
+      },
+      {
+        name: "Documentation",
+        evidence: "Used to turn coursework, operations, and project facts into readable ChiaOS proof.",
+        stage: "Building",
+      },
+    ],
+  },
+  {
+    title: "AI-assisted Workflow",
     description:
       "Using AI-assisted development to move faster while keeping proof, iteration, and clarity visible.",
     skills: [
       {
         name: "Vibe coding",
-        evidence: "Uses AI tools to accelerate planning, implementation, and iteration.",
+        evidence: "Uses AI tools to accelerate planning, implementation, refactoring, and design iteration.",
         stage: "Building",
       },
       {
@@ -84,7 +128,7 @@ export const skillGroups: SkillGroup[] = [
       },
       {
         name: "Operational communication",
-        evidence: "Developed through parent, student, and teacher coordination work.",
+        evidence: "Developed through parent, student, and teacher coordination at Realfun.",
         stage: "Applied",
       },
     ],

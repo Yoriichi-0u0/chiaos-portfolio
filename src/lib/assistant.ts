@@ -22,7 +22,7 @@ const corpus: CorpusItem[] = [
     source: "Profile",
     keywords: ["who", "profile", "identity", "about", "location", "role"],
     text: `${profile.name} ${profile.preferredName} ${profile.location} ${profile.identity} ${profile.positioning} ${profile.targetRoles.join(" ")}`,
-    answer: `I'm Chia, an undergraduate builder in ${profile.location}, focused on AI, cybersecurity, cloud architecture, and software systems. ChiaOS is my career system for showing development skill, creative direction, project proof, and the way I keep building.`,
+    answer: `I'm Chia, an AI-focused Computer Science student based in ${profile.location}. I study Artificial Intelligence and Cybersecurity at Swinburne, and ChiaOS is my personal operating system for showing project proof, Realfun operations training, AI-assisted workflow, and what I am becoming.`,
   },
   {
     source: "ChiaOS Version",
@@ -36,19 +36,19 @@ const corpus: CorpusItem[] = [
   {
     source: "Education",
     keywords: ["education", "university", "degree", "major", "swinburne", "study"],
-    text: `${education.university} ${education.degree} ${education.majors.join(" ")} ${education.focus.join(" ")}`,
-    answer: `${profile.preferredName} studies ${education.degree} at ${education.university}, majoring in ${education.majors.join(" and ")}. Current focus areas include ${education.focus.join(", ")}.`,
+    text: `${education.university} ${education.degree} ${education.majors.join(" ")} ${education.currentStage ?? ""} ${education.expectedGraduation ?? ""} ${education.cgpaSnapshot ?? ""} ${education.foundation?.institution ?? ""} ${education.foundation?.program ?? ""} ${education.foundation?.cgpa ?? ""} ${education.focus.join(" ")}`,
+    answer: `${profile.preferredName} studies ${education.degree} at ${education.university}, double majoring in ${education.majors.join(" and ")}. Current stage: ${education.currentStage}. Expected graduation: ${education.expectedGraduation}. ${education.cgpaSnapshot}. Foundation: ${education.foundation?.program} at ${education.foundation?.institution}, ${education.foundation?.cgpa}.`,
   },
   {
     source: "Experience",
     keywords: ["experience", "work", "job", "admin", "hotline", "realfun", "communication"],
     text: experience
-      .map((item) => `${item.organization} ${item.role} ${item.summary} ${item.responsibilities.join(" ")}`)
+      .map((item) => `${item.organization} ${item.role} ${item.startDate ?? ""} ${item.endDate ?? ""} ${item.summary} ${item.responsibilities.join(" ")} ${item.metrics?.join(" ") ?? ""} ${item.events?.join(" ") ?? ""} ${item.caseStudy?.title ?? ""} ${item.caseStudy?.summary ?? ""}`)
       .join(" "),
     answer: experience
       .map(
         (item) =>
-          `My major work experience so far is ${item.role} at ${item.organization}, ${item.location}. ${item.summary} Responsibilities included ${item.responsibilities.join(" ")}`
+          `My major work experience so far is ${item.role} at ${item.organization}, ${item.location}, from ${item.startDate} to ${item.endDate}. ${item.summary} Key scale: ${item.metrics?.join(", ")}. Events supported include ${item.events?.join(", ")}. ${item.caseStudy?.title}: ${item.caseStudy?.summary}`
       )
       .join(" "),
   },
@@ -65,6 +65,8 @@ const corpus: CorpusItem[] = [
       "automated",
       "negotiation",
       "aws",
+      "cos40007",
+      "design",
       "database",
       "networking",
       "repo",
@@ -73,7 +75,7 @@ const corpus: CorpusItem[] = [
     text: missions
       .map((mission) => `${mission.title} ${mission.category} ${mission.summary} ${mission.proof.join(" ")} ${mission.technologies.join(" ")} ${mission.href}`)
       .join(" "),
-    answer: `My flagship mission file is COS30049 Computing Technology Innovation Project, currently the university project I am most satisfied with. Repo: https://github.com/jostinchok/my-react-app.git. COS30018 Automated Negotiation System is an Intelligent Systems mission; the team repo is private for now, with a public copy coming soon at https://github.com/Yoriichi-0u0/cos30018-assignment.git while the final public repo details are still being confirmed. Other mission files stay described without invented links.`,
+    answer: `My flagship mission file is COS30049 Computing Technology Innovation Project, currently the university project I am most satisfied with. Repo: https://github.com/jostinchok/my-react-app.git. COS30018 Automated Negotiation System is an Intelligent Systems mission with a public copy coming soon at https://github.com/Yoriichi-0u0/cos30018-assignment.git, though the final repo name may change. COS40007 is AI-related design/project work with no public link yet, so ChiaOS describes it first and links it later.`,
   },
   {
     source: "Skills",
