@@ -27,3 +27,6 @@ pnpm-debug.log*
 
 # typescript
 *.tsbuildinfo
+
+# Private content inbox for local planning only
+_content_inbox/
