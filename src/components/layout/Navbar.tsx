@@ -7,11 +7,15 @@ import { ChiaOSVersionBadge } from "@/components/system/ChiaOSVersionBadge";
 import { cn } from "@/lib/utils";
 
 const systemLinks = [
-  { label: "Core", href: "#top" },
+  { label: "Core", href: "#hero" },
+  { label: "Identity", href: "#identity" },
+  { label: "Education", href: "#education" },
+  { label: "Ops", href: "#operations" },
   { label: "Missions", href: "#missions" },
   { label: "Skills", href: "#skills" },
+  { label: "Life OS", href: "#life-os" },
   { label: "Timeline", href: "#timeline" },
-  { label: "Logs", href: "#logs" },
+  { label: "Logs", href: "#build-logs" },
   { label: "Roadmap", href: "#roadmap" },
   { label: "Ask", href: "#ask" },
 ];
@@ -43,17 +47,17 @@ export function Navbar({ onCommandOpen }: NavbarProps) {
     <header className="sticky top-0 z-40 border-b border-white/12 bg-[#05070B]/86 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-3">
-          <a href="#top" className="font-display text-lg font-semibold text-white">
+          <a href="#hero" className="font-display text-lg font-semibold text-white">
             ChiaOS System
           </a>
           <ChiaOSVersionBadge className="hidden sm:inline-flex" />
         </div>
-        <div className="hidden items-center gap-1 lg:flex">
+        <div className="hidden items-center gap-0 xl:flex">
           {systemLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-full px-3 py-2 text-sm text-[#AAB4C0] transition hover:bg-white/6 hover:text-white"
+              className="rounded-full px-2.5 py-2 text-sm text-[#AAB4C0] transition hover:bg-white/6 hover:text-white"
             >
               {link.label}
             </a>
@@ -85,7 +89,7 @@ export function Navbar({ onCommandOpen }: NavbarProps) {
           </Link>
           <button
             type="button"
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-[#0B0F17] text-white transition hover:border-[#00D9FF]/60 lg:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/12 bg-[#0B0F17] text-white transition hover:border-[#00D9FF]/60 xl:hidden"
             aria-label={mobileMenuOpen ? "Close system navigation" : "Open system navigation"}
             aria-expanded={mobileMenuOpen}
             aria-controls={mobileMenuId}
@@ -100,7 +104,7 @@ export function Navbar({ onCommandOpen }: NavbarProps) {
         </div>
       </nav>
       {mobileMenuOpen ? (
-        <div id={mobileMenuId} className="border-t border-white/12 px-4 pb-4 sm:px-6 lg:hidden">
+        <div id={mobileMenuId} className="border-t border-white/12 px-4 pb-4 sm:px-6 xl:hidden">
           <div className="mx-auto max-w-7xl pt-3">
             <nav aria-label="System navigation" className="grid gap-2">
               {systemLinks.map((link) => (

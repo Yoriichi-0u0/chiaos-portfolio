@@ -3,7 +3,11 @@ import { buildLogs } from "@/data/buildLogs";
 
 export function BuildLogs() {
   return (
-    <section id="logs" className="px-4 py-16 sm:px-6 lg:px-8">
+    <section
+      id="build-logs"
+      data-system-section
+      className="system-section px-4 py-16 sm:px-6 lg:px-8"
+    >
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="font-code text-sm uppercase text-[#00D9FF]">build logs</p>

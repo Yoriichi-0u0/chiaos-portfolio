@@ -5,7 +5,7 @@ export const buildLogs: BuildLog[] = [
     title: "ChiaOS v1 planning",
     dateLabel: "Current build",
     summary:
-      "Defined the personal career operating system concept, dual-mode experience, local data model, and deployment path.",
+      "Defined the personal career operating system concept, Original Setup route, Activated System route, local data model, and deployment path.",
     tags: ["Portfolio", "Planning", "Next.js"],
   },
   {

@@ -31,8 +31,18 @@ const snapshotItems = [
 
 export function CareerSnapshot() {
   return (
-    <section className="px-4 py-12 sm:px-6 lg:px-8">
+    <section
+      id="education"
+      data-system-section
+      className="system-section px-4 py-12 sm:px-6 lg:px-8"
+    >
       <div className="mx-auto max-w-7xl">
+        <div className="mb-8 max-w-3xl">
+          <p className="font-code text-sm uppercase text-[#00D9FF]">education module</p>
+          <h2 className="mt-3 font-display text-4xl font-semibold text-[#F8FAFC] sm:text-5xl">
+            Academic direction, mapped cleanly.
+          </h2>
+        </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {snapshotItems.map((item) => {
             const Icon = item.icon;

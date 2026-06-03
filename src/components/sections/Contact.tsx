@@ -3,7 +3,11 @@ import { profile } from "@/data/profile";
 
 export function Contact() {
   return (
-    <section id="contact" className="px-4 py-16 sm:px-6 lg:px-8">
+    <section
+      id="contact"
+      data-system-section
+      className="system-section px-4 py-16 sm:px-6 lg:px-8"
+    >
       <div className="mx-auto max-w-7xl rounded-3xl border border-[#00D9FF]/24 bg-[#0B0F17]/88 p-6 shadow-2xl shadow-[rgba(0,217,255,0.12)] sm:p-8 lg:p-10">
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>

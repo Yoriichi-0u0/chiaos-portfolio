@@ -75,9 +75,27 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
     () => [
       {
         label: "System Core",
-        detail: "Return to the activated hero scene",
+        detail: "Return to activation core",
         icon: Zap,
-        run: () => scrollToTarget("#top"),
+        run: () => scrollToTarget("#hero"),
+      },
+      {
+        label: "Identity Core",
+        detail: "ChiaOS profile and system director",
+        icon: Sparkles,
+        run: () => scrollToTarget("#identity"),
+      },
+      {
+        label: "Education Module",
+        detail: "Academic direction",
+        icon: FileText,
+        run: () => scrollToTarget("#education"),
+      },
+      {
+        label: "Operations Module",
+        detail: "Realfun communication experience",
+        icon: RadioTower,
+        run: () => scrollToTarget("#operations"),
       },
       {
         label: "Mission Files",
@@ -92,6 +110,12 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
         run: () => scrollToTarget("#skills"),
       },
       {
+        label: "Life OS",
+        detail: "Personal build loop",
+        icon: Zap,
+        run: () => scrollToTarget("#life-os"),
+      },
+      {
         label: "Career Timeline",
         detail: "Growth path",
         icon: Timeline,
@@ -101,7 +125,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
         label: "Build Logs",
         detail: "Iteration history",
         icon: FileText,
-        run: () => scrollToTarget("#logs"),
+        run: () => scrollToTarget("#build-logs"),
       },
       {
         label: "Roadmap",

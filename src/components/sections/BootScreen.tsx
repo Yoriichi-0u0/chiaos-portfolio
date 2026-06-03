@@ -15,7 +15,11 @@ export function BootScreen() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="top" className="relative px-4 pt-8 sm:px-6 lg:px-8">
+    <section
+      id="hero"
+      data-system-section
+      className="system-section relative px-4 pt-8 sm:px-6 lg:px-8"
+    >
       <div className="mx-auto max-w-7xl">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: -16 }}

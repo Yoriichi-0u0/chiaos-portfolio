@@ -1,9 +1,22 @@
 import { BadgeCheck } from "lucide-react";
 import { skillGroups } from "@/data/skills";
+import { cn } from "@/lib/utils";
 
-export function SkillSystem() {
+type SkillSystemProps = {
+  highlightedSkill?: string | null;
+  onSkillHover?: (skillName: string | null) => void;
+};
+
+export function SkillSystem({
+  highlightedSkill = null,
+  onSkillHover,
+}: SkillSystemProps) {
   return (
-    <section id="skills" className="px-4 py-16 sm:px-6 lg:px-8">
+    <section
+      id="skills"
+      data-system-section
+      className="system-section px-4 py-16 sm:px-6 lg:px-8"
+    >
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="font-code text-sm uppercase text-[#00D9FF]">skill system</p>
@@ -27,9 +40,22 @@ export function SkillSystem() {
               <p className="mt-2 text-sm leading-6 text-[#AAB4C0]">{group.description}</p>
               <div className="mt-5 grid gap-3">
                 {group.skills.map((skill) => (
-                  <div
+                  <button
                     key={skill.name}
-                    className="rounded-2xl border border-white/12 bg-[#101624]/72 p-4"
+                    type="button"
+                    onMouseEnter={() => onSkillHover?.(skill.name)}
+                    onMouseLeave={() => onSkillHover?.(null)}
+                    onPointerEnter={() => onSkillHover?.(skill.name)}
+                    onPointerLeave={() => onSkillHover?.(null)}
+                    onFocus={() => onSkillHover?.(skill.name)}
+                    onBlur={() => onSkillHover?.(null)}
+                    onClick={() => onSkillHover?.(skill.name)}
+                    className={cn(
+                      "w-full rounded-2xl border bg-[#101624]/72 p-4 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D9FF]",
+                      highlightedSkill === skill.name
+                        ? "border-[#FFD400]/55 shadow-[0_0_28px_rgba(255,212,0,0.12)]"
+                        : "border-white/12"
+                    )}
                   >
                     <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                       <div className="flex items-center gap-3">
@@ -43,7 +69,7 @@ export function SkillSystem() {
                     <p className="mt-3 text-sm leading-6 text-[#AAB4C0]">
                       {skill.evidence}
                     </p>
-                  </div>
+                  </button>
                 ))}
               </div>
             </article>

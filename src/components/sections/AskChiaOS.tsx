@@ -24,7 +24,11 @@ export function AskChiaOS() {
   }
 
   return (
-    <section id="ask" className="px-4 py-16 sm:px-6 lg:px-8">
+    <section
+      id="ask"
+      data-system-section
+      className="system-section px-4 py-16 sm:px-6 lg:px-8"
+    >
       <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="min-w-0">
           <p className="font-code text-sm uppercase text-[#00D9FF]">ask chiaos</p>

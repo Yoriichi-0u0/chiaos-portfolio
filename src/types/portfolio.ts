@@ -87,3 +87,17 @@ export type AssistantAnswer = {
   sources: string[];
   confident: boolean;
 };
+
+export type SystemSectionKey =
+  | "hero"
+  | "identity"
+  | "education"
+  | "operations"
+  | "missions"
+  | "skills"
+  | "life-os"
+  | "timeline"
+  | "build-logs"
+  | "roadmap"
+  | "ask"
+  | "contact";

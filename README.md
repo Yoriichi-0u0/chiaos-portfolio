@@ -22,7 +22,7 @@ GitHub repo: https://github.com/Yoriichi-0u0/chiaos-portfolio
 ## Routes
 
 - `/` is the Original Setup landing page: clean CV summary, key skills preview, featured mission preview, CV download, and Activate ChiaOS action.
-- `/system` is the Activated ChiaOS System: 3D system core, activation sequence, mission files, skill system, career timeline, build logs, roadmap, local Ask ChiaOS assistant, and command palette.
+- `/system` is the Activated ChiaOS System: scroll-guided 3D System Director, activation sequence, identity, education, operations, mission files, skill system, Life OS, career timeline, build logs, roadmap, local Ask ChiaOS assistant, and command palette.
 - ChiaOS versioning follows Chia's live age in the frontend, using a major age version and minor progress through the current age year.
 
 ## Local Development
@@ -48,6 +48,7 @@ npm run build
 - `src/data/` contains typed local portfolio content.
 - `src/lib/assistant.ts` contains the local Ask ChiaOS matching logic.
 - `src/lib/version.ts` contains the dynamic ChiaOS age/version calculation.
+- `src/hooks/useActiveSection.ts` drives the `/system` scroll-guided director state.
 - `src/types/portfolio.ts` contains shared content types.
 - `public/cv/` contains the placeholder CV path.
 

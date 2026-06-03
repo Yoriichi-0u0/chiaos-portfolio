@@ -3,13 +3,21 @@
 import { ArrowUpRight, Cpu, ShieldCheck } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { Mission } from "@/types/portfolio";
+import { cn } from "@/lib/utils";
 
 type MissionCardProps = {
   mission: Mission;
   index: number;
+  highlighted?: boolean;
+  onHover?: (missionId: string | null) => void;
 };
 
-export function MissionCard({ mission, index }: MissionCardProps) {
+export function MissionCard({
+  mission,
+  index,
+  highlighted = false,
+  onHover,
+}: MissionCardProps) {
   const reduceMotion = useReducedMotion();
   const isExternalLink = mission.href.startsWith("http");
 
@@ -19,7 +27,18 @@ export function MissionCard({ mission, index }: MissionCardProps) {
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={reduceMotion ? undefined : { duration: 0.45, delay: index * 0.05 }}
-      className="group relative overflow-hidden rounded-2xl border border-white/12 bg-[#101624]/90 p-5 shadow-2xl shadow-black/25 transition hover:border-[#00D9FF]/45 hover:shadow-[0_0_34px_rgba(0,217,255,0.14)]"
+      onMouseEnter={() => onHover?.(mission.id)}
+      onMouseLeave={() => onHover?.(null)}
+      onPointerEnter={() => onHover?.(mission.id)}
+      onPointerLeave={() => onHover?.(null)}
+      onFocusCapture={() => onHover?.(mission.id)}
+      onBlurCapture={() => onHover?.(null)}
+      className={cn(
+        "group relative overflow-hidden rounded-2xl border bg-[#101624]/90 p-5 shadow-2xl shadow-black/25 transition hover:border-[#00D9FF]/45 hover:shadow-[0_0_34px_rgba(0,217,255,0.14)]",
+        highlighted
+          ? "border-[#FFD400]/55 shadow-[0_0_38px_rgba(255,212,0,0.14)]"
+          : "border-white/12"
+      )}
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00D9FF] to-transparent" />
       <div className="absolute inset-y-0 right-0 w-1 bg-gradient-to-b from-[#00D9FF] via-[#FFD400] to-transparent opacity-70" />

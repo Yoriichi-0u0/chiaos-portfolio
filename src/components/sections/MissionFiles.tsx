@@ -9,7 +9,15 @@ import { cn, uniqueValues } from "@/lib/utils";
 
 type FilterValue = "All" | MissionCategory;
 
-export function MissionFiles() {
+type MissionFilesProps = {
+  highlightedMissionId?: string | null;
+  onMissionHover?: (missionId: string | null) => void;
+};
+
+export function MissionFiles({
+  highlightedMissionId = null,
+  onMissionHover,
+}: MissionFilesProps) {
   const categories = useMemo<FilterValue[]>(
     () => ["All", ...uniqueValues(missions.map((mission) => mission.category))],
     []
@@ -22,7 +30,11 @@ export function MissionFiles() {
       : missions.filter((mission) => mission.category === activeCategory);
 
   return (
-    <section id="missions" className="px-4 py-16 sm:px-6 lg:px-8">
+    <section
+      id="missions"
+      data-system-section
+      className="system-section px-4 py-16 sm:px-6 lg:px-8"
+    >
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl">
@@ -63,7 +75,13 @@ export function MissionFiles() {
         </div>
         <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {filteredMissions.map((mission, index) => (
-            <MissionCard key={mission.id} mission={mission} index={index} />
+            <MissionCard
+              key={mission.id}
+              mission={mission}
+              index={index}
+              highlighted={mission.id === highlightedMissionId}
+              onHover={onMissionHover}
+            />
           ))}
         </div>
       </div>

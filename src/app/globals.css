@@ -118,6 +118,20 @@ textarea {
     linear-gradient(180deg, #05070b 0%, #0b0f17 46%, #05070b 100%);
 }
 
+.system-section {
+  scroll-margin-top: 5.5rem;
+  transition:
+    background 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.system-section[data-active="true"] {
+  background:
+    linear-gradient(90deg, rgba(0, 217, 255, 0.07), transparent 34%),
+    linear-gradient(270deg, rgba(255, 212, 0, 0.045), transparent 30%);
+  box-shadow: inset 0 1px 0 rgba(0, 217, 255, 0.1);
+}
+
 .system-speedlines {
   background-image:
     linear-gradient(100deg, transparent 0 14%, rgba(0, 217, 255, 0.18) 15%, transparent 16% 100%),
@@ -126,6 +140,13 @@ textarea {
 }
 
 .system-scene canvas {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.system-director canvas {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
