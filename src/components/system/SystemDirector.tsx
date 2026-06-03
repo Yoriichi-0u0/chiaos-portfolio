@@ -321,26 +321,26 @@ function nodeForSkill(skillName: string | null | undefined): DirectorNodeKey | n
 
 function NodeGeometry({ kind, mobile }: { kind: DirectorNode["kind"]; mobile: boolean }) {
   if (kind === "box") {
-    return <boxGeometry args={[0.7, 0.7, 0.7]} />;
+    return <boxGeometry args={mobile ? [0.64, 0.64, 0.64] : [0.98, 0.98, 0.98]} />;
   }
 
   if (kind === "torus") {
-    return <torusGeometry args={[0.42, 0.12, mobile ? 10 : 14, mobile ? 24 : 36]} />;
+    return <torusGeometry args={[mobile ? 0.4 : 0.62, mobile ? 0.11 : 0.16, mobile ? 10 : 16, mobile ? 28 : 48]} />;
   }
 
   if (kind === "octa") {
-    return <octahedronGeometry args={[0.56, mobile ? 0 : 1]} />;
+    return <octahedronGeometry args={[mobile ? 0.54 : 0.82, mobile ? 0 : 1]} />;
   }
 
   if (kind === "dodeca") {
-    return <dodecahedronGeometry args={[0.52, 0]} />;
+    return <dodecahedronGeometry args={[mobile ? 0.5 : 0.78, 0]} />;
   }
 
   if (kind === "ico") {
-    return <icosahedronGeometry args={[0.56, mobile ? 0 : 1]} />;
+    return <icosahedronGeometry args={[mobile ? 0.56 : 0.84, mobile ? 0 : 1]} />;
   }
 
-  return <sphereGeometry args={[0.52, mobile ? 14 : 24, mobile ? 10 : 16]} />;
+  return <sphereGeometry args={[mobile ? 0.52 : 0.8, mobile ? 18 : 32, mobile ? 12 : 20]} />;
 }
 
 function DirectorModule({
@@ -367,11 +367,11 @@ function DirectorModule({
       return;
     }
 
-    targetVector.current.set(target[0], target[1], target[2] + (highlighted ? 0.34 : 0));
+    targetVector.current.set(target[0], target[1], target[2] + (highlighted ? 0.56 : active ? 0.22 : 0));
     groupRef.current.position.lerp(targetVector.current, reduceMotion ? 0.35 : 0.075);
 
-    const pulse = reduceMotion ? 0 : Math.sin(state.clock.elapsedTime * 2.4) * 0.035;
-    const targetScale = (mobile ? 0.72 : 1) * (highlighted ? 1.42 : active ? 1.18 : 0.92) + pulse;
+    const pulse = reduceMotion ? 0 : Math.sin(state.clock.elapsedTime * 2.8) * (highlighted ? 0.08 : 0.045);
+    const targetScale = (mobile ? 0.82 : 1.1) * (highlighted ? 1.72 : active ? 1.4 : 1) + pulse;
     scaleVector.current.set(targetScale, targetScale, targetScale);
     groupRef.current.scale.lerp(scaleVector.current, reduceMotion ? 0.35 : 0.08);
 
@@ -388,11 +388,20 @@ function DirectorModule({
         <meshStandardMaterial
           color={highlighted ? "#FFD400" : node.color}
           emissive={highlighted ? "#FFD400" : active ? node.color : "#00D9FF"}
-          emissiveIntensity={highlighted ? 0.72 : active ? 0.38 : 0.16}
-          metalness={0.68}
-          roughness={0.24}
+          emissiveIntensity={highlighted ? 1.55 : active ? 1.05 : 0.5}
+          metalness={0.76}
+          roughness={0.18}
           transparent
-          opacity={mobile ? 0.72 : 0.86}
+          opacity={mobile ? 0.88 : 1}
+        />
+      </mesh>
+      <mesh scale={1.12}>
+        <NodeGeometry kind={node.kind} mobile={mobile} />
+        <meshBasicMaterial
+          color={highlighted ? "#FFD400" : node.color}
+          transparent
+          opacity={highlighted ? 0.32 : active ? 0.2 : 0.12}
+          wireframe
         />
       </mesh>
     </group>
@@ -422,8 +431,8 @@ function DirectorCore({
     targetVector.current.set(...formation.core);
     groupRef.current.position.lerp(targetVector.current, reduceMotion ? 0.35 : 0.07);
 
-    const rhythm = reduceMotion ? 0 : Math.sin(state.clock.elapsedTime * (pulse ? 3.8 : 1.8)) * 0.055;
-    const targetScale = (mobile ? 0.84 : 1) * formation.coreScale + rhythm;
+    const rhythm = reduceMotion ? 0 : Math.sin(state.clock.elapsedTime * (pulse ? 3.8 : 1.8)) * 0.075;
+    const targetScale = (mobile ? 0.92 : 1.16) * formation.coreScale + rhythm;
     scaleVector.current.set(targetScale, targetScale, targetScale);
     groupRef.current.scale.lerp(scaleVector.current, reduceMotion ? 0.35 : 0.08);
 
@@ -436,20 +445,28 @@ function DirectorCore({
   return (
     <group ref={groupRef} position={formation.core}>
       <mesh>
-        <torusKnotGeometry args={[0.48, 0.075, mobile ? 64 : 96, mobile ? 7 : 10]} />
+        <sphereGeometry args={[mobile ? 0.48 : 0.72, mobile ? 24 : 40, mobile ? 16 : 24]} />
+        <meshBasicMaterial color={formation.accent} transparent opacity={mobile ? 0.22 : 0.34} />
+      </mesh>
+      <mesh>
+        <torusKnotGeometry args={[mobile ? 0.54 : 0.78, mobile ? 0.085 : 0.13, mobile ? 72 : 128, mobile ? 8 : 12]} />
         <meshStandardMaterial
-          color="#111827"
+          color="#07111F"
           emissive={formation.accent}
-          emissiveIntensity={pulse ? 0.56 : 0.34}
-          metalness={0.82}
-          roughness={0.15}
+          emissiveIntensity={pulse ? 1.45 : 1}
+          metalness={0.9}
+          roughness={0.1}
           transparent
-          opacity={mobile ? 0.76 : 0.92}
+          opacity={mobile ? 0.9 : 1}
         />
       </mesh>
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.78, 0.012, 8, mobile ? 48 : 72]} />
-        <meshBasicMaterial color={formation.accent} transparent opacity={mobile ? 0.24 : 0.34} />
+        <torusGeometry args={[mobile ? 0.86 : 1.2, mobile ? 0.014 : 0.022, 8, mobile ? 64 : 96]} />
+        <meshBasicMaterial color={formation.accent} transparent opacity={mobile ? 0.46 : 0.62} />
+      </mesh>
+      <mesh rotation={[0, Math.PI / 2, 0]}>
+        <torusGeometry args={[mobile ? 0.68 : 0.98, mobile ? 0.01 : 0.016, 8, mobile ? 48 : 84]} />
+        <meshBasicMaterial color="#00D9FF" transparent opacity={mobile ? 0.26 : 0.42} />
       </mesh>
     </group>
   );
@@ -472,64 +489,84 @@ function DirectorScene({
   const highlightedNode = missionNode ?? skillNode;
   const showConnections = formation.connect && !mobile;
   const showPulse = activeSection === "ask" || Boolean(highlightedMissionId || highlightedSkill);
+  const sceneScale = mobile ? 0.86 : 1.12;
+  const scenePosition: [number, number, number] = mobile ? [-0.12, -0.04, 0] : [0.5, 0.02, 0];
 
   return (
     <>
-      <ambientLight intensity={0.78} />
-      <directionalLight position={[2.5, 4, 5]} intensity={1.35} />
-      <pointLight position={[2.6, 0.5, 3]} color="#00D9FF" intensity={mobile ? 5 : 8} distance={8} />
-      <pointLight position={[-2.4, -1, 2]} color="#FFD400" intensity={mobile ? 2 : 3.4} distance={7} />
+      <ambientLight intensity={1.05} />
+      <directionalLight position={[2.8, 4.5, 5]} intensity={mobile ? 1.8 : 2.35} />
+      <pointLight position={[2.7, 0.5, 3]} color="#00D9FF" intensity={mobile ? 9 : 16} distance={10} />
+      <pointLight position={[-2.6, -1, 2.4]} color="#FFD400" intensity={mobile ? 5 : 8.5} distance={9} />
+      <pointLight position={[0.2, 1.8, 2.7]} color="#B7F7FF" intensity={mobile ? 3.5 : 5.5} distance={8} />
 
-      <DirectorCore
-        formation={formation}
-        reduceMotion={reduceMotion}
-        mobile={mobile}
-        pulse={showPulse}
-      />
-
-      {!mobile ? (
-        <>
-          <Line
-            points={formation.beam}
-            color={formation.accent}
-            lineWidth={2}
-            transparent
-            opacity={0.3}
-          />
-          <Line
-            points={formation.path}
-            color={activeSection === "roadmap" || activeSection === "timeline" ? "#FFD400" : "#00D9FF"}
-            lineWidth={1.6}
-            transparent
-            opacity={0.22}
-          />
-        </>
-      ) : null}
-
-      {showConnections
-        ? nodes.map((node) => (
-            <Line
-              key={`${node.key}-connection`}
-              points={[formation.core, formation.nodes[node.key]]}
-              color={node.key === highlightedNode ? "#FFD400" : "#00D9FF"}
-              lineWidth={node.key === highlightedNode ? 2 : 1}
-              transparent
-              opacity={node.key === highlightedNode ? 0.45 : 0.15}
-            />
-          ))
-        : null}
-
-      {nodes.map((node) => (
-        <DirectorModule
-          key={node.key}
-          node={node}
-          target={formation.nodes[node.key]}
-          active={node.key === activeNode}
-          highlighted={node.key === highlightedNode}
+      <group position={scenePosition} scale={sceneScale}>
+        <DirectorCore
+          formation={formation}
           reduceMotion={reduceMotion}
           mobile={mobile}
+          pulse={showPulse}
         />
-      ))}
+
+        {!mobile ? (
+          <>
+            <Line
+              points={formation.beam}
+              color={formation.accent}
+              lineWidth={4.5}
+              transparent
+              opacity={0.78}
+            />
+            <Line
+              points={formation.path}
+              color={activeSection === "roadmap" || activeSection === "timeline" ? "#FFD400" : "#00D9FF"}
+              lineWidth={3}
+              transparent
+              opacity={0.62}
+            />
+            <Line
+              points={formation.path.map(([x, y, z]) => [x, y - 0.12, z - 0.22] as [number, number, number])}
+              color="#B7F7FF"
+              lineWidth={1.5}
+              transparent
+              opacity={0.3}
+            />
+          </>
+        ) : (
+          <Line
+            points={formation.path}
+            color={formation.accent}
+            lineWidth={2.2}
+            transparent
+            opacity={0.42}
+          />
+        )}
+
+        {showConnections
+          ? nodes.map((node) => (
+              <Line
+                key={`${node.key}-connection`}
+                points={[formation.core, formation.nodes[node.key]]}
+                color={node.key === highlightedNode ? "#FFD400" : "#00D9FF"}
+                lineWidth={node.key === highlightedNode ? 3.5 : 2}
+                transparent
+                opacity={node.key === highlightedNode ? 0.8 : 0.36}
+              />
+            ))
+          : null}
+
+        {nodes.map((node) => (
+          <DirectorModule
+            key={node.key}
+            node={node}
+            target={formation.nodes[node.key]}
+            active={node.key === activeNode}
+            highlighted={node.key === highlightedNode}
+            reduceMotion={reduceMotion}
+            mobile={mobile}
+          />
+        ))}
+      </group>
     </>
   );
 }
@@ -574,53 +611,82 @@ export function SystemDirector({
   }, []);
 
   return (
-    <div
-      className="system-director pointer-events-none fixed inset-0 z-0 overflow-hidden"
-      aria-hidden="true"
-    >
+    <>
       <div
-        className={cn(
-          "absolute inset-0 transition-opacity duration-500",
-          mobile ? "opacity-35" : "opacity-60"
+        className="system-director pointer-events-none fixed inset-0 z-[1] overflow-hidden"
+        aria-hidden="true"
+      >
+        <div
+          className="absolute inset-y-0 right-0 hidden w-[min(48rem,52vw)] border-l border-[#00D9FF]/14 opacity-85 lg:block"
+          style={{
+            background:
+              "linear-gradient(90deg, transparent, rgba(0,217,255,0.08) 34%, rgba(255,212,0,0.06) 100%), radial-gradient(circle at 62% 34%, rgba(0,217,255,0.26), transparent 34%), radial-gradient(circle at 74% 62%, rgba(255,212,0,0.19), transparent 30%)",
+          }}
+        />
+        <div className="absolute right-[4%] top-[16%] hidden h-[68vh] w-px bg-gradient-to-b from-transparent via-[#00D9FF]/65 to-transparent lg:block" />
+        <div className="absolute right-[7%] top-[22%] hidden h-[44vh] w-px bg-gradient-to-b from-transparent via-[#FFD400]/45 to-transparent lg:block" />
+        <div
+          className={cn(
+            "absolute inset-0 transition-opacity duration-500",
+            mobile ? "opacity-70" : "opacity-95"
+          )}
+          style={{
+            background:
+              activeSection === "roadmap" || activeSection === "timeline" || activeSection === "life-os"
+                ? "radial-gradient(circle at 78% 36%, rgba(255,212,0,0.28), transparent 30%), radial-gradient(circle at 24% 42%, rgba(0,217,255,0.18), transparent 34%)"
+                : "radial-gradient(circle at 76% 36%, rgba(0,217,255,0.3), transparent 30%), radial-gradient(circle at 26% 52%, rgba(255,212,0,0.15), transparent 34%)",
+          }}
+        />
+      </div>
+      <div
+        className="system-director-visual pointer-events-none fixed inset-0 z-[12] overflow-hidden"
+        aria-hidden="true"
+      >
+        {webglAvailable ? (
+          <Canvas
+            aria-label="Scroll-guided ChiaOS System Director"
+            className="absolute inset-0 h-full w-full"
+            camera={{ position: [mobile ? 0 : 0.6, 0, mobile ? 6.3 : 5.6], fov: mobile ? 50 : 50 }}
+            dpr={mobile ? [1, 1.25] : [1, 1.6]}
+            frameloop={reduceMotion ? "demand" : "always"}
+            gl={{ antialias: !mobile, powerPreference: "high-performance", alpha: true }}
+          >
+            <DirectorScene
+              activeSection={activeSection}
+              highlightedMissionId={highlightedMissionId}
+              highlightedSkill={highlightedSkill}
+              reduceMotion={reduceMotion}
+              mobile={mobile}
+            />
+          </Canvas>
+        ) : (
+          <div className="system-director-fallback absolute inset-0">
+            <div className="absolute right-[7%] top-[20%] h-72 w-72 rounded-full border-2 border-[#00D9FF]/45 bg-[#00D9FF]/20 shadow-[0_0_90px_rgba(0,217,255,0.55)] blur-[1px] md:h-96 md:w-96" />
+            <div className="absolute right-[12%] top-[27%] h-44 w-44 rounded-full border border-[#FFD400]/48 shadow-[0_0_70px_rgba(255,212,0,0.42)] md:h-64 md:w-64" />
+            <div className="absolute right-[18%] top-[42%] h-1 w-[52vw] rotate-[-8deg] bg-gradient-to-l from-[#FFD400]/80 via-[#00D9FF]/40 to-transparent shadow-[0_0_24px_rgba(255,212,0,0.55)]" />
+            <div className="absolute right-[12%] top-[56%] h-1 w-[58vw] rotate-[6deg] bg-gradient-to-l from-[#00D9FF]/80 via-[#B7F7FF]/36 to-transparent shadow-[0_0_24px_rgba(0,217,255,0.6)]" />
+            <div className="absolute right-[28%] top-[36%] grid grid-cols-3 gap-3 opacity-85">
+              {nodes.map((node) => (
+                <span
+                  key={node.key}
+                  className="h-4 w-4 rounded-full border border-white/30 shadow-[0_0_18px_rgba(0,217,255,0.55)]"
+                  style={{ backgroundColor: node.color }}
+                />
+              ))}
+            </div>
+          </div>
         )}
-        style={{
-          background:
-            activeSection === "roadmap" || activeSection === "timeline" || activeSection === "life-os"
-              ? "radial-gradient(circle at 78% 36%, rgba(255,212,0,0.17), transparent 30%), radial-gradient(circle at 24% 42%, rgba(0,217,255,0.13), transparent 34%)"
-              : "radial-gradient(circle at 76% 36%, rgba(0,217,255,0.17), transparent 30%), radial-gradient(circle at 26% 52%, rgba(255,212,0,0.1), transparent 34%)",
-        }}
-      />
-      {webglAvailable ? (
-        <Canvas
-          aria-label="Scroll-guided ChiaOS System Director"
-          className="absolute inset-0 h-full w-full"
-          camera={{ position: [0, 0, mobile ? 7.3 : 5.8], fov: mobile ? 47 : 43 }}
-          dpr={mobile ? [1, 1.15] : [1, 1.45]}
-          frameloop={reduceMotion ? "demand" : "always"}
-          gl={{ antialias: !mobile, powerPreference: "high-performance", alpha: true }}
-        >
-          <DirectorScene
-            activeSection={activeSection}
-            highlightedMissionId={highlightedMissionId}
-            highlightedSkill={highlightedSkill}
-            reduceMotion={reduceMotion}
-            mobile={mobile}
-          />
-        </Canvas>
-      ) : (
-        <div className="absolute inset-0">
-          <div className="absolute right-[8%] top-[24%] h-48 w-48 rounded-full border border-[#00D9FF]/20 bg-[#00D9FF]/10 blur-sm" />
-          <div className="absolute right-[18%] top-[42%] h-px w-[42vw] rotate-[-8deg] bg-gradient-to-l from-[#FFD400]/45 to-transparent" />
-          <div className="absolute right-[14%] top-[54%] h-px w-[50vw] rotate-[6deg] bg-gradient-to-l from-[#00D9FF]/40 to-transparent" />
-        </div>
-      )}
-      <div className="absolute bottom-5 right-4 hidden max-w-xs rounded-2xl border border-white/12 bg-[#05070B]/54 p-4 text-right backdrop-blur-xl lg:block">
-        <p className="font-code text-xs uppercase text-[#00D9FF]">System Director</p>
-        <p className="mt-1 font-display text-lg font-semibold text-[#F8FAFC]">
-          {directorLabel}
+      </div>
+      <div
+        className="pointer-events-none fixed bottom-5 right-4 z-[13] hidden max-w-xs rounded-2xl border border-[#00D9FF]/30 bg-[#05070B]/68 p-4 text-right shadow-[0_0_48px_rgba(0,217,255,0.22)] backdrop-blur-xl lg:block"
+        aria-hidden="true"
+      >
+        <p className="font-code text-xs uppercase tracking-[0.28em] text-[#00D9FF]">
+          System Director
         </p>
+        <p className="mt-1 font-display text-lg font-semibold text-[#F8FAFC]">{directorLabel}</p>
         <p className="mt-1 text-xs leading-5 text-[#AAB4C0]">{directorStatus}</p>
       </div>
-    </div>
+    </>
   );
 }

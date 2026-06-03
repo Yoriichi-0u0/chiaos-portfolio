@@ -146,11 +146,61 @@ textarea {
   height: 100% !important;
 }
 
-.system-director canvas {
+.system-director-visual {
+  mix-blend-mode: screen;
+}
+
+.system-director-visual canvas {
   position: absolute !important;
   inset: 0 !important;
   width: 100% !important;
   height: 100% !important;
+  filter:
+    drop-shadow(0 0 28px rgba(0, 217, 255, 0.55))
+    drop-shadow(0 0 44px rgba(255, 212, 0, 0.24))
+    saturate(1.25);
+  mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.04),
+    rgba(0, 0, 0, 0.12) 40%,
+    rgba(0, 0, 0, 0.56) 60%,
+    rgba(0, 0, 0, 0.9) 78%,
+    #000 100%
+  );
+  opacity: 0.9;
+}
+
+.system-director-fallback {
+  animation: director-fallback-pulse 3.6s ease-in-out infinite alternate;
+  mask-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.06),
+    rgba(0, 0, 0, 0.2) 40%,
+    #000 66%
+  );
+}
+
+@keyframes director-fallback-pulse {
+  from {
+    opacity: 0.72;
+    transform: translate3d(0, 0, 0) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, -8px, 0) scale(1.02);
+  }
+}
+
+@media (max-width: 767px) {
+  .system-director-visual {
+    opacity: 0.76;
+  }
+
+  .system-director-visual canvas,
+  .system-director-fallback {
+    mask-image: radial-gradient(circle at 66% 24%, #000 0 38%, transparent 78%);
+  }
 }
 
 .scrollbar-hide {
