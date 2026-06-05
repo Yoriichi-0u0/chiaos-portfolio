@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Filter } from "lucide-react";
+import { Filter, Layers3 } from "lucide-react";
 import { MissionCard } from "@/components/MissionCard";
 import { missions } from "@/data/missions";
 import type { MissionCategory } from "@/types/portfolio";
@@ -40,11 +40,11 @@ export function MissionFiles({
           <div className="max-w-3xl">
             <p className="font-code text-sm uppercase text-[#00D9FF]">mission files</p>
             <h2 className="mt-3 font-display text-4xl font-semibold text-[#F8FAFC] sm:text-5xl">
-              Project proof with direction.
+              Project proof, ranked for signal.
             </h2>
             <p className="mt-4 text-[#AAB4C0]">
-              The missions show where Chia has been building and where the next
-              checkpoint can connect to real-world teams.
+              COS30049, COS30018, and COS40007 lead the archive. The rest of the
+              files stay available without pretending every placeholder is finished.
             </p>
           </div>
           <div
@@ -72,6 +72,39 @@ export function MissionFiles({
               </button>
             ))}
           </div>
+        </div>
+        <div className="mt-8 grid gap-4 lg:grid-cols-3">
+          {missions.slice(0, 3).map((mission, index) => (
+            <a
+              key={mission.id}
+              href={`#${mission.id}`}
+              onMouseEnter={() => onMissionHover?.(mission.id)}
+              onMouseLeave={() => onMissionHover?.(null)}
+              onFocus={() => onMissionHover?.(mission.id)}
+              onBlur={() => onMissionHover?.(null)}
+              className={cn(
+                "group rounded-2xl border bg-[#0B0F17]/74 p-5 transition hover:border-[#00D9FF]/45",
+                highlightedMissionId === mission.id
+                  ? "border-[#FFD400]/55 shadow-[0_0_28px_rgba(255,212,0,0.12)]"
+                  : "border-white/12"
+              )}
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-code text-xs uppercase text-[#FFD400]">
+                    Priority 0{index + 1}
+                  </p>
+                  <h3 className="mt-2 font-display text-xl font-semibold text-[#F8FAFC]">
+                    {mission.title}
+                  </h3>
+                </div>
+                <Layers3 className="h-5 w-5 shrink-0 text-[#00D9FF]" aria-hidden />
+              </div>
+              <p className="mt-3 text-sm leading-6 text-[#AAB4C0]">
+                {mission.role ?? mission.summary}
+              </p>
+            </a>
+          ))}
         </div>
         <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {filteredMissions.map((mission, index) => (

@@ -1,6 +1,16 @@
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, Brain, Layers3, Radar } from "lucide-react";
 import { skillGroups } from "@/data/skills";
 import { cn } from "@/lib/utils";
+
+const skillStats = [
+  { label: "Clusters", value: `${skillGroups.length}`, icon: Layers3 },
+  {
+    label: "Evidence items",
+    value: `${skillGroups.reduce((total, group) => total + group.skills.length, 0)}`,
+    icon: BadgeCheck,
+  },
+  { label: "Primary direction", value: "AI", icon: Brain },
+];
 
 type SkillSystemProps = {
   highlightedSkill?: string | null;
@@ -18,25 +28,55 @@ export function SkillSystem({
       className="system-section px-4 py-16 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="font-code text-sm uppercase text-[#00D9FF]">skill system</p>
-          <h2 className="mt-3 font-display text-4xl font-semibold text-[#F8FAFC] sm:text-5xl">
-            Skills mapped to evidence.
-          </h2>
-          <p className="mt-4 text-[#AAB4C0]">
-            ChiaOS avoids inflated ratings. Each skill is shown with a current
-            stage and the work that supports it.
-          </p>
+        <div className="grid gap-6 lg:grid-cols-[0.86fr_1.14fr] lg:items-end">
+          <div className="max-w-3xl">
+            <p className="font-code text-sm uppercase text-[#00D9FF]">skill system</p>
+            <h2 className="mt-3 font-display text-4xl font-semibold text-[#F8FAFC] sm:text-5xl">
+              Skills mapped to evidence.
+            </h2>
+            <p className="mt-4 text-[#AAB4C0]">
+              ChiaOS avoids inflated ratings. Each skill is shown with a current
+              stage and the work that supports it.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-3">
+            {skillStats.map((stat) => {
+              const Icon = stat.icon;
+
+              return (
+                <article
+                  key={stat.label}
+                  className="rounded-2xl border border-white/12 bg-[#0B0F17]/78 p-4"
+                >
+                  <Icon className="h-5 w-5 text-[#FFD400]" aria-hidden />
+                  <p className="mt-3 font-code text-xs uppercase text-[#AAB4C0]">
+                    {stat.label}
+                  </p>
+                  <p className="mt-1 font-display text-2xl font-semibold text-[#F8FAFC]">
+                    {stat.value}
+                  </p>
+                </article>
+              );
+            })}
+          </div>
         </div>
         <div className="mt-10 grid gap-5 lg:grid-cols-2">
-          {skillGroups.map((group) => (
+          {skillGroups.map((group, groupIndex) => (
             <article
               key={group.title}
               className="rounded-2xl border border-white/12 bg-[#0B0F17]/78 p-5 shadow-lg shadow-black/20"
             >
-              <h3 className="font-display text-2xl font-semibold text-[#F8FAFC]">
-                {group.title}
-              </h3>
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="font-code text-xs uppercase text-[#FFD400]">
+                    cluster {String(groupIndex + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="mt-2 font-display text-2xl font-semibold text-[#F8FAFC]">
+                    {group.title}
+                  </h3>
+                </div>
+                <Radar className="h-5 w-5 shrink-0 text-[#00D9FF]" aria-hidden />
+              </div>
               <p className="mt-2 text-sm leading-6 text-[#AAB4C0]">{group.description}</p>
               <div className="mt-5 grid gap-3">
                 {group.skills.map((skill) => (

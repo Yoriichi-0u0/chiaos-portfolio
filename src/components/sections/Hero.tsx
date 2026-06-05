@@ -1,19 +1,49 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowDown, Download, Gauge, RadioTower, Sparkles } from "lucide-react";
+import {
+  ArrowDown,
+  Bot,
+  Download,
+  Gauge,
+  Layers3,
+  RadioTower,
+  ShieldCheck,
+  Sparkles,
+} from "lucide-react";
 import { profile } from "@/data/profile";
 
 const cockpitReadouts = [
-  { label: "AI", value: "Applied" },
-  { label: "Cyber", value: "Building" },
-  { label: "Cloud", value: "Design" },
+  { label: "Primary signal", value: "AI-first" },
+  { label: "Operating proof", value: "Realfun" },
+  { label: "Build style", value: "Vibe coding" },
 ];
 
 const directorReadouts = [
   { label: "Active layer", value: "Scroll-guided 3D" },
-  { label: "Attention", value: "Cyan / Yellow" },
+  { label: "Focus loop", value: "Mission + skill cues" },
   { label: "Motion", value: "Reduced-safe" },
+];
+
+const systemRoutes = [
+  {
+    href: "#missions",
+    label: "Mission proof",
+    detail: "University builds, public repos, and honest placeholders.",
+    icon: Layers3,
+  },
+  {
+    href: "#skills",
+    label: "Skill evidence",
+    detail: "No fake percentages, only signals backed by work.",
+    icon: ShieldCheck,
+  },
+  {
+    href: "#ask",
+    label: "Ask ChiaOS",
+    detail: "Local answers drawn from the site data.",
+    icon: Bot,
+  },
 ];
 
 export function Hero() {
@@ -27,7 +57,7 @@ export function Hero() {
     >
       <div className="absolute inset-0 -z-10 system-grid opacity-35" aria-hidden />
       <div className="absolute inset-x-0 top-0 -z-10 h-40 system-speedlines opacity-40" aria-hidden />
-      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.02fr_0.98fr]">
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
@@ -39,12 +69,12 @@ export function Hero() {
             Activated ChiaOS System
           </div>
           <h1 className="mt-6 max-w-5xl font-display text-4xl font-semibold leading-[1.02] text-[#F8FAFC] sm:text-7xl lg:text-8xl">
-            {profile.tagline}
+            Activated system, running live.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-8 text-[#AAB4C0]">
-            The clean setup screen is unlocked. This is the full-send system:
-            original interface work, 3D motion, local assistant logic, project proof,
-            and career identity running as one portfolio experience.
+            {profile.tagline} ChiaOS is the full-send layer: 3D direction,
+            local assistant logic, mission proof, Realfun operations, and career
+            identity arranged as one product experience.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
@@ -77,6 +107,30 @@ export function Hero() {
               </div>
             ))}
           </div>
+          <div className="mt-5 grid max-w-3xl gap-3 md:grid-cols-3">
+            {systemRoutes.map((route) => {
+              const Icon = route.icon;
+
+              return (
+                <a
+                  key={route.href}
+                  href={route.href}
+                  className="group rounded-2xl border border-white/12 bg-[#0B0F17]/72 p-4 transition hover:border-[#00D9FF]/45 hover:bg-[#101624]/88"
+                >
+                  <div className="flex items-center justify-between gap-4">
+                    <Icon className="h-5 w-5 text-[#00D9FF]" aria-hidden />
+                    <span className="h-2 w-2 rounded-full bg-[#FFD400] opacity-70 transition group-hover:scale-125" />
+                  </div>
+                  <p className="mt-4 font-display text-lg font-semibold text-[#F8FAFC]">
+                    {route.label}
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-[#AAB4C0]">
+                    {route.detail}
+                  </p>
+                </a>
+              );
+            })}
+          </div>
         </motion.div>
 
         <motion.div
@@ -86,7 +140,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="relative"
         >
-          <div className="rounded-[2rem] border border-[#00D9FF]/24 bg-[#0B0F17]/70 p-5 shadow-2xl shadow-[rgba(0,217,255,0.14)] backdrop-blur">
+          <div className="rounded-[2rem] border border-[#00D9FF]/24 bg-[#0B0F17]/76 p-5 shadow-2xl shadow-[rgba(0,217,255,0.14)] backdrop-blur">
             <div className="flex items-center justify-between gap-4 border-b border-white/12 pb-4">
               <div>
                 <p className="font-code text-xs uppercase text-[#00D9FF]">
@@ -101,8 +155,9 @@ export function Hero() {
               </span>
             </div>
             <p className="mt-4 text-sm leading-6 text-[#AAB4C0]">
-              The fixed 3D layer now reacts to the section in view, mission hover,
-              and skill focus. It guides attention without sitting in a single box.
+              The fixed 3D layer reacts to the section in view, mission focus,
+              and skill focus. It behaves like a visual director rather than a
+              decorative background.
             </p>
             <div className="mt-5 grid gap-3">
               {directorReadouts.map((readout) => (

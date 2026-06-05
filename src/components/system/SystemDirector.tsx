@@ -1697,7 +1697,7 @@ export function SystemDirector({
         />
       </div>
       <div
-        className="system-director-visual pointer-events-none fixed inset-0 z-[12] overflow-hidden"
+        className="system-director-visual pointer-events-none fixed inset-0 z-[6] overflow-hidden"
         aria-hidden="true"
       >
         {webglAvailable ? (

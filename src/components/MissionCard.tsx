@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Cpu, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Cpu, Layers3, ShieldCheck } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import type { Mission } from "@/types/portfolio";
 import { cn } from "@/lib/utils";
@@ -23,6 +23,7 @@ export function MissionCard({
 
   return (
     <motion.article
+      id={mission.id}
       initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -52,11 +53,22 @@ export function MissionCard({
           </h3>
         </div>
         <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[#00D9FF]/35 bg-[#00D9FF]/10 text-[#00D9FF] shadow-[0_0_24px_rgba(0,217,255,0.18)]">
-          <Cpu className="h-5 w-5" aria-hidden />
+          {mission.category === "AI" ? (
+            <Cpu className="h-5 w-5" aria-hidden />
+          ) : (
+            <Layers3 className="h-5 w-5" aria-hidden />
+          )}
         </span>
       </div>
-      <div className="mt-4 inline-flex rounded-full border border-[#FFD400]/25 bg-[#FFD400]/10 px-3 py-1 font-code text-xs uppercase text-[#FFD400]">
-        {mission.status}
+      <div className="mt-4 flex flex-wrap gap-2">
+        <span className="inline-flex rounded-full border border-[#FFD400]/25 bg-[#FFD400]/10 px-3 py-1 font-code text-xs uppercase text-[#FFD400]">
+          {mission.status}
+        </span>
+        {mission.role ? (
+          <span className="inline-flex rounded-full border border-white/12 bg-white/6 px-3 py-1 text-xs text-[#E5E7EB]">
+            {mission.role}
+          </span>
+        ) : null}
       </div>
       <p className="mt-4 text-sm leading-6 text-[#AAB4C0]">{mission.summary}</p>
       <div className="mt-5 grid gap-2">

@@ -12,15 +12,26 @@ export function Contact() {
         <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
           <div>
             <p className="font-code text-sm uppercase text-[#00D9FF]">
-              contact
+              signal handoff
             </p>
             <h2 className="mt-3 font-display text-4xl font-semibold text-[#F8FAFC] sm:text-5xl">
-              Connect with {profile.preferredName}.
+              Connect with {profile.preferredName} after the system run.
             </h2>
             <p className="mt-4 max-w-2xl text-base leading-7 text-[#AAB4C0]">
-              Open to internship conversations, project feedback, and opportunities
-              across AI, software engineering, cybersecurity, and cloud.
+              ChiaOS is built to show development taste, AI direction, operating
+              proof, and career identity. The next signal can be feedback,
+              collaboration, or a practical opportunity across AI and software systems.
             </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {["AI-focused", "Product-minded", "Proof-led", "Operations-tested"].map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-[#00D9FF]/22 bg-[#00D9FF]/8 px-3 py-1 text-xs text-[#B7F7FF]"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
             <a
