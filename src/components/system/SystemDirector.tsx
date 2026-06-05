@@ -672,6 +672,14 @@ function SemanticCategorySymbol({
           opacity={highlighted ? 0.62 : active ? 0.42 : 0.22}
         />
       </mesh>
+      <mesh rotation={[0.24, Math.PI / 2, 0]}>
+        <torusGeometry args={[highlighted ? 0.88 : active ? 0.8 : 0.74, 0.008, 8, 58]} />
+        <meshBasicMaterial
+          color={highlighted ? "#FFD400" : "#00D9FF"}
+          transparent
+          opacity={highlighted ? 0.5 : active ? 0.32 : 0.14}
+        />
+      </mesh>
     </group>
   );
 }
@@ -767,15 +775,19 @@ function DirectorCore({
   return (
     <group ref={groupRef} position={formation.core}>
       <mesh>
-        <sphereGeometry args={[mobile ? 0.34 : 0.48, mobile ? 20 : 32, mobile ? 12 : 20]} />
-        <meshBasicMaterial color={formation.accent} transparent opacity={mobile ? 0.2 : 0.28} />
+        <sphereGeometry args={[mobile ? 0.42 : 0.58, mobile ? 20 : 36, mobile ? 12 : 22]} />
+        <meshBasicMaterial color={formation.accent} transparent opacity={mobile ? 0.26 : 0.34} />
+      </mesh>
+      <mesh>
+        <sphereGeometry args={[mobile ? 0.82 : 1.08, mobile ? 18 : 28, mobile ? 10 : 16]} />
+        <meshBasicMaterial color="#00D9FF" transparent opacity={mobile ? 0.045 : 0.06} />
       </mesh>
       <mesh rotation={[0.08, 0.18, 0.18]}>
         <boxGeometry args={[mobile ? 0.52 : 0.66, mobile ? 0.52 : 0.66, mobile ? 0.09 : 0.12]} />
         <meshStandardMaterial
           color="#07111F"
           emissive={formation.accent}
-          emissiveIntensity={pulse ? 1.2 : 0.78}
+          emissiveIntensity={pulse ? 1.45 : 0.96}
           metalness={0.86}
           roughness={0.12}
           transparent
@@ -789,13 +801,144 @@ function DirectorCore({
         </mesh>
       ))}
       <mesh rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[mobile ? 0.62 : 0.82, mobile ? 0.012 : 0.016, 8, mobile ? 56 : 76]} />
-        <meshBasicMaterial color={formation.accent} transparent opacity={mobile ? 0.38 : 0.5} />
+        <torusGeometry args={[mobile ? 0.72 : 0.98, mobile ? 0.014 : 0.018, 8, mobile ? 60 : 82]} />
+        <meshBasicMaterial color={formation.accent} transparent opacity={mobile ? 0.46 : 0.58} />
       </mesh>
       <mesh rotation={[0, Math.PI / 2, 0]}>
-        <torusGeometry args={[mobile ? 0.48 : 0.66, mobile ? 0.009 : 0.012, 8, mobile ? 44 : 68]} />
-        <meshBasicMaterial color="#00D9FF" transparent opacity={mobile ? 0.2 : 0.3} />
+        <torusGeometry args={[mobile ? 0.56 : 0.74, mobile ? 0.01 : 0.014, 8, mobile ? 48 : 72]} />
+        <meshBasicMaterial color="#00D9FF" transparent opacity={mobile ? 0.28 : 0.36} />
       </mesh>
+      <mesh rotation={[Math.PI / 2, 0.4, 0.22]}>
+        <torusGeometry args={[mobile ? 0.96 : 1.2, mobile ? 0.006 : 0.01, 8, mobile ? 64 : 92]} />
+        <meshBasicMaterial color="#B7F7FF" transparent opacity={mobile ? 0.2 : 0.24} />
+      </mesh>
+    </group>
+  );
+}
+
+function samplePolyline(points: [number, number, number][], progress: number) {
+  if (points.length <= 1) {
+    return new Vector3(...(points[0] ?? [0, 0, 0]));
+  }
+
+  const segmentLengths = points.slice(0, -1).map((point, index) => {
+    const nextPoint = points[index + 1];
+    return new Vector3(...point).distanceTo(new Vector3(...nextPoint));
+  });
+  const totalLength = segmentLengths.reduce((total, length) => total + length, 0);
+  let targetDistance = totalLength * progress;
+
+  for (let index = 0; index < segmentLengths.length; index += 1) {
+    const segmentLength = segmentLengths[index];
+
+    if (targetDistance <= segmentLength || index === segmentLengths.length - 1) {
+      const start = new Vector3(...points[index]);
+      const end = new Vector3(...points[index + 1]);
+      const localProgress = segmentLength === 0 ? 0 : targetDistance / segmentLength;
+      return start.lerp(end, localProgress);
+    }
+
+    targetDistance -= segmentLength;
+  }
+
+  return new Vector3(...points[points.length - 1]);
+}
+
+function AttentionGuide({
+  formation,
+  reduceMotion,
+  mobile,
+  pulse,
+}: {
+  formation: Formation;
+  reduceMotion: boolean;
+  mobile: boolean;
+  pulse: boolean;
+}) {
+  const pulseRef = useRef<Group>(null);
+  const endpointRef = useRef<Group>(null);
+  const guidePoints = useMemo<[number, number, number][]>(() => {
+    const [start, end] = formation.beam;
+    const midpoint: [number, number, number] = [
+      start[0] + (end[0] - start[0]) * (mobile ? 0.48 : 0.58),
+      start[1] + (end[1] - start[1]) * (mobile ? 0.78 : 0.44) + (mobile ? 0.52 : 0.2),
+      start[2] + 0.18,
+    ];
+
+    return [
+      [start[0], start[1], start[2] + 0.22],
+      midpoint,
+      [end[0], end[1], end[2] + 0.1],
+    ];
+  }, [formation.beam, mobile]);
+  const endpoint = guidePoints[guidePoints.length - 1];
+  const start = guidePoints[0];
+  const end = guidePoints[guidePoints.length - 1];
+  const guideAngle = Math.atan2(end[1] - start[1], end[0] - start[0]);
+
+  useFrame((state) => {
+    if (endpointRef.current) {
+      const scale = reduceMotion
+        ? 1
+        : 1 + Math.sin(state.clock.elapsedTime * (pulse ? 3.4 : 2.1)) * (mobile ? 0.08 : 0.12);
+
+      endpointRef.current.scale.setScalar(scale);
+      endpointRef.current.rotation.z += reduceMotion ? 0 : 0.008;
+    }
+
+    if (!pulseRef.current || reduceMotion) {
+      return;
+    }
+
+    const progress = (state.clock.elapsedTime * (pulse ? 0.58 : 0.4)) % 1;
+    const position = samplePolyline(guidePoints, progress);
+    pulseRef.current.position.copy(position);
+    pulseRef.current.rotation.z = guideAngle - Math.PI / 2;
+  });
+
+  return (
+    <group>
+      <Line
+        points={guidePoints}
+        color={formation.accent}
+        lineWidth={mobile ? 2.8 : 5.6}
+        transparent
+        opacity={mobile ? 0.26 : 0.46}
+      />
+      <Line
+        points={guidePoints.map(([x, y, z]) => [x, y - (mobile ? 0.08 : 0.14), z - 0.18] as [number, number, number])}
+        color="#00D9FF"
+        lineWidth={mobile ? 1.4 : 2.8}
+        transparent
+        opacity={mobile ? 0.2 : 0.32}
+      />
+      <Line
+        points={guidePoints.map(([x, y, z]) => [x, y + (mobile ? 0.06 : 0.1), z + 0.1] as [number, number, number])}
+        color="#B7F7FF"
+        lineWidth={mobile ? 0.9 : 1.4}
+        transparent
+        opacity={mobile ? 0.16 : 0.24}
+      />
+      <group ref={endpointRef} position={endpoint} rotation={[Math.PI / 2, 0, guideAngle]}>
+        <mesh>
+          <torusGeometry args={[mobile ? 0.18 : 0.3, mobile ? 0.009 : 0.014, 8, mobile ? 42 : 64]} />
+          <meshBasicMaterial color={formation.accent} transparent opacity={mobile ? 0.5 : 0.74} />
+        </mesh>
+        <mesh>
+          <torusGeometry args={[mobile ? 0.3 : 0.5, mobile ? 0.005 : 0.008, 8, mobile ? 46 : 72]} />
+          <meshBasicMaterial color="#00D9FF" transparent opacity={mobile ? 0.24 : 0.38} />
+        </mesh>
+      </group>
+      <group ref={pulseRef} position={start}>
+        <mesh>
+          <sphereGeometry args={[mobile ? 0.055 : 0.085, mobile ? 14 : 18, mobile ? 10 : 12]} />
+          <meshBasicMaterial color="#FFD400" transparent opacity={mobile ? 0.7 : 0.88} />
+        </mesh>
+        <mesh position={[0, mobile ? -0.11 : -0.16, 0]} rotation={[0, 0, 0]}>
+          <coneGeometry args={[mobile ? 0.06 : 0.1, mobile ? 0.18 : 0.28, 3]} />
+          <meshBasicMaterial color={formation.accent} transparent opacity={mobile ? 0.42 : 0.66} />
+        </mesh>
+      </group>
     </group>
   );
 }
@@ -1540,8 +1683,14 @@ function DirectorScene({
   const highlightedNode = missionNode ?? skillNode;
   const showConnections = formation.connect && !mobile;
   const showPulse = activeSection === "ask" || Boolean(highlightedMissionId || highlightedSkill);
-  const sceneScale = mobile ? 0.86 : 1.12;
-  const scenePosition: [number, number, number] = mobile ? [-0.12, -0.04, 0] : [0.5, 0.02, 0];
+  const guidePulse =
+    showPulse ||
+    activeSection === "hero" ||
+    activeSection === "missions" ||
+    activeSection === "skills" ||
+    activeSection === "operations";
+  const sceneScale = mobile ? 0.72 : 0.98;
+  const scenePosition: [number, number, number] = mobile ? [1.02, 0.76, 0] : [1.18, 0.02, 0];
 
   return (
     <>
@@ -1558,6 +1707,12 @@ function DirectorScene({
           mobile={mobile}
           pulse={showPulse}
         />
+        <AttentionGuide
+          formation={formation}
+          reduceMotion={reduceMotion}
+          mobile={mobile}
+          pulse={guidePulse}
+        />
         <SectionSemanticRigs
           activeSection={activeSection}
           highlightedMissionId={highlightedMissionId}
@@ -1567,13 +1722,6 @@ function DirectorScene({
 
         {!mobile ? (
           <>
-            <Line
-              points={formation.beam}
-              color={formation.accent}
-              lineWidth={4.5}
-              transparent
-              opacity={0.78}
-            />
             <Line
               points={formation.path}
               color={activeSection === "roadmap" || activeSection === "timeline" ? "#FFD400" : "#00D9FF"}
@@ -1616,13 +1764,13 @@ function DirectorScene({
           <DirectorModule
             key={node.key}
             node={node}
-        target={formation.nodes[node.key]}
-        active={node.key === activeNode}
-        highlighted={node.key === highlightedNode}
-        reduceMotion={reduceMotion}
-        mobile={mobile}
-        quiet={activeSection !== "missions" && activeSection !== "skills" && activeSection !== "operations"}
-      />
+            target={formation.nodes[node.key]}
+            active={node.key === activeNode}
+            highlighted={node.key === highlightedNode}
+            reduceMotion={reduceMotion}
+            mobile={mobile}
+            quiet={activeSection !== "missions" && activeSection !== "skills" && activeSection !== "operations"}
+          />
         ))}
       </group>
     </>
@@ -1697,7 +1845,7 @@ export function SystemDirector({
         />
       </div>
       <div
-        className="system-director-visual pointer-events-none fixed inset-0 z-[6] overflow-hidden"
+        className="system-director-visual pointer-events-none fixed inset-0 z-[12] overflow-hidden"
         aria-hidden="true"
       >
         {webglAvailable ? (
@@ -1719,9 +1867,16 @@ export function SystemDirector({
           </Canvas>
         ) : (
           <div className="system-director-fallback absolute inset-0">
-            <div className="absolute right-[4%] top-[18%] h-80 w-80 rounded-full border-2 border-[#00D9FF]/45 bg-[#00D9FF]/14 shadow-[0_0_90px_rgba(0,217,255,0.48)] md:h-[26rem] md:w-[26rem]">
+            <div className="absolute left-[9%] top-[43%] hidden h-20 w-20 -translate-y-1/2 rounded-full border border-[#FFD400]/60 shadow-[0_0_42px_rgba(255,212,0,0.34)] md:block">
+              <div className="absolute inset-4 rounded-full border border-[#00D9FF]/60" />
+              <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FFD400] shadow-[0_0_22px_rgba(255,212,0,0.8)]" />
+            </div>
+            <div className="absolute left-[12%] top-[45%] hidden h-2 w-[58%] -translate-y-1/2 rotate-[-8deg] rounded-full bg-gradient-to-r from-[#FFD400]/80 via-[#00D9FF]/70 to-transparent shadow-[0_0_32px_rgba(0,217,255,0.38)] md:block" />
+            <div className="absolute left-[22%] top-[50%] hidden h-px w-[46%] -translate-y-1/2 rotate-[-8deg] bg-gradient-to-r from-[#B7F7FF]/70 via-[#FFD400]/45 to-transparent md:block" />
+            <div className="absolute right-[6%] top-[24%] h-72 w-72 rounded-full border-2 border-[#00D9FF]/55 bg-[#00D9FF]/16 shadow-[0_0_110px_rgba(0,217,255,0.54)] md:h-[28rem] md:w-[28rem]">
               <div className="absolute inset-10 rounded-full border border-[#FFD400]/45" />
-              <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-xl border border-[#B7F7FF]/55 bg-[#0B0F17]/80 shadow-[0_0_42px_rgba(0,217,255,0.45)]">
+              <div className="absolute inset-20 rounded-full border border-[#B7F7FF]/25" />
+              <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rotate-45 rounded-xl border border-[#B7F7FF]/65 bg-[#0B0F17]/80 shadow-[0_0_52px_rgba(0,217,255,0.55)]">
                 <span className="absolute left-1/2 top-2 h-20 w-1 -translate-x-1/2 bg-[#00D9FF]/60" />
                 <span className="absolute left-2 top-1/2 h-1 w-20 -translate-y-1/2 bg-[#FFD400]/70" />
               </div>
