@@ -30,3 +30,4 @@ pnpm-debug.log*
 
 # Private content inbox for local planning only
 _content_inbox/
+.codegraph/
