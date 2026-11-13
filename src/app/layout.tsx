@@ -40,9 +40,6 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Chia Yuen Kai" }],
   creator: "Chia Yuen Kai",
-  icons: {
-    icon: "/favicon.svg",
-  },
   openGraph: {
     title: "ChiaOS | Chia Yuen Kai",
     description:
