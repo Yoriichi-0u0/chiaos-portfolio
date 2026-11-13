@@ -21,6 +21,7 @@ import {
   Users,
 } from "lucide-react";
 import { ChiaOSVersionBadge } from "@/components/system/ChiaOSVersionBadge";
+import { ChiaOSMark } from "@/components/ChiaOSMark";
 import { education } from "@/data/education";
 import { experience } from "@/data/experience";
 import { missions } from "@/data/missions";
@@ -143,7 +144,8 @@ export function LandingPage() {
       <header className="sticky top-0 z-40 border-b border-[#D8DADC]/80 bg-[#F5F5F7]/88 backdrop-blur-xl">
         <nav className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex min-w-0 items-center gap-3">
-            <a href="#top" className="font-display text-lg font-semibold tracking-normal">
+            <a href="#top" className="inline-flex items-center gap-2 font-display text-lg font-semibold tracking-normal">
+              <ChiaOSMark />
               ChiaOS
             </a>
             <ChiaOSVersionBadge tone="light" showHint className="hidden sm:inline-flex" />

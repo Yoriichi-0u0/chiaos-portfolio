@@ -21,8 +21,8 @@ Replace these before treating the public site as final:
 
 ## Needs Chia's Confirmation (added 13 November 2026)
 
-- Education stage still says "Year 2, Semester 2 / fourth semester out of six" (June 2026). Confirm the current semester and CGPA snapshot.
-- Realfun role still says "May 2023 to Present". Confirm it is current.
+- Education stage still says "Year 2, Semester 2 / fourth semester out of six" (June 2026). Confirm the current semester. (CGPA confirmed 13 November 2026: 3.51 cumulative as of the last semester.)
+- Realfun role confirmed current on 13 November 2026 as admin and hotline handler.
 - Earth FM: confirm Chia's split of work within team BoboMimi (site currently says only "Team leader").
 - FinGence: confirm the wider contribution wording with teammates (site currently says only "data ingestion owner").
 - Bird classifier: confirm individual or group work. The Streamlit app redirects visitors to a sign-in page, so it is not linked.

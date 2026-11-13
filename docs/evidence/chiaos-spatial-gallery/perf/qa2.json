@@ -1,0 +1,94 @@
+{
+ "desktop": {
+  "canvasesBefore": 0,
+  "canvasesAtGallery": 0,
+  "endKey": "Little Orbit",
+  "homeKey": "Earth FM",
+  "sliderHome": "1880 · −0.18 °C",
+  "sliderEnd": "2025 · +1.19 °C",
+  "playButton": 0,
+  "fallback": 1,
+  "overflow": 0,
+  "caseStudyHash": "#fingence",
+  "canvasesAfterLeaving": 0,
+  "errors": []
+ },
+ "tablet": {
+  "canvasesBefore": 0,
+  "canvasesAtGallery": 0,
+  "endKey": "Little Orbit",
+  "homeKey": "Earth FM",
+  "sliderHome": "1880 · −0.18 °C",
+  "sliderEnd": "2025 · +1.19 °C",
+  "playButton": 0,
+  "fallback": 1,
+  "overflow": 0,
+  "caseStudyHash": "#fingence",
+  "canvasesAfterLeaving": 0,
+  "errors": []
+ },
+ "mobile": {
+  "canvasesBefore": 0,
+  "canvasesAtGallery": 0,
+  "endKey": "Little Orbit",
+  "homeKey": "Earth FM",
+  "sliderHome": "1880 · −0.18 °C",
+  "sliderEnd": "2025 · +1.19 °C",
+  "playButton": 0,
+  "fallback": 1,
+  "overflow": 0,
+  "caseStudyHash": "#fingence",
+  "canvasesAfterLeaving": 0,
+  "errors": []
+ },
+ "reduced": {
+  "canvasesBefore": 0,
+  "canvasesAtGallery": 0,
+  "endKey": "Little Orbit",
+  "homeKey": "Earth FM",
+  "sliderHome": "1880 · −0.18 °C",
+  "sliderEnd": "2025 · +1.19 °C",
+  "playButton": 0,
+  "fallback": 1,
+  "overflow": 0,
+  "caseStudyHash": "#fingence",
+  "canvasesAfterLeaving": 0,
+  "errors": []
+ },
+ "nowebgl": {
+  "canvasesBefore": 0,
+  "canvasesAtGallery": 0,
+  "endKey": "Little Orbit",
+  "homeKey": "Earth FM",
+  "sliderHome": "1880 · −0.18 °C",
+  "sliderEnd": "2025 · +1.19 °C",
+  "playButton": 0,
+  "fallback": 1,
+  "overflow": 0,
+  "caseStudyHash": "#fingence",
+  "canvasesAfterLeaving": 0,
+  "errors": []
+ },
+ "nowebgl-mobile": {
+  "canvasesBefore": 0,
+  "canvasesAtGallery": 0,
+  "endKey": "Little Orbit",
+  "homeKey": "Earth FM",
+  "sliderHome": "1880 · −0.18 °C",
+  "sliderEnd": "2025 · +1.19 °C",
+  "playButton": 0,
+  "fallback": 1,
+  "overflow": 0,
+  "caseStudyHash": "#fingence",
+  "canvasesAfterLeaving": 0,
+  "errors": []
+ },
+ "landing": {
+  "h1": "Welcome to ChiaOS.",
+  "overflow": 0,
+  "icons": [
+   "/icon.svg?icon.0d19z1qszn1tb.svg",
+   "/apple-icon.png?apple-icon.30c_qnfwuthcv.png"
+  ]
+ }
+}

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Command, Download, Home, Menu, X } from "lucide-react";
 import { ChiaOSVersionBadge } from "@/components/system/ChiaOSVersionBadge";
+import { ChiaOSMark } from "@/components/ChiaOSMark";
 import { cn } from "@/lib/utils";
 
 const systemLinks = [
@@ -47,7 +48,8 @@ export function Navbar({ onCommandOpen }: NavbarProps) {
     <header className="sticky top-0 z-40 border-b border-white/12 bg-[#05070B]/94 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-3">
-          <a href="#hero" className="font-display text-lg font-semibold text-white">
+          <a href="#hero" className="inline-flex items-center gap-2 font-display text-lg font-semibold text-white">
+            <ChiaOSMark />
             ChiaOS System
           </a>
           <ChiaOSVersionBadge className="hidden sm:inline-flex" />
