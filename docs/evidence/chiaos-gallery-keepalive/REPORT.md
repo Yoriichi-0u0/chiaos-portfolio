@@ -62,16 +62,37 @@ Branch `codex/chiaos-gallery-keepalive`, stacked on PR #3 (`f2e0185`).
 
 ## Physical-device procedure (not yet run)
 
-No phone was connected, so adoption stays undecided.
+No phone has been tested. Every number in this report is simulated.
 
-1. **Build and serve.** Run `npm run build && npx next start -p 3217`, then open `http://<mac-ip>:3217/system?perf` on the phone. Add `&renderer=unified` for the unified run. Use each branch in turn.
-2. **Prepare the phone.** Use the same charge level (above 50%), not charging, with Low Power Mode off and the screen at the same brightness.
-3. **Cold entry.** Do 3 passes per renderer. Reload, wait 5 s, then scroll to Mission Gallery.
-4. **Warm return.** Do 6 passes per renderer. Scroll to the page end, wait 3 s, then scroll back.
-5. **Record the data.** In Safari Web Inspector, use Timelines (JavaScript & Events, Rendering Frames, Memory). In the console, read `__chiaosPerf.gallery.frames` and calculate the median and p95.
-6. **Note visible differences.** Record the mask edge, the accent glow, and any blank-frame flash when returning.
+**LAN access (no USB):**
 
-An iPhone 15 Pro is a high-end device. Repeat on a mid-range Android phone through `chrome://inspect` before deciding.
+1. Put the Mac and the phone on the same Wi-Fi.
+2. Find the Mac's IP with `ipconfig getifaddr en0` (it was `192.168.1.4` when this was written).
+3. Check out the branch under test, then run `npm run build && npm run start:lan`, which serves `next start -H 0.0.0.0 -p 3217`.
+4. Allow incoming connections if the macOS firewall prompts.
+5. On the phone, open `http://<mac-ip>:3217/system?perf`. For PR #4, add `&renderer=unified` on its branch.
+
+**On-device HUD.** `?perf` shows a small panel in the bottom-left. It never renders without `?perf`. It shows:
+
+- **Per-canvas frame time:** median and p95 over the last 120 frames, plus FPS.
+- **WebGL contexts:** created, lost and restored.
+- **Gallery entries:** `c` (cold) or `w` (warm) in ms. An entry is timed from when the stage intersects the viewport until 3 gallery frames have been drawn.
+- **Input delay:** Chrome uses Event Timing, which reports only events of 16 ms or longer. Safari has no Event Timing and falls back to the input-to-next-frame delay.
+
+**Copy JSON** copies the raw frames, inputs, user agent, viewport and DPR to the clipboard. Paste the result into `perf/device-<phone>-<renderer>-<n>.json`.
+
+**Passes (per device × renderer):**
+
+1. **Prepare the phone.** Charge it above 50%, and keep it unplugged. Turn Low Power Mode or Battery Saver off. Use the same brightness for each run, and close other tabs.
+2. **Cold entry, 3 passes.** Reload, wait 5 s, then scroll to Mission Gallery. Record the `c` value.
+3. **Warm return, 6 passes.** Scroll to the page end, wait 3 s, then scroll back. Record each `w` value.
+4. **Pacing and input.** Settle at the gallery, then switch tabs 10 times and drag the Earth FM slider. Record the gallery median/p95 and the input line, then use Copy JSON.
+5. **Context recovery.** Lock the phone for 10 s and then unlock it, then switch to another app and come back. Check that the gallery is not blank, and record the lost/restored counts.
+6. **Visual defects.** Note any blank-frame flash on return, canvas overlap with text, the mask edge, and orientation-change layout.
+
+**Optional deeper capture:** Safari Web Inspector (needs a cable and Develop menu) or `chrome://inspect` on Android. These are not required for the HUD numbers.
+
+Devices: an iPhone 15 Pro with Safari (high-end) and a mid-range Android phone with Chrome. Don't decide adoption from the iPhone alone.
 
 ## Recommendation
 

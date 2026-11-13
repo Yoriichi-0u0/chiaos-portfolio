@@ -5,6 +5,7 @@ import { useFrame, useThree } from "@react-three/fiber";
 
 type ProbeSample = {
   frames: number[];
+  total: number;
   info: { calls: number; triangles: number; geometries: number; textures: number; programs: number };
 };
 
@@ -23,7 +24,7 @@ function Probe({ name }: { name: string }) {
 
   useEffect(() => {
     const store = (window.__chiaosPerf ??= {});
-    store[name] = { frames: [], info: { calls: 0, triangles: 0, geometries: 0, textures: 0, programs: 0 } };
+    store[name] = { frames: [], total: 0, info: { calls: 0, triangles: 0, geometries: 0, textures: 0, programs: 0 } };
     return () => {
       delete store[name];
     };
@@ -35,6 +36,7 @@ function Probe({ name }: { name: string }) {
       return;
     }
     sample.frames.push(delta * 1000);
+    sample.total += 1;
     if (sample.frames.length > 600) {
       sample.frames.shift();
     }

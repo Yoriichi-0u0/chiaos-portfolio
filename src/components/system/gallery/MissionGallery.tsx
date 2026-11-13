@@ -172,6 +172,7 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
       >
         <div
           ref={stageRef}
+          data-gallery-stage
           className="relative aspect-[4/3] min-h-[18rem] overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_50%_45%,#132036_0%,#070A10_70%)] lg:aspect-auto lg:min-h-[30rem] lg:border-b-0 lg:border-r"
           style={{ touchAction: "pan-y" }}
         >

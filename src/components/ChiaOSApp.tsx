@@ -5,6 +5,7 @@ import { CommandPalette } from "@/components/CommandPalette";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { SystemDirector } from "@/components/system/SystemDirector";
+import { PerfHud } from "@/components/system/PerfHud";
 import { SystemScrollProgress } from "@/components/system/SystemScrollProgress";
 import { AskChiaOS } from "@/components/sections/AskChiaOS";
 import { BootScreen } from "@/components/sections/BootScreen";
@@ -33,6 +34,7 @@ export function ChiaOSApp() {
     >
       <div className="system-radial pointer-events-none fixed inset-0 z-0" aria-hidden="true" />
       <SystemScrollProgress />
+      <PerfHud />
       <SystemDirector
         activeSection={activeSection}
         highlightedMissionId={highlightedMissionId}
