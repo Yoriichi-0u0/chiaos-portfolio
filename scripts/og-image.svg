@@ -1,0 +1,27 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="78%" cy="46%" r="46%">
+      <stop offset="0" stop-color="#00D9FF" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#00D9FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#05070B"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <g stroke="#FFFFFF" stroke-opacity="0.05">
+    <path d="M0 105H1200M0 210H1200M0 315H1200M0 420H1200M0 525H1200"/>
+    <path d="M120 0V630M240 0V630M360 0V630M480 0V630M600 0V630M720 0V630M840 0V630M960 0V630M1080 0V630"/>
+  </g>
+  <g transform="translate(936 300)" fill="none">
+    <circle r="196" stroke="#00D9FF" stroke-opacity="0.16" stroke-width="2"/>
+    <circle r="148" stroke="#FFD400" stroke-opacity="0.14" stroke-width="2" stroke-dasharray="4 10"/>
+    <path d="M90.5 -90.5A128 128 0 1 0 90.5 90.5" stroke="#00D9FF" stroke-width="44" stroke-linecap="round"/>
+    <circle r="40" fill="#FFD400"/>
+  </g>
+  <g font-family="Space Grotesk, Helvetica Neue, Arial, sans-serif">
+    <text x="88" y="132" fill="#00D9FF" font-family="Menlo, monospace" font-size="24" letter-spacing="5">CHIAOS · PORTFOLIO</text>
+    <text x="84" y="268" fill="#F8FAFC" font-size="104" font-weight="700" letter-spacing="-3">Chia Yuen Kai</text>
+    <text x="88" y="336" fill="#C9D1DB" font-size="34">Computer Science · AI and Cybersecurity</text>
+    <text x="88" y="382" fill="#AAB4C0" font-size="28">Swinburne University of Technology Sarawak</text>
+    <text x="88" y="520" fill="#FFD400" font-family="Menlo, monospace" font-size="28" letter-spacing="3">Code. Learn. Build. Evolve.</text>
+  </g>
+</svg>
