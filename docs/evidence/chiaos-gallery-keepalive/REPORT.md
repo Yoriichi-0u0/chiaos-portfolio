@@ -76,3 +76,39 @@ An iPhone 15 Pro is a high-end device. Repeat on a mid-range Android phone throu
 ## Recommendation
 
 Adopt keep-alive for the default dual renderer. It is a 2-file change that keeps behaviour identical, and it delivers most of unified's return-latency benefit. Keep unified as an opt-in experiment in PR #4 until physical-device data shows a meaningful advantage.
+
+## Acceptance gate (re-review of `0a02638`)
+
+**Lifecycle check (`scripts/gate.mjs`, raw output in `gate/gate-full.json`).** Simulated phone, SwiftShader:
+
+| Check | Result |
+|---|---|
+| Gallery canvas before the first near-viewport entry | none (1 canvas, the director) |
+| After the first entry | mounted (2 canvases) |
+| Frames rendered offscreen over 2 s | 0, same canvas element kept |
+| Return | same canvas; selected year (1940) and selected tab (PagePilot) preserved |
+| Blank frame on return | mean absolute pixel difference from steady state: 4.6 immediately, 4.9 after 1.5 s (no blank frame) |
+| Hidden tab, 2 s | 0 frames; rendering resumes when the tab is visible again |
+| CDP freeze then resume | rendering resumes |
+| `WEBGL_lose_context` lose and restore | the context restores on the same canvas, rendering resumes, and the slider still works |
+| Rotation 390x844 → 844x390 → back | the canvas resizes to its container, no overflow |
+| Client-side navigation to `/` | 0 canvases, perf probes removed, both WebGL contexts released (`isContextLost() === true`) |
+
+After the forced context loss, three logs `delete: object does not belong to this context` warnings when it disposes objects created before the loss. This is three.js behaviour and happens on the default dual branch too. The same run without the forced loss logs no warnings.
+
+**Tab-switch latency.** I reran `scripts/tabs.mjs` 4 times, alternating dual and keep-alive builds: 48 clicks per run, 4x CPU throttle, raw data in `gate/`.
+
+| | Click → second rAF, pooled median | p95 | Event Timing entries over 16 ms | Long tasks per run |
+|---|---|---|---|---|
+| dual (2 runs, n=96) | 606 ms | 1356 ms | 0 | 62–63 |
+| keep-alive (2 runs, n=96) | 627 ms | 1110 ms | 0 | 65–67 |
+
+- The p95 values overlap between runs of the same build: dual 1017 and 1413 ms, keep-alive 1294 and 1083 ms. The earlier 383 → 700 ms p95 difference is therefore run noise, not a regression.
+- No click handler took more than 16 ms. The rAF-based delay comes from frames already queued under 4x throttling and software rendering, which affects both builds. There is no repeatable interaction regression.
+
+**GPU resources (`renderer.info`).** After 48 switches, both builds report the same gallery counts: 8 geometries, 2 textures and 4 programs.
+- `renderer.info` counts three objects. It does not measure driver GPU memory, and JS heap is not GPU memory.
+- **Contexts at the same time.** Keep-alive keeps 2 contexts alive while `/system` is open: the director and the gallery. Dual has 1–2 at once.
+- **Contexts created per session.** Keep-alive creates 4 and dual creates 10.
+
+**Physical devices.** None were available: `devicectl` and `adb` are both missing, and no phone appears on USB. All numbers here are simulated. Use the procedure above for iPhone 15 Pro Safari and a mid-range Android Chrome.

@@ -1,0 +1,65 @@
+{
+ "dual-desktop": {
+  "canvases": 2,
+  "keyboardTab": "gallery-tab-bird-species-classification|true",
+  "homeTab": "gallery-tab-earth-fm",
+  "sliderReading": "1890 · −0.36 °C",
+  "playVisible": 1,
+  "afterPlay": "1900 · −0.09 °C",
+  "hoverScrub": "1980 · +0.26 °C -> 1967 · −0.02 °C",
+  "panelTopElement": "P",
+  "overflow": -15,
+  "hidden": 0,
+  "errors": []
+ },
+ "keepalive-tablet": {
+  "canvases": 2,
+  "keyboardTab": "gallery-tab-bird-species-classification|true",
+  "homeTab": "gallery-tab-earth-fm",
+  "sliderReading": "1890 · −0.36 °C",
+  "playVisible": 1,
+  "afterPlay": "1900 · −0.09 °C",
+  "hoverScrub": "1980 · +0.26 °C -> 1953 · +0.08 °C",
+  "panelTopElement": "P",
+  "overflow": -15,
+  "hidden": 0,
+  "errors": []
+ },
+ "keepalive-mobile": {
+  "canvases": 2,
+  "keyboardTab": "gallery-tab-bird-species-classification|true",
+  "homeTab": "gallery-tab-earth-fm",
+  "sliderReading": "1890 · −0.36 °C",
+  "playVisible": 1,
+  "afterPlay": "1900 · −0.09 °C",
+  "hoverScrub": "1980 · +0.26 °C -> 1935 · −0.20 °C",
+  "panelTopElement": "P",
+  "overflow": 0,
+  "hidden": 0,
+  "errors": []
+ },
+ "keepalive-reduced": {
+  "canvases": 2,
+  "keyboardTab": "gallery-tab-bird-species-classification|true",
+  "homeTab": "gallery-tab-earth-fm",
+  "sliderReading": "1890 · −0.36 °C",
+  "playVisible": 0,
+  "hoverScrub": "1980 · +0.26 °C -> 1967 · −0.02 °C",
+  "panelTopElement": "P",
+  "overflow": -15,
+  "hidden": 0,
+  "errors": []
+ },
+ "keepalive-nowebgl": {
+  "canvases": 0,
+  "keyboardTab": "gallery-tab-bird-species-classification|true",
+  "homeTab": "gallery-tab-earth-fm",
+  "sliderReading": "1890 · −0.36 °C",
+  "playVisible": 0,
+  "hoverScrub": "1980 · +0.26 °C -> 1980 · +0.26 °C",
+  "panelTopElement": "P",
+  "overflow": -15,
+  "hidden": 0,
+  "errors": []
+ }
+}
