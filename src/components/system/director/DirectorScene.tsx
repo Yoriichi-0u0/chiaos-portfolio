@@ -57,6 +57,7 @@ export function DirectorScene({
           reduceMotion={reduceMotion}
           mobile={mobile}
           pulse={showPulse}
+          missionId={highlightedMissionId}
         />
         <AttentionGuide
           formation={formation}

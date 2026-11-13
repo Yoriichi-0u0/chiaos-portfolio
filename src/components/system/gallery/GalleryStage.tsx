@@ -5,7 +5,11 @@ import { Canvas, useThree } from "@react-three/fiber";
 import { PresentationControls } from "@react-three/drei";
 import { EarthRecord } from "./artifacts/EarthRecord";
 import { DocumentStack, FeatherField, LedgerLattice, LunarOutpost, TerrainDiorama } from "./artifacts/ProjectArtifacts";
-import type { GalleryArtifactId } from "./galleryData";
+import { galleryArtifacts, type GalleryArtifactId } from "./galleryData";
+import { KernelDial } from "../kernel/KernelDial";
+import { KernelMount } from "../kernel/KernelMount";
+
+const dialAccents = galleryArtifacts.map((item) => item.accent);
 import { PerfProbe } from "../PerfProbe";
 import { usePageVisible } from "@/hooks/usePageVisible";
 
@@ -81,6 +85,17 @@ export function GalleryStage({
       <directionalLight position={[3, 4, 5]} intensity={2.2} />
       <pointLight position={[-3, 1, 3]} color="#00D9FF" intensity={10} distance={12} />
       <pointLight position={[3, -1, 2]} color="#FFD400" intensity={6} distance={10} />
+      <group position={[0, 0, -1.1]}>
+        <KernelDial
+          radius={mobile ? 1.42 : 1.5}
+          tube={0.012}
+          accents={dialAccents}
+          activeIndex={Math.max(0, galleryArtifacts.findIndex((item) => item.id === selected))}
+          fallbackAccent="#00D9FF"
+          reduceMotion={reduceMotion}
+          opacity={0.55}
+        />
+      </group>
       <PresentationControls
         key={selected}
         enabled={!reduceMotion}
@@ -90,7 +105,7 @@ export function GalleryStage({
         polar={[-0.3, 0.3]}
         azimuth={[-0.6, 0.6]}
       >
-        {artifact}
+        <KernelMount reduceMotion={reduceMotion}>{artifact}</KernelMount>
       </PresentationControls>
     </Canvas>
   );
