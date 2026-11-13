@@ -27,10 +27,10 @@ export function CareerTimeline() {
           {timeline.map((item, index) => (
             <motion.article
               key={item.title}
-              initial={reduceMotion ? false : { opacity: 0, x: -20 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
+              initial={{ opacity: 0, x: reduceMotion ? 0 : -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.45, delay: index * 0.04 }}
+              transition={reduceMotion ? { duration: 0 } : { duration: 0.45, delay: index * 0.04 }}
               className="grid gap-4 rounded-2xl border border-white/12 bg-[#0B0F17] p-5 shadow-lg shadow-black/20 md:grid-cols-[120px_1fr]"
             >
               <div>

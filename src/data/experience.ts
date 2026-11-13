@@ -6,6 +6,8 @@ export const experience: Experience[] = [
     location: "Miri Branch",
     role: "Part-time Admin / Hotline Handler",
     startDate: "May 2023",
+    startDateNote:
+      "Unresolved: the September 2026 CV says May 2024. Kept as May 2023 until an employment record confirms the date.",
     endDate: "Present",
     summary:
       "Major real-world operations experience coordinating parents, students, teachers, class changes, online support, and urgent communication under pressure.",

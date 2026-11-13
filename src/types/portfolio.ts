@@ -33,6 +33,12 @@ export type MissionLink = {
   href: string;
 };
 
+export type MissionScreenshot = {
+  src: string;
+  alt: string;
+  capturedOn: string;
+};
+
 export type MissionCaseStudy = {
   problem: string;
   contribution: string;
@@ -59,6 +65,7 @@ export type Mission = {
   links?: MissionLink[];
   featured?: boolean;
   caseStudy?: MissionCaseStudy;
+  screenshot?: MissionScreenshot;
 };
 
 export type SkillGroup = {
@@ -76,6 +83,7 @@ export type Experience = {
   location: string;
   role: string;
   startDate?: string;
+  startDateNote?: string;
   endDate?: string;
   summary: string;
   responsibilities: string[];
@@ -95,7 +103,9 @@ export type Education = {
   orientation?: string;
   firstSemester?: string;
   currentStage?: string;
+  currentStageSource?: string;
   expectedGraduation?: string;
+  cgpa?: string;
   cgpaSnapshot?: string;
   focus: string[];
   foundation?: {

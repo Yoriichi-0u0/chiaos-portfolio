@@ -19,6 +19,11 @@ export const missions: Mission[] = [
     status: "Live prototype",
     linkLabel: "Open Earth FM",
     href: "https://earth-fm.vercel.app/",
+    screenshot: {
+      src: "/screenshots/earth-fm.webp",
+      alt: "Earth FM home page with the Climate Spiral record, visual-sound scanner and four Earth stories.",
+      capturedOn: "13 November 2026",
+    },
     links: [
       { label: "Live prototype", href: "https://earth-fm.vercel.app/" },
       { label: "Source", href: "https://github.com/Yoriichi-0u0/earth-fm" },
@@ -27,7 +32,7 @@ export const missions: Mission[] = [
       problem:
         "Earth visualizations can be engaging but hard for a first-time learner to interpret. The challenge asked for visual frames paired with dynamic, real-time sonification.",
       contribution:
-        "Team leader of BoboMimi, a two-person team. A detailed split of individual contributions is pending confirmation, so this case study describes the team's shared prototype.",
+        "Chia led team BoboMimi, a two-person team with Jacy Chiong Yet Suu, and contributed to development and integration. The delivered app is shared team work, so features here are credited to the team.",
       architecture: [
         "A 48-strip left-to-right scan maps image brightness to pitch, RGB to timbre and position to stereo pan.",
         "Bundled GISTEMP snapshots play on a fixed ten-band scale, with dates, values and frequencies shown together.",
@@ -54,7 +59,7 @@ export const missions: Mission[] = [
     featured: true,
     summary:
       "AI-driven financial analysis and automated reporting for the Sarawak Artificial Intelligence Centre (SAIC): ingestion, reconciliation, anomaly review and management reports with traceable evidence.",
-    role: "Team project: data ingestion owner",
+    role: "Data Ingestion Lead and Integration Contributor",
     proof: [
       "Deterministic CSV/XLSX ingestion with column mapping, validation and lineage",
       "Bank-to-ledger reconciliation with row-level source evidence",
@@ -72,7 +77,7 @@ export const missions: Mission[] = [
       problem:
         "Finance teams reconcile bank and ledger records, investigate unusual movements and write management reports by hand. Each step needs evidence a reviewer can trace back to source rows.",
       contribution:
-        "Listed as owner of the data-ingestion work in the team's release ownership table. Other modules belong to teammates, and this case study describes the team's shared system.",
+        "Led the data-ingestion workstream: deterministic CSV/XLSX ingestion, validation, normalization and source lineage. Also contributed to AI-assisted ingestion workflows and application integration. Teammates own the analytics, backend and security components, and this case study describes the team's shared system.",
       architecture: [
         "Ingestion profiles source values, validates rows and keeps lineage and quarantined records for review.",
         "Every AI model call passes through one gateway that records metadata only; a test fails the build on a direct provider call.",
@@ -95,10 +100,11 @@ export const missions: Mission[] = [
     id: "bird-species-classification",
     title: "200-Species Bird Classifier",
     category: "AI",
-    period: "COS30082 Applied Machine Learning",
+    period: "COS30082 Applied Machine Learning, Assignment 1 (individual)",
     featured: true,
     summary:
       "A fine-tuned EfficientNetB3 image classifier for 200 bird species, packaged as an educational Streamlit app with Top-5 predictions and documented limits.",
+    role: "Individual project",
     proof: [
       "76.41% Top-1 and 93.69% Top-5 on the official 1,204-image test set",
       "CPU float32 inference at 380 × 380 with verified class mapping",
@@ -115,7 +121,7 @@ export const missions: Mission[] = [
       problem:
         "Classify photographs into 200 closely related bird species, then ship the model so anyone can test it without a GPU.",
       contribution:
-        "The project fine-tunes the model from ImageNet weights, evaluates it on the official test partition and packages single-view deterministic inference.",
+        "Individual assignment (AS01): Chia fine-tuned EfficientNetB3 from ImageNet weights, evaluated it on the official test partition and packaged it as a Streamlit app. This is separate from the COS30082 group project.",
       architecture: [
         "One frozen EfficientNetB3 model with 380 × 380 RGB input and CPU float32 inference.",
         "The ordered class mapping and preprocessing are verified before the model loads.",
@@ -138,10 +144,11 @@ export const missions: Mission[] = [
     id: "sarawak-tourism-information-system",
     title: "Sarawak Tourism Information System",
     category: "Product",
-    period: "SWE30003 Assignment 01",
+    period: "Supplementary prototype, based on the SWE30003 Assignment 01 case",
     featured: true,
     summary:
-      "A responsive tourism UI/UX prototype for discovering Sarawak, planning a multi-day trip and demonstrating a local listing-management workflow.",
+      "A responsive React UI/UX prototype derived from the SWE30003 draft SRS, for discovering Sarawak, planning a multi-day trip and demonstrating a local listing-management workflow.",
+    role: "UI/UX prototype development",
     proof: [
       "Search, filter and compare up to three attractions",
       "Day-by-day trip planner with text export and explicit shared-link import",
@@ -151,6 +158,11 @@ export const missions: Mission[] = [
     status: "Live prototype",
     linkLabel: "Open prototype",
     href: "https://sarawak-tourism-information-system.vercel.app/",
+    screenshot: {
+      src: "/screenshots/sarawak-tourism-information-system.webp",
+      alt: "Sarawak tourism prototype home page with a rainforest hero image, search bar and experience filters.",
+      capturedOn: "13 November 2026",
+    },
     links: [
       { label: "Live prototype", href: "https://sarawak-tourism-information-system.vercel.app/" },
       { label: "Source", href: "https://github.com/Yoriichi-0u0/Sarawak-Tourism-Information-System" },
@@ -159,7 +171,7 @@ export const missions: Mission[] = [
       problem:
         "Turn an incomplete draft SRS for a Sarawak tourism system into a usable visitor and staff experience.",
       contribution:
-        "The prototype maps requirements to workflows and documents design assumptions where the SRS was silent. Individual roles are pending confirmation.",
+        "Supplementary UI/UX prototype work, maintained in Chia's public repository. It maps the draft SRS to working flows and documents design assumptions where the SRS was silent. It is not the completed SWE30003 assessment.",
       architecture: [
         "A browser-only React app; saved places, trips and edits live in local storage.",
         "Shared trip URLs carry only catalogue entries and require the visitor to click Import trip.",
@@ -174,7 +186,7 @@ export const missions: Mission[] = [
         "The management session ends after 15 minutes of inactivity.",
       ],
       limits:
-        "A UI/UX demonstrator only: no accounts, payments, real reservations, live availability or shared database.",
+        "A UI/UX demonstrator only: no accounts, payments, real reservations, live availability or shared database. The management area is a local demo and does not meet the SRS's staff authorization requirement.",
       evidence: "Repository README, checked 13 November 2026.",
     },
   },
@@ -182,27 +194,58 @@ export const missions: Mission[] = [
     id: "pagepilot",
     title: "PagePilot",
     category: "Product",
+    period: "Personal product, June 2026 to present",
+    featured: true,
     summary:
-      "A free, privacy-first PDF workspace for merging, splitting, reordering, compressing, annotating and signing documents in the browser.",
+      "A free, local-first PDF workspace for merging, splitting, reordering, compressing, annotating and signing documents in the browser, with no accounts and no uploads.",
+    role: "Product development: scope, UX and technical direction",
     proof: [
-      "Core PDF tools run locally in the browser",
-      "Public privacy page: no PDF content, file names or page counts in analytics",
-      "Public feedback repository for bug reports and feature requests",
+      "Previews render with PDF.js and exports are written with pdf-lib, in the browser",
+      "Public privacy page: no PDF content, file names, sizes or page counts in analytics",
+      "Known limits are published: structural compression, flattened notes, visual signatures",
     ],
-    technologies: ["Web app", "PDF tools", "Privacy by design"],
+    technologies: ["Next.js", "React", "TypeScript", "PDF.js", "pdf-lib", "Web Workers", "Vercel Analytics"],
     status: "Live product",
     linkLabel: "Open PagePilot",
     href: "https://pagepilot-inky.vercel.app/",
+    screenshot: {
+      src: "/screenshots/pagepilot.webp",
+      alt: "PagePilot home page with a local PDF workspace and the Organize, Send and Sign, and Review tool groups.",
+      capturedOn: "13 November 2026",
+    },
     links: [
       { label: "Live product", href: "https://pagepilot-inky.vercel.app/" },
       { label: "Public feedback", href: "https://github.com/Yoriichi-0u0/PagePilot-Feedback" },
     ],
+    caseStudy: {
+      problem:
+        "Students often need to merge, split, trim, sign or shrink a PDF right before a deadline. Many free tools upload the file, add a watermark or require an account.",
+      contribution:
+        "Chia's own product: he defined the scope, the user experience, the technical direction and the browser-based PDF workflows. The source is private, so this case study uses only facts from the live product and its public pages.",
+      architecture: [
+        "Files are read into browser memory. PDF.js renders previews and thumbnails, and pdf-lib writes the exported PDF.",
+        "Heavier visual reorder, annotation and signature exports run in a Web Worker so the page stays responsive.",
+        "The result downloads from a temporary local Blob URL. Documents are never stored in cookies, persistent browser storage, an offline database or a service-worker cache.",
+        "Cookieless analytics count only event names and tool names. Automatic pageviews are discarded.",
+      ],
+      challenges: [
+        "Measuring whether people complete a task without collecting anything about their documents.",
+        "Being honest about what browser-only processing can and cannot do.",
+      ],
+      results: [
+        "Public beta with merge, split, reorder, remove pages, compress, text notes, highlights, fill and sign.",
+        "Unlimited core workflows with no accounts, watermarks or AI features.",
+      ],
+      limits:
+        "Compression is structural optimization only: it does not downsample images and may not shrink every PDF. Notes and highlights are flattened into the export. Signatures are visual electronic marks, not certificate-backed digital signatures, and do not verify identity.",
+      evidence: "Live product, /privacy and /terms (effective 16 August 2026), checked 13 November 2026.",
+    },
   },
   {
     id: "little-orbit",
     title: "Little Orbit",
     category: "Space",
-    period: "NASA Space Apps Challenge 2026",
+    period: "Built for the NASA Space Apps 2026 junior astronaut challenge",
     summary:
       "A junior astronaut mission trainer where students build a Moon or Mars outpost and balance power, oxygen, water, food and crew health over 14 turns.",
     proof: [
@@ -214,6 +257,11 @@ export const missions: Mission[] = [
     status: "Live prototype",
     linkLabel: "Play Little Orbit",
     href: "https://little-orbit-seven.vercel.app/",
+    screenshot: {
+      src: "/screenshots/little-orbit.webp",
+      alt: "Little Orbit mission control with resource gauges, a lunar outpost and today's flight plan.",
+      capturedOn: "13 November 2026",
+    },
     links: [
       { label: "Play", href: "https://little-orbit-seven.vercel.app/" },
       { label: "Source", href: "https://github.com/Yoriichi-0u0/little-orbit" },
@@ -239,89 +287,115 @@ export const missions: Mission[] = [
   },
   {
     id: "automated-negotiation-system",
-    title: "COS30018 Intelligent Systems / Automated Negotiation System",
+    title: "Velvet Hammer Auto Auction",
     category: "Negotiation",
+    period: "COS30018 Intelligent Systems, five-person team project",
     summary:
-      "A multi-agent negotiation and Intelligent Systems project exploring agent behavior, decision flow, and structured negotiation logic.",
-    role: "Multi-agent negotiation system design and implementation",
+      "A JADE multi-agent car auction in Java: a broker matches buyer and dealer agents, who negotiate prices automatically or manually from a Swing dashboard.",
+    role: "Agent communication and protocols",
     proof: [
-      "Automated negotiation workflow and agent decision logic",
-      "Intelligent Systems coursework mission",
-      "Public copy planned while final repo details are confirmed",
+      "Broker, dealer and buyer agents exchanging JADE ACL messages",
+      "Three dealer strategies: stubborn, desperate and matcher",
+      "Live negotiation feed, market boards and a negotiation-gap chart",
     ],
-    technologies: ["Intelligent Systems", "Negotiation Agents", "Decision Logic", "Software Design"],
-    status: "In progress",
-    note: "Public copy coming soon; repo name may change as the final public version is cleaned up.",
-    linkLabel: "Public copy coming soon",
-    href: "https://github.com/Yoriichi-0u0/cos30018-assignment.git",
+    technologies: ["Java", "JADE", "Multi-agent systems", "Java Swing"],
+    status: "Built",
+    note: "Team project led by Jonathan Zheng Li Chai. Chia's documented role is agent communication and protocols.",
+    linkLabel: "View source",
+    href: "https://github.com/Yoriichi-0u0/cos30018-assignment",
   },
   {
-    id: "cos40007-design-project-ai-work",
-    title: "COS40007 Design Project / AI-related Project Work",
-    category: "Design",
+    id: "cos40007-yolov5-graffiti-detection",
+    title: "YOLOv5 Graffiti Detection",
+    category: "AI",
+    period: "COS40007 AI for Engineering, Portfolio 4 (individual)",
     summary:
-      "AI-related design and project work that Chia is shaping into a clearer public proof file before linking it.",
-    role: "AI-related design/project work",
+      "An individual deep-learning portfolio that trains YOLOv5 to detect graffiti, with annotation conversion, a dataset audit, three training iterations, IoU evaluation and error analysis.",
+    role: "Individual project",
     proof: [
-      "Design project direction connected to AI practice",
-      "Public write-up and link intentionally pending",
-      "Described first, linked only after the public version is ready",
+      "Three iterations on 400, 600 and all 732 training images",
+      "Best default-configuration result: 18 of 40 test images reached IoU ≥ 0.90",
+      "Video detection, error analysis and a GenAI declaration",
     ],
-    technologies: ["AI", "Design Project", "Research Direction", "System Thinking"],
-    status: "In progress",
-    note: "No public link yet. ChiaOS keeps the placeholder honest until the project is ready to share.",
-    linkLabel: "View in ChiaOS System",
-    href: "/system#missions",
+    technologies: ["Python", "YOLOv5", "PyTorch", "Object detection", "Jupyter"],
+    status: "Built",
+    note: "The target was 32 of 40 test images at IoU ≥ 0.90. The default-configuration notebook reached 18, which the write-up reports and discusses.",
+    linkLabel: "View source",
+    href: "https://github.com/Yoriichi-0u0/cos40007-portfolio-04",
   },
   {
     id: "aws-cloud-architecture",
-    title: "AWS Cloud Architecture Design",
+    title: "Cloud File Management System",
     category: "Cloud",
+    period: "Four-person team project, March to June 2026",
     summary:
-      "A secure and scalable cloud architecture design mission focused on practical service selection, availability, and system boundaries.",
-    role: "Cloud architecture planning and tradeoff mapping",
+      "A scalable, event-driven AWS architecture for uploading, processing and delivering files, covering storage, identity, queues, media processing and edge security.",
+    role: "Team lead",
     proof: [
-      "AWS service mapping",
-      "Secure architecture tradeoff thinking",
-      "Scalability and reliability planning",
+      "Led a four-member team through the architecture design",
+      "Event-driven processing with Lambda, SNS and SQS",
+      "Edge and identity layers: CloudFront, AWS WAF, Cognito and Route 53",
     ],
-    technologies: ["AWS", "Cloud Architecture", "Security", "Scalability"],
+    technologies: ["Amazon S3", "CloudFront", "API Gateway", "Cognito", "Lambda", "DynamoDB", "SNS", "SQS", "MediaConvert", "Rekognition", "AWS WAF", "VPC"],
     status: "Portfolio proof",
-    linkLabel: "Project link pending",
-    href: "#contact",
+    note: "Architecture design project. There is no public repository, so this mission file is the public record.",
+    linkLabel: "Read the mission file",
+    href: "#aws-cloud-architecture",
+    links: [],
+    caseStudy: {
+      problem:
+        "Design a file-management system that scales with uploads, processes media and images automatically, and stays secure at the edge.",
+      contribution: "Chia led the four-member team that designed the architecture.",
+      architecture: [
+        "Uploads land in Amazon S3 and are delivered through CloudFront, with Route 53 for DNS and AWS WAF at the edge.",
+        "API Gateway and Cognito handle the API and user identity. DynamoDB stores file metadata.",
+        "Lambda functions react to events, and SNS and SQS fan out and buffer work. MediaConvert transcodes video and Rekognition analyses images.",
+        "Private resources run inside VPC networking.",
+      ],
+      challenges: [
+        "Keeping processing asynchronous so uploads never wait for media jobs.",
+        "Choosing managed services that scale without servers to operate.",
+      ],
+      results: ["A documented event-driven architecture across 13 AWS services."],
+      limits:
+        "This was a design project. Load, cost and availability figures were not measured in a live deployment, and no public source is linked.",
+      evidence: "Chia's CV (September 2026). Completion of COS20019 Cloud Computing Architecture is recorded in his Degree Progress Audit (August 2026).",
+    },
   },
   {
     id: "database-design-project",
-    title: "Database Design Project",
+    title: "COS20031 Database Design Project",
     category: "Database",
     summary:
-      "A data modeling mission focused on relational structure, normalization, querying, and building reliable database-backed workflows.",
-    role: "Relational data modeling and database workflow practice",
+      "A completed university unit in relational database design: data modeling, normalization and SQL querying.",
+    role: "Completed unit",
     proof: [
-      "Relational schema design",
-      "SQL query practice",
-      "Database-backed application thinking",
+      "Unit completion recorded in the Degree Progress Audit (August 2026)",
+      "Database work is also applied in FinGence (Supabase and PostgreSQL)",
     ],
     technologies: ["SQL", "Database Design", "ERD", "Normalization"],
     status: "Built",
-    linkLabel: "Project link pending",
-    href: "#contact",
+    note: "Project artefacts are not public yet, so no project link is shown.",
+    linkLabel: "See FinGence",
+    href: "#fingence",
+    links: [{ label: "Applied in FinGence", href: "#fingence" }],
   },
   {
     id: "networking-switching-portfolio",
-    title: "Networking and Switching Portfolio",
+    title: "TNE10006 Networks and Switching",
     category: "Networking",
     summary:
-      "A network design and switching portfolio covering VLANs, subnetting, STP, EtherChannel, and secure network structure.",
-    role: "Networking foundations and switching portfolio practice",
+      "A completed university unit in network design and switching, covering VLANs, subnetting, STP and EtherChannel.",
+    role: "Completed unit",
     proof: [
-      "VLAN and subnet planning",
-      "Switching protocol configuration",
-      "Secure network design foundations",
+      "Unit completion recorded in the Degree Progress Audit (August 2026)",
+      "Followed by COS30015 IT Security; TNE30009 Network Security and Resilience is a current unit",
     ],
-    technologies: ["VLANs", "Subnetting", "STP", "EtherChannel", "Security"],
-    status: "Portfolio proof",
-    linkLabel: "Project link pending",
-    href: "#contact",
+    technologies: ["VLANs", "Subnetting", "STP", "EtherChannel"],
+    status: "Built",
+    note: "Lab and portfolio artefacts are not public yet, so no project link is shown.",
+    linkLabel: "No public link",
+    href: "#networking-switching-portfolio",
+    links: [],
   },
 ];

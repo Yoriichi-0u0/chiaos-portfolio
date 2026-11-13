@@ -28,9 +28,9 @@ export function BootScreen() {
     >
       <div className="mx-auto max-w-7xl">
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: -16 }}
-          animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: reduceMotion ? 0 : -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.5 }}
           className="system-grid overflow-hidden rounded-[1.75rem] border border-white/12 bg-[#0B0F17] shadow-2xl shadow-[rgba(0,217,255,0.12)]"
         >
           <div className="grid gap-0 lg:grid-cols-[1fr_0.72fr]">
@@ -55,9 +55,9 @@ export function BootScreen() {
                 {bootLines.map((line, index) => (
                   <motion.div
                     key={line}
-                    initial={reduceMotion ? false : { opacity: 0, x: -10 }}
-                    animate={reduceMotion ? undefined : { opacity: 1, x: 0 }}
-                    transition={{ duration: 0.35, delay: index * 0.08 }}
+                    initial={{ opacity: 0, x: reduceMotion ? 0 : -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={reduceMotion ? { duration: 0 } : { duration: 0.35, delay: index * 0.08 }}
                     className="rounded-2xl border border-white/10 bg-[#05070B] px-3 py-3 font-code text-xs text-[#AAB4C0]"
                   >
                     <span className="text-[#FFD400]">0{index + 1}</span> / {line}

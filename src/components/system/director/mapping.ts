@@ -26,6 +26,7 @@ export const missionNodeMap: Record<string, DirectorNodeKey> = {
   "cos30049-computing-technology-innovation-project": "ai",
   "aws-cloud-architecture": "cloud",
   "automated-negotiation-system": "software",
+  "cos40007-yolov5-graffiti-detection": "ai",
   "database-design-project": "database",
   "networking-switching-portfolio": "networking",
 };

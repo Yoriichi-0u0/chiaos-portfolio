@@ -46,14 +46,6 @@ export const metadata: Metadata = {
       "A clean setup landing page and activated system experience for Chia Yuen Kai's development skill, creative direction, and proof of work.",
     url: siteUrl,
     siteName: "ChiaOS",
-    images: [
-      {
-        url: "/og-placeholder.svg",
-        width: 1200,
-        height: 630,
-        alt: "ChiaOS Open Graph placeholder",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },
@@ -62,7 +54,6 @@ export const metadata: Metadata = {
     title: "ChiaOS | Chia Yuen Kai",
     description:
       "Original setup and activated ChiaOS system for AI, cybersecurity, cloud, and software systems.",
-    images: ["/og-placeholder.svg"],
   },
 };
 

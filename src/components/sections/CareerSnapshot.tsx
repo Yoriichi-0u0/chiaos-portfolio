@@ -34,13 +34,13 @@ const snapshotItems = [
   {
     icon: GraduationCap,
     label: "Swinburne snapshot",
-    value: "CGPA approx. 3.52",
-    detail: "Unofficial snapshot kept concise and public-safe.",
+    value: education.cgpa ? `CGPA ${education.cgpa}` : "CGPA on request",
+    detail: "Cumulative, as of the last completed semester.",
   },
   {
     icon: BriefcaseBusiness,
     label: "Foundation",
-    value: "Curtin CGPA 4.00",
+    value: `Curtin ${education.foundation?.cgpa ?? "Foundation"}`,
     detail: education.foundation?.completed ?? "Foundation completed.",
   },
 ];
