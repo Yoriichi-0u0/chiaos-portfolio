@@ -11,11 +11,21 @@ import {
   type InstancedMesh,
 } from "three";
 import { gistempAnnual } from "@/data/gistemp";
+import {
+  ANOMALY_MIN,
+  ANOMALY_SPAN,
+  RECORD_INNER as INNER,
+  RECORD_OUTER as OUTER,
+  advancePlayhead,
+  encodeAnomaly,
+  indexForRadius,
+  playbackStart,
+  radiusForIndex as radiusForIndexOf,
+} from "@/lib/earthRecord";
 import { anomalyColor } from "../galleryData";
 
-const INNER = 0.36;
-const OUTER = 0.94;
 const COUNT = gistempAnnual.length;
+const scratchColor = new Color();
 const PIVOT: [number, number] = [1.28, 1.02];
 const ARM = 1.38;
 
@@ -57,8 +67,9 @@ const fragmentShader = /* glsl */ `
     if (r > ${INNER.toFixed(3)} && r < ${OUTER.toFixed(3)}) {
       float t = (${OUTER.toFixed(3)} - r) / ${(OUTER - INNER).toFixed(3)};
       float idx = floor(t * uCount);
-      float v = texture2D(uData, vec2((idx + 0.5) / uCount, 0.5)).r * 2.0 - 0.6;
-      float edge = smoothstep(0.0, 0.18, fract(t * uCount)) * smoothstep(1.0, 0.82, fract(t * uCount));
+      float v = texture2D(uData, vec2((idx + 0.5) / uCount, 0.5)).r * ${ANOMALY_SPAN.toFixed(3)} + (${ANOMALY_MIN.toFixed(3)});
+      float cell = fract(t * uCount);
+      float edge = smoothstep(0.0, 0.18, cell) * (1.0 - smoothstep(0.82, 1.0, cell));
       vec3 band = anomalyColor(v);
       col = mix(col, band * (0.62 + 0.38 * groove), 0.72 * (0.55 + 0.45 * edge));
 
@@ -72,7 +83,7 @@ const fragmentShader = /* glsl */ `
 
     if (r <= ${INNER.toFixed(3)}) {
       vec3 label = vec3(1.0, 0.83, 0.0);
-      float ring = smoothstep(0.004, 0.0, abs(r - 0.26)) + smoothstep(0.004, 0.0, abs(r - 0.18));
+      float ring = (1.0 - smoothstep(0.0, 0.004, abs(r - 0.26))) + (1.0 - smoothstep(0.0, 0.004, abs(r - 0.18)));
       col = r < 0.3 ? mix(label * 0.88, vec3(0.04, 0.05, 0.07), ring * 0.8) : vec3(0.035, 0.04, 0.055);
       if (r < 0.035) {
         col = vec3(0.75, 0.8, 0.85);
@@ -93,7 +104,7 @@ const fragmentShader = /* glsl */ `
 `;
 
 function radiusForIndex(index: number) {
-  return OUTER - ((index + 0.5) / COUNT) * (OUTER - INNER);
+  return radiusForIndexOf(index, COUNT);
 }
 
 function armAngleForRadius(radius: number) {
@@ -108,11 +119,13 @@ export function EarthRecord({
   playing,
   reduceMotion,
   onYearChange,
+  onPlaybackEnd,
 }: {
   year: number;
   playing: boolean;
   reduceMotion: boolean;
   onYearChange: (index: number, fromPointer: boolean) => void;
+  onPlaybackEnd: () => void;
 }) {
   const barsRef = useRef<InstancedMesh>(null);
   const spinRef = useRef<Group>(null);
@@ -125,7 +138,7 @@ export function EarthRecord({
   const texture = useMemo(() => {
     const data = new Uint8Array(COUNT * 4);
     gistempAnnual.forEach((value, index) => {
-      const encoded = Math.round(Math.max(0, Math.min(1, (value + 0.6) / 2)) * 255);
+      const encoded = encodeAnomaly(value);
       data.set([encoded, encoded, encoded, 255], index * 4);
     });
     const dataTexture = new DataTexture(data, COUNT, 1, RGBAFormat);
@@ -162,8 +175,15 @@ export function EarthRecord({
   useEffect(() => {
     if (!playing) {
       playhead.current = year;
+      lastReported.current = year;
     }
   }, [playing, year]);
+
+  useEffect(() => {
+    if (playing) {
+      playhead.current = playbackStart(lastReported.current, COUNT);
+    }
+  }, [playing]);
 
   useEffect(() => {
     const bars = barsRef.current;
@@ -192,11 +212,15 @@ export function EarthRecord({
 
   useFrame((state, delta) => {
     if (playing && !reduceMotion) {
-      playhead.current = (playhead.current + delta * 7) % COUNT;
-      const index = Math.floor(playhead.current);
+      const next = advancePlayhead(playhead.current, delta, COUNT);
+      playhead.current = next.playhead;
+      const index = Math.floor(next.playhead);
       if (index !== lastReported.current) {
         lastReported.current = index;
         onYearChange(index, false);
+      }
+      if (next.ended) {
+        onPlaybackEnd();
       }
     }
 
@@ -209,7 +233,7 @@ export function EarthRecord({
 
     const bars = barsRef.current;
     if (bars && highlighted.current !== index) {
-      const color = new Color();
+      const color = scratchColor;
       if (highlighted.current >= 0) {
         bars.setColorAt(highlighted.current, color.setRGB(...anomalyColor(gistempAnnual[highlighted.current])));
       }
@@ -233,15 +257,14 @@ export function EarthRecord({
   });
 
   function scrub(event: ThreeEvent<PointerEvent>) {
-    if (!event.uv) {
+    if (!event.uv || playing) {
       return;
     }
-    const radius = Math.hypot(event.uv.x - 0.5, event.uv.y - 0.5) * 2;
-    if (radius < INNER || radius > OUTER) {
+    const index = indexForRadius(Math.hypot(event.uv.x - 0.5, event.uv.y - 0.5) * 2, COUNT);
+    if (index === null) {
       return;
     }
     event.stopPropagation();
-    const index = Math.min(COUNT - 1, Math.max(0, Math.floor(((OUTER - radius) / (OUTER - INNER)) * COUNT)));
     if (index !== lastReported.current) {
       lastReported.current = index;
       onYearChange(index, true);

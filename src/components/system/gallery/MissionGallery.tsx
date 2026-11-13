@@ -7,6 +7,7 @@ import { ArrowDown, Pause, Play } from "lucide-react";
 import { formatGistempReading, gistempAnnual, gistempSource } from "@/data/gistemp";
 import { missions } from "@/data/missions";
 import { useWebGLAvailable } from "@/hooks/useWebGLAvailable";
+import { setGalleryActive } from "@/hooks/galleryActivity";
 import { cn } from "@/lib/utils";
 import { anomalyColor, galleryArtifacts, toHex, type GalleryArtifactId } from "./galleryData";
 
@@ -15,7 +16,7 @@ const GalleryStage = dynamic(() => import("./GalleryStage").then((module) => mod
   loading: () => null,
 });
 
-function EarthRecordPoster() {
+function EarthRecordPoster({ year }: { year: number }) {
   const count = gistempAnnual.length;
   return (
     <svg viewBox="-110 -110 220 220" className="h-full max-h-80 w-auto" aria-hidden>
@@ -29,6 +30,7 @@ function EarthRecordPoster() {
           strokeWidth={58 / count + 0.15}
         />
       ))}
+      <circle r={94 - (year / count) * 58} fill="none" stroke="#FFFFFF" strokeWidth={1.4} />
       <circle r="28" fill="#FFD400" />
       <circle r="3" fill="#0B0F17" />
     </svg>
@@ -71,11 +73,16 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
   }, []);
 
   useEffect(() => {
-    if (!nearViewport) {
+    if (!nearViewport || reduceMotion || !webgl) {
       const frame = window.requestAnimationFrame(() => setPlaying(false));
       return () => window.cancelAnimationFrame(frame);
     }
-  }, [nearViewport]);
+  }, [nearViewport, reduceMotion, webgl]);
+
+  useEffect(() => {
+    setGalleryActive(Boolean(webgl && nearViewport));
+    return () => setGalleryActive(false);
+  }, [webgl, nearViewport]);
 
   const handleYearChange = useCallback((index: number, fromPointer: boolean) => {
     setYear(index);
@@ -83,6 +90,8 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
       setPlaying(false);
     }
   }, []);
+
+  const handlePlaybackEnd = useCallback(() => setPlaying(false), []);
 
   function select(id: GalleryArtifactId) {
     setSelected(id);
@@ -173,13 +182,14 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
                 reduceMotion={reduceMotion}
                 mobile={mobile}
                 onYearChange={handleYearChange}
+                onPlaybackEnd={handlePlaybackEnd}
               />
             </div>
           ) : null}
           {webgl === false ? (
             <div className="gallery-fallback absolute inset-0 flex items-center justify-center p-8" aria-hidden>
               {selected === "earth-fm" ? (
-                <EarthRecordPoster />
+                <EarthRecordPoster year={year} />
               ) : (
                 <span
                   className="flex h-40 w-40 items-center justify-center rounded-full border-2"
@@ -224,11 +234,16 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
                   <button
                     type="button"
                     onClick={() => setPlaying((current) => !current)}
-                    aria-pressed={playing}
                     className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#FFD400] text-[#05070B] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FFD400]"
                   >
                     {playing ? <Pause className="h-4 w-4" aria-hidden /> : <Play className="h-4 w-4" aria-hidden />}
-                    <span className="sr-only">{playing ? "Pause record" : "Play record year by year"}</span>
+                    <span className="sr-only">
+                      {playing
+                        ? "Pause record"
+                        : year >= gistempAnnual.length - 1
+                          ? `Play record from ${gistempSource.firstYear}`
+                          : "Play record year by year"}
+                    </span>
                   </button>
                 ) : null}
                 <label className="flex w-full flex-col gap-1">

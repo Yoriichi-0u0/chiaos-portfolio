@@ -6,6 +6,8 @@ import { PresentationControls } from "@react-three/drei";
 import { EarthRecord } from "./artifacts/EarthRecord";
 import { DocumentStack, FeatherField, LedgerLattice, LunarOutpost, TerrainDiorama } from "./artifacts/ProjectArtifacts";
 import type { GalleryArtifactId } from "./galleryData";
+import { PerfProbe } from "../PerfProbe";
+import { usePageVisible } from "@/hooks/usePageVisible";
 
 function DemandInvalidator({ deps }: { deps: unknown[] }) {
   const invalidate = useThree((state) => state.invalidate);
@@ -23,6 +25,7 @@ export function GalleryStage({
   reduceMotion,
   mobile,
   onYearChange,
+  onPlaybackEnd,
 }: {
   selected: GalleryArtifactId;
   year: number;
@@ -30,11 +33,21 @@ export function GalleryStage({
   reduceMotion: boolean;
   mobile: boolean;
   onYearChange: (index: number, fromPointer: boolean) => void;
+  onPlaybackEnd: () => void;
 }) {
+  const visible = usePageVisible();
   let artifact: ReactNode;
   switch (selected) {
     case "earth-fm":
-      artifact = <EarthRecord year={year} playing={playing} reduceMotion={reduceMotion} onYearChange={onYearChange} />;
+      artifact = (
+        <EarthRecord
+          year={year}
+          playing={playing}
+          reduceMotion={reduceMotion}
+          onYearChange={onYearChange}
+          onPlaybackEnd={onPlaybackEnd}
+        />
+      );
       break;
     case "fingence":
       artifact = <LedgerLattice reduceMotion={reduceMotion} />;
@@ -57,10 +70,11 @@ export function GalleryStage({
       className="absolute inset-0 h-full w-full"
       camera={{ position: [0, 0, mobile ? 4.6 : 4.1], fov: 42 }}
       dpr={mobile ? [1, 1.5] : [1, 2]}
-      frameloop={reduceMotion ? "demand" : "always"}
+      frameloop={!visible ? "never" : reduceMotion ? "demand" : "always"}
       gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
     >
       <DemandInvalidator deps={[selected, year, playing, mobile]} />
+      <PerfProbe name="gallery" />
       <ambientLight intensity={0.7} />
       <directionalLight position={[3, 4, 5]} intensity={2.2} />
       <pointLight position={[-3, 1, 3]} color="#00D9FF" intensity={10} distance={12} />
