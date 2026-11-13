@@ -14,19 +14,33 @@
 Replace these before treating the public site as final:
 
 - CV PDF at `public/cv/chia-yuen-kai-cv-placeholder.pdf`
-- Project screenshots in `public/screenshots/`
-- Real Open Graph image to replace `public/og-placeholder.svg`
-- COS30018 final public repo name/link confirmation
-- Other project links not known yet
+  - Draft text: `docs/cv/CV_DRAFT_2026-11.md`
+  - Needs your review and private contact details before a PDF is published.
 
-## Needs Chia's Confirmation (added 13 November 2026)
+## Resolved 13 November 2026
 
-- Education stage still says "Year 2, Semester 2 / fourth semester out of six" (June 2026). Confirm the current semester. (CGPA confirmed 13 November 2026: 3.51 cumulative as of the last semester.)
-- Realfun role confirmed current on 13 November 2026 as admin and hotline handler.
-- Earth FM: confirm Chia's split of work within team BoboMimi (site currently says only "Team leader").
-- FinGence: confirm the wider contribution wording with teammates (site currently says only "data ingestion owner").
-- Bird classifier: confirm individual or group work. The Streamlit app redirects visitors to a sign-in page, so it is not linked.
-- Sarawak Tourism Information System and Little Orbit: confirm individual or team work and Chia's exact role.
-- PagePilot: source is private. The site uses only public live-site and privacy-page facts. Approve a fuller case study if wanted.
-- COS40007 has no public link; AWS, database and networking missions still point to `#contact`.
-- Real screenshots for the featured missions (Earth FM, FinGence, bird classifier, tourism, PagePilot).
+- **Stage:** Year 3, Semester 1 (5 of 6), Semester 2 2026. Inferred from the progression that began in September 2024.
+- **CGPA:** 3.51.
+- **Realfun:** role is current.
+- **Earth FM:** team BoboMimi, Chia (leader) and Jacy Chiong Yet Suu. Features are credited to the team.
+- **FinGence:** Data Ingestion Lead and Integration Contributor.
+- **Bird classifier:** individual assignment (AS01).
+- **Sarawak Tourism:** supplementary UI/UX prototype, not the graded assessment.
+- **Little Orbit:** no ownership claim made.
+- **PagePilot:** public case study added from the live site, /privacy, /terms and the README's known limits.
+- **COS30018 and COS40007:** public repositories linked.
+- **AWS:** internal case study.
+- **Database and networking:** described as completed units, with no misleading `#contact` links.
+- **Images:**
+  - Open Graph and Twitter image: `src/app/opengraph-image.png`, generated from `scripts/og-image.svg`.
+  - Screenshots for Earth FM, PagePilot, Sarawak Tourism and Little Orbit are in `public/screenshots/`.
+
+## Still needs Chia
+
+- **Realfun start date:** ChiaOS says May 2023 and the September 2026 CV says May 2024. The site keeps May 2023 until a reliable source settles it.
+- **Earth FM:** a feature-by-feature split with Jacy, only if it is documented.
+- **Little Orbit:** whether anyone else contributed.
+- **COS40007 README:** it shows the student ID. Decide whether to remove it before promoting the link more prominently.
+- **Bird classifier demo:** add a Streamlit link only if it works without a sign-in.
+- **FinGence:** no public screenshot, because the hosted app requires a sign-in.
+- **Placeholder files:** `public/og-placeholder.svg` and `public/favicon.svg` are no longer referenced and can be deleted when convenient.

@@ -1,0 +1,85 @@
+{
+ "external": {
+  "https://earth-fm.vercel.app/": "200",
+  "https://github.com/Yoriichi-0u0/earth-fm": "200",
+  "https://github.com/Yoriichi-0u0/FinGence-Finance-Intelligence": "200",
+  "https://fingence-financeintelligence.vercel.app/": "200 -> https://fingence-financeintelligence.vercel.app/sign-in",
+  "https://github.com/Yoriichi-0u0/COS30082-AS01-Bird-Species-Classification": "200",
+  "https://sarawak-tourism-information-system.vercel.app/": "200",
+  "https://github.com/Yoriichi-0u0/Sarawak-Tourism-Information-System": "200",
+  "https://pagepilot-inky.vercel.app/": "200",
+  "https://github.com/Yoriichi-0u0/PagePilot-Feedback": "200",
+  "https://little-orbit-seven.vercel.app/": "200",
+  "https://github.com/Yoriichi-0u0/little-orbit": "200",
+  "https://github.com/jostinchok/my-react-app.git": "200 -> https://github.com/jostinchok/my-react-app",
+  "https://github.com/Yoriichi-0u0/cos30018-assignment": "200",
+  "https://github.com/Yoriichi-0u0/cos40007-portfolio-04": "200"
+ },
+ "pages": {
+  "landing-1440": {
+   "brokenHash": [],
+   "contactMissions": 0,
+   "imgsMissingAlt": [],
+   "screenshots": 0,
+   "overflow": 0,
+   "og": "https://chiaos-portfolio.vercel.app/opengraph-image.png?opengraph-image.2s71fnju-w69p.png",
+   "twitter": "https://chiaos-portfolio.vercel.app/twitter-image.png?twitter-image.2s71fnju-w69p.png",
+   "stage": "Year 3, Semester 1 / fifth semester out of six (Semester 2, 2026)",
+   "cgpa": "CGPA 3.51 as of the last completed semester",
+   "lazyImagesLoaded": [],
+   "errors": []
+  },
+  "landing-390": {
+   "brokenHash": [],
+   "contactMissions": 0,
+   "imgsMissingAlt": [],
+   "screenshots": 0,
+   "overflow": 0,
+   "og": "https://chiaos-portfolio.vercel.app/opengraph-image.png?opengraph-image.2s71fnju-w69p.png",
+   "twitter": "https://chiaos-portfolio.vercel.app/twitter-image.png?twitter-image.2s71fnju-w69p.png",
+   "stage": "Year 3, Semester 1 / fifth semester out of six (Semester 2, 2026)",
+   "cgpa": "CGPA 3.51 as of the last completed semester",
+   "lazyImagesLoaded": [],
+   "errors": []
+  },
+  "system-1440": {
+   "brokenHash": [],
+   "contactMissions": 0,
+   "imgsMissingAlt": [],
+   "screenshots": 4,
+   "overflow": 0,
+   "og": "https://chiaos-portfolio.vercel.app/opengraph-image.png?opengraph-image.2s71fnju-w69p.png",
+   "twitter": "https://chiaos-portfolio.vercel.app/twitter-image.png?twitter-image.2s71fnju-w69p.png",
+   "stage": "Year 3, Semester 1 / fifth semester out of six (Semester 2, 2026)",
+   "cgpa": "CGPA 3.51 as of the last completed semester.",
+   "lazyImagesLoaded": [
+    1200,
+    1200,
+    1200,
+    1200
+   ],
+   "errors": []
+  },
+  "system-390": {
+   "brokenHash": [],
+   "contactMissions": 0,
+   "imgsMissingAlt": [],
+   "screenshots": 4,
+   "overflow": 0,
+   "og": "https://chiaos-portfolio.vercel.app/opengraph-image.png?opengraph-image.2s71fnju-w69p.png",
+   "twitter": "https://chiaos-portfolio.vercel.app/twitter-image.png?twitter-image.2s71fnju-w69p.png",
+   "stage": "Year 3, Semester 1 / fifth semester out of six (Semester 2, 2026)",
+   "cgpa": "CGPA 3.51 as of the last completed semester.",
+   "lazyImagesLoaded": [
+    1200,
+    1200,
+    1200,
+    1200
+   ],
+   "errors": []
+  },
+  "/opengraph-image.png": "200 image/png",
+  "/twitter-image.png": "200 image/png",
+  "/screenshots/pagepilot.webp": "200 image/webp"
+ }
+}
