@@ -24,10 +24,10 @@ export function MissionCard({
   return (
     <motion.article
       id={mission.id}
-      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-      whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={reduceMotion ? undefined : { duration: 0.45, delay: index * 0.05 }}
+      transition={reduceMotion ? { duration: 0 } : { duration: 0.45, delay: index * 0.05 }}
       onMouseEnter={() => onHover?.(mission.id)}
       onMouseLeave={() => onHover?.(null)}
       onPointerEnter={() => onHover?.(mission.id)}
@@ -72,6 +72,23 @@ export function MissionCard({
         ) : null}
       </div>
       <p className="mt-4 text-sm leading-6 text-[#AAB4C0]">{mission.summary}</p>
+      {mission.screenshot ? (
+        <figure className="mt-5 overflow-hidden rounded-2xl border border-white/12 bg-[#05070B]">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={mission.screenshot.src}
+            alt={mission.screenshot.alt}
+            width={1200}
+            height={750}
+            loading="lazy"
+            decoding="async"
+            className="aspect-[16/10] w-full object-cover object-top"
+          />
+          <figcaption className="px-3 py-2 font-code text-[11px] text-[#7D8794]">
+            Live site, captured {mission.screenshot.capturedOn}
+          </figcaption>
+        </figure>
+      ) : null}
       <div className="mt-5 grid gap-2">
         {mission.proof.map((item) => (
           <div key={item} className="flex gap-2 text-sm text-[#AAB4C0]">

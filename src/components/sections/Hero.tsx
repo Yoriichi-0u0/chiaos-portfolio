@@ -59,10 +59,10 @@ export function Hero() {
       <div className="absolute inset-x-0 top-0 -z-10 h-40 system-speedlines opacity-40" aria-hidden />
       <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.02fr_0.98fr]">
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.6 }}
         >
           <div className="inline-flex items-center gap-2 rounded-full border border-[#00D9FF]/35 bg-[#00D9FF]/10 px-4 py-2 text-sm font-medium text-[#B7F7FF] shadow-[0_0_26px_rgba(0,217,255,0.18)]">
             <Sparkles className="h-4 w-4" aria-hidden />
@@ -134,10 +134,10 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          initial={reduceMotion ? false : { opacity: 0, scale: 0.96 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: reduceMotion ? 1 : 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 0.6, delay: 0.1 }}
           className="relative"
         >
           <div className="rounded-[2rem] border border-[#00D9FF]/24 bg-[#0B0F17] p-5 shadow-2xl shadow-[rgba(0,217,255,0.14)] backdrop-blur">
