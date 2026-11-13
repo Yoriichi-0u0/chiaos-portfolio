@@ -3,7 +3,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { LucideIcon } from "lucide-react";
 import {
-  Download,
   FileText,
   FolderKanban,
   Home,
@@ -15,6 +14,7 @@ import {
   X,
   Zap,
 } from "lucide-react";
+import { cv } from "@/data/cv";
 import { cn } from "@/lib/utils";
 
 type CommandAction = {
@@ -148,11 +148,11 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
         },
       },
       {
-        label: "Download CV",
-        detail: "Placeholder PDF",
-        icon: Download,
+        label: cv.label,
+        detail: cv.detail,
+        icon: FileText,
         run: () => {
-          window.location.href = "/cv/chia-yuen-kai-cv-placeholder.pdf";
+          window.location.href = cv.href;
         },
       },
     ],

@@ -13,9 +13,11 @@
 
 Replace these before treating the public site as final:
 
-- CV PDF at `public/cv/chia-yuen-kai-cv-placeholder.pdf`
-  - Draft text: `docs/cv/CV_DRAFT_2026-11.md`
-  - Needs your review and private contact details before a PDF is published.
+- **Final CV PDF:**
+  - The placeholder PDF has been removed. Every CV button now opens a "Request CV" email, configured in `src/data/cv.ts`.
+  - To publish a reviewed PDF, add it under `public/cv/` and point `cv.href` at it.
+  - The draft text in `docs/cv/CV_DRAFT_2026-11.md` is public in this repository, so it contains no contact details.
+- **Semester stage:** inferred, not confirmed by an official record (see `education.currentStageSource`).
 
 ## Resolved 13 November 2026
 

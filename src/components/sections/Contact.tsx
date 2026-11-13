@@ -1,4 +1,5 @@
-import { BriefcaseBusiness, Download, GitBranch, Mail } from "lucide-react";
+import { BriefcaseBusiness, FileText, GitBranch, Mail } from "lucide-react";
+import { cv } from "@/data/cv";
 import { profile } from "@/data/profile";
 
 export function Contact() {
@@ -60,11 +61,12 @@ export function Contact() {
               LinkedIn
             </a>
             <a
-              href="/cv/chia-yuen-kai-cv-placeholder.pdf"
+              href={cv.href}
+              title={cv.detail}
               className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/12 px-5 text-sm font-semibold text-white transition hover:border-[#FFD400]/55 sm:w-auto lg:w-full"
             >
-              <Download className="h-4 w-4" aria-hidden />
-              CV
+              <FileText className="h-4 w-4" aria-hidden />
+              {cv.shortLabel}
             </a>
           </div>
         </div>

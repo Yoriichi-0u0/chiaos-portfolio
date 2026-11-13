@@ -83,6 +83,7 @@ export type Experience = {
   location: string;
   role: string;
   startDate?: string;
+  startDateNote?: string;
   endDate?: string;
   summary: string;
   responsibilities: string[];
@@ -102,7 +103,9 @@ export type Education = {
   orientation?: string;
   firstSemester?: string;
   currentStage?: string;
+  currentStageSource?: string;
   expectedGraduation?: string;
+  cgpa?: string;
   cgpaSnapshot?: string;
   focus: string[];
   foundation?: {

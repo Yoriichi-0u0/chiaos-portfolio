@@ -7,7 +7,7 @@ import {
   BriefcaseBusiness,
   CheckCircle2,
   Cpu,
-  Download,
+  FileText,
   Fingerprint,
   GitBranch,
   GraduationCap,
@@ -25,6 +25,7 @@ import { ChiaOSMark } from "@/components/ChiaOSMark";
 import { education } from "@/data/education";
 import { experience } from "@/data/experience";
 import { missions } from "@/data/missions";
+import { cv } from "@/data/cv";
 import { profile } from "@/data/profile";
 import { skillGroups } from "@/data/skills";
 
@@ -60,13 +61,13 @@ const snapshotCards = [
   },
   {
     label: "Foundation",
-    value: "Curtin CGPA 4.00",
+    value: `Curtin ${education.foundation?.cgpa ?? "Foundation"}`,
     detail: education.foundation?.completed ?? "Foundation completed.",
     icon: BookOpen,
   },
   {
     label: "Operations",
-    value: "Realfun since May 2023",
+    value: `Realfun since ${realfun.startDate}`,
     detail: "Hotline, scheduling, events, and pressure handling.",
     icon: MessageSquare,
   },
@@ -183,11 +184,12 @@ export function LandingPage() {
               LinkedIn
             </a>
             <a
-              href="/cv/chia-yuen-kai-cv-placeholder.pdf"
+              href={cv.href}
+              title={cv.detail}
               className="hidden h-10 items-center gap-2 rounded-full border border-[#1D1D1F]/15 bg-white px-3 text-sm font-semibold text-[#1D1D1F] shadow-sm transition hover:bg-[#F9FAFB] sm:inline-flex"
             >
-              <Download className="h-4 w-4" aria-hidden />
-              CV
+              <FileText className="h-4 w-4" aria-hidden />
+              {cv.shortLabel}
             </a>
             <Link
               href="/system"
@@ -234,11 +236,12 @@ export function LandingPage() {
                   Activate ChiaOS
                 </Link>
                 <a
-                  href="/cv/chia-yuen-kai-cv-placeholder.pdf"
+                  href={cv.href}
+                  title={cv.detail}
                   className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#1D1D1F]/15 bg-white px-5 text-sm font-semibold text-[#1D1D1F] shadow-sm transition hover:border-[#1D1D1F]/25 hover:bg-[#F9FAFB] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0071E3]"
                 >
-                  <Download className="h-4 w-4" aria-hidden />
-                  Download CV
+                  <FileText className="h-4 w-4" aria-hidden />
+                  {cv.label}
                 </a>
               </div>
 
@@ -675,11 +678,12 @@ export function LandingPage() {
                   Contact Chia
                 </a>
                 <a
-                  href="/cv/chia-yuen-kai-cv-placeholder.pdf"
+                  href={cv.href}
+                  title={cv.detail}
                   className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/16 px-5 text-sm font-semibold text-white transition hover:border-white/32"
                 >
-                  <Download className="h-4 w-4" aria-hidden />
-                  CV
+                  <FileText className="h-4 w-4" aria-hidden />
+                  {cv.shortLabel}
                 </a>
               </div>
             </div>

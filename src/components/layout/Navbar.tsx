@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Command, Download, Home, Menu, X } from "lucide-react";
+import { Command, FileText, Home, Menu, X } from "lucide-react";
+import { cv } from "@/data/cv";
 import { ChiaOSVersionBadge } from "@/components/system/ChiaOSVersionBadge";
 import { ChiaOSMark } from "@/components/ChiaOSMark";
 import { cn } from "@/lib/utils";
@@ -76,11 +77,12 @@ export function Navbar({ onCommandOpen }: NavbarProps) {
             <span className="hidden sm:inline">Command</span>
           </button>
           <a
-            href="/cv/chia-yuen-kai-cv-placeholder.pdf"
+            href={cv.href}
+            title={cv.detail}
             className="hidden h-10 items-center gap-2 rounded-full border border-[#FFD400]/60 bg-[#FFD400] px-3 text-sm font-medium text-[#05070B] shadow-[0_0_22px_rgba(255,212,0,0.2)] transition hover:bg-[#ffe766] lg:inline-flex"
           >
-            <Download className="h-4 w-4" aria-hidden />
-            CV
+            <FileText className="h-4 w-4" aria-hidden />
+            {cv.shortLabel}
           </a>
           <Link
             href="/"
@@ -131,15 +133,16 @@ export function Navbar({ onCommandOpen }: NavbarProps) {
                 Back to Landing
               </Link>
               <a
-                href="/cv/chia-yuen-kai-cv-placeholder.pdf"
+                href={cv.href}
+                title={cv.detail}
                 onClick={() => setMobileMenuOpen(false)}
                 className={cn(
                   "inline-flex h-11 items-center justify-center gap-2 rounded-full border px-4 text-sm font-semibold transition",
                   "border-[#FFD400]/50 bg-[#FFD400]/10 text-[#FFF4B8] hover:bg-[#FFD400]/15"
                 )}
               >
-                <Download className="h-4 w-4" aria-hidden />
-                Download CV
+                <FileText className="h-4 w-4" aria-hidden />
+                {cv.label}
               </a>
             </div>
           </div>

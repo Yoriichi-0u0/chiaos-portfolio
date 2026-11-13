@@ -4,13 +4,14 @@ import { motion, useReducedMotion } from "framer-motion";
 import {
   ArrowDown,
   Bot,
-  Download,
+  FileText,
   Gauge,
   Layers3,
   RadioTower,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import { cv } from "@/data/cv";
 import { profile } from "@/data/profile";
 
 const cockpitReadouts = [
@@ -85,11 +86,12 @@ export function Hero() {
               View Missions
             </a>
             <a
-              href="/cv/chia-yuen-kai-cv-placeholder.pdf"
+              href={cv.href}
+              title={cv.detail}
               className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#FFD400]/35 bg-[#FFD400]/10 px-5 text-sm font-semibold text-[#FFF4B8] transition hover:border-[#FFD400]/70 hover:bg-[#FFD400]/15"
             >
-              <Download className="h-4 w-4" aria-hidden />
-              Download CV
+              <FileText className="h-4 w-4" aria-hidden />
+              {cv.label}
             </a>
           </div>
           <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">

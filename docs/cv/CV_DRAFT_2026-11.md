@@ -1,8 +1,8 @@
-# CV draft, November 2026 (for review, not published)
+# CV draft, November 2026 (for review, not a final CV)
 
 Starting point: `Career/Chia Yuen Kai CV.pdf` (14 September 2026). Updated with verified project evidence from 13 November 2026.
 
-Contact details are deliberately left out of this file. Add them only in the final private copy. The site still serves `public/cv/chia-yuen-kai-cv-placeholder.pdf`, and no replacement PDF has been uploaded.
+This file is committed to the public `chiaos-portfolio` GitHub repository, so anyone can read it. It is a working draft, not private storage. It deliberately contains no phone number, personal email, home address or student ID. Add contact details only to the final CV kept outside this repository. The site offers no CV download yet. Its CV buttons open an email request instead, and no PDF has been uploaded.
 
 ## Open questions before publishing
 
