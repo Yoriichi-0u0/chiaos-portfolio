@@ -17,9 +17,12 @@ export function applyGroupOpacity(group: Group, opacity: number) {
         item.userData.baseOpacity = typeof item.opacity === "number" ? item.opacity : 1;
       }
 
-      item.transparent = true;
+      if (!item.transparent) {
+        item.transparent = true;
+        item.needsUpdate = true;
+      }
+
       item.opacity = item.userData.baseOpacity * opacity;
-      item.needsUpdate = true;
     });
   });
 }
@@ -43,6 +46,7 @@ export function useSemanticRig({
 }) {
   const groupRef = useRef<Group>(null);
   const opacityRef = useRef(active ? 1 : 0);
+  const appliedOpacityRef = useRef(-1);
   const targetPosition = useRef(new Vector3(...position));
   const targetScale = useRef(new Vector3(1, 1, 1));
 
@@ -53,8 +57,17 @@ export function useSemanticRig({
 
     const speed = reduceMotion ? 1 : Math.min(1, delta * 4.5);
     opacityRef.current += ((active ? 1 : 0) - opacityRef.current) * speed;
+
+    if (Math.abs(opacityRef.current - (active ? 1 : 0)) < 0.002) {
+      opacityRef.current = active ? 1 : 0;
+    }
+
     groupRef.current.visible = opacityRef.current > 0.025;
-    applyGroupOpacity(groupRef.current, opacityRef.current);
+
+    if (groupRef.current.visible && appliedOpacityRef.current !== opacityRef.current) {
+      applyGroupOpacity(groupRef.current, opacityRef.current);
+      appliedOpacityRef.current = opacityRef.current;
+    }
 
     targetPosition.current.set(...position);
     groupRef.current.position.lerp(targetPosition.current, reduceMotion ? 0.35 : 0.08);
