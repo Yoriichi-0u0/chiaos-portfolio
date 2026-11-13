@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useThree } from "@react-three/fiber";
 import { Line } from "@react-three/drei";
 import { AttentionGuide } from "./AttentionGuide";
+import { PerfProbe } from "../PerfProbe";
 import { DirectorCore } from "./DirectorCore";
 import { DirectorModule } from "./DirectorModule";
 import { formations, nodes } from "./formations";
@@ -43,6 +44,7 @@ export function DirectorScene({
 
   return (
     <>
+      <PerfProbe name="director" />
       <ambientLight intensity={1.05} />
       <directionalLight position={[2.8, 4.5, 5]} intensity={mobile ? 1.8 : 2.35} />
       <pointLight position={[2.7, 0.5, 3]} color="#00D9FF" intensity={mobile ? 9 : 16} distance={10} />

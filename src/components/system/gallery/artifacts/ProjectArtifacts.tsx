@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Line } from "@react-three/drei";
 import { AdditiveBlending, BufferAttribute, BufferGeometry, Color, DoubleSide, PlaneGeometry, type Group, type Points } from "three";
@@ -164,6 +164,8 @@ export function FeatherField({ reduceMotion }: { reduceMotion: boolean }) {
     colorAttribute.needsUpdate = true;
   });
 
+  useEffect(() => () => geometry.dispose(), [geometry]);
+
   return (
     <group rotation={[0.1, -0.35, -0.55]} scale={1.15}>
       <points ref={pointsRef} geometry={geometry}>
@@ -245,6 +247,8 @@ export function TerrainDiorama({ reduceMotion }: { reduceMotion: boolean }) {
     const [bx, by, bz] = stops[index + 1];
     marker.current.position.set(ax + (bx - ax) * local, ay + (by - ay) * local + 0.04, az + (bz - az) * local);
   });
+
+  useEffect(() => () => geometry.dispose(), [geometry]);
 
   return (
     <group rotation={[0.55, -0.6, 0]} position={[0, -0.25, 0]} scale={1.05}>

@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { usePageVisible } from "@/hooks/usePageVisible";
+import { useGalleryActive } from "@/hooks/galleryActivity";
 import { DirectorScene } from "./director/DirectorScene";
 import type { SystemDirectorProps } from "./director/types";
 
@@ -13,6 +15,8 @@ export function SystemDirector({
   highlightedSkill = null,
 }: SystemDirectorProps) {
   const reduceMotion = Boolean(useReducedMotion());
+  const visible = usePageVisible();
+  const galleryActive = useGalleryActive();
   const [mobile, setMobile] = useState(false);
   const [webglAvailable, setWebglAvailable] = useState<boolean | null>(null);
 
@@ -81,7 +85,7 @@ export function SystemDirector({
             className="absolute inset-0 h-full w-full"
             camera={{ position: [mobile ? 0 : 0.6, 0, mobile ? 6.3 : 5.6], fov: mobile ? 50 : 50 }}
             dpr={mobile ? [1, 1.25] : [1, 1.6]}
-            frameloop={reduceMotion ? "demand" : "always"}
+            frameloop={!visible ? "never" : reduceMotion || (mobile && galleryActive) ? "demand" : "always"}
             gl={{ antialias: !mobile, powerPreference: "high-performance", alpha: true }}
           >
             <DirectorScene
