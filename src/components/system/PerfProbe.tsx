@@ -14,7 +14,7 @@ declare global {
   }
 }
 
-const enabled =
+export const perfEnabled =
   process.env.NODE_ENV !== "production" ||
   (typeof window !== "undefined" && new URLSearchParams(window.location.search).has("perf"));
 
@@ -51,5 +51,5 @@ function Probe({ name }: { name: string }) {
 }
 
 export function PerfProbe({ name }: { name: string }) {
-  return enabled ? <Probe name={name} /> : null;
+  return perfEnabled ? <Probe name={name} /> : null;
 }

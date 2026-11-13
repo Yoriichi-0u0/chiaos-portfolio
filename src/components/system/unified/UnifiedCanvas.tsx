@@ -9,6 +9,7 @@ import { GalleryScene } from "../gallery/GalleryStage";
 import { galleryArtifacts } from "../gallery/galleryData";
 import { getGallerySlot, useGallerySlot } from "./gallerySlot";
 import { createDirectorMask, createGalleryBackdrop, passCamera } from "./passes";
+import { perfEnabled } from "../PerfProbe";
 
 type WorldProps = Required<SystemDirectorProps> & { reduceMotion: boolean; mobile: boolean };
 
@@ -25,6 +26,16 @@ function createWorldResources() {
 }
 
 type WorldResources = ReturnType<typeof createWorldResources>;
+
+function disposeWorld(world: WorldResources) {
+  for (const scene of [world.directorScene, world.galleryScene, world.mask.scene, world.backdrop.scene]) {
+    scene.traverse((object) => {
+      const mesh = object as { geometry?: { dispose(): void }; material?: { dispose(): void } | { dispose(): void }[] };
+      mesh.geometry?.dispose();
+      (Array.isArray(mesh.material) ? mesh.material : mesh.material ? [mesh.material] : []).forEach((material) => material.dispose());
+    });
+  }
+}
 
 function setCameraPositions(world: WorldResources, mobile: boolean) {
   world.directorCamera.position.set(mobile ? 0 : 0.6, 0, mobile ? 6.3 : 5.6);
@@ -90,7 +101,9 @@ function renderWorld(world: WorldResources, state: RootState, element: HTMLDivEl
   }
   gl.render(galleryScene, galleryCamera);
   gl.setScissorTest(false);
-  window.__chiaosGalleryDraws = (window.__chiaosGalleryDraws ?? 0) + 1;
+  if (perfEnabled) {
+    window.__chiaosGalleryDraws = (window.__chiaosGalleryDraws ?? 0) + 1;
+  }
 }
 
 declare global {
@@ -182,6 +195,7 @@ function UnifiedWorld({
 export function UnifiedCanvas({ visible, ...props }: WorldProps & { visible: boolean }) {
   const [eventSource] = useState(() => document.body);
   const [world] = useState(createWorldResources);
+  useEffect(() => () => disposeWorld(world), [world]);
   return (
     <Canvas
       aria-label="Scroll-guided ChiaOS System Director and mission gallery"
