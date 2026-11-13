@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useThree } from "@react-three/fiber";
 import { Line } from "@react-three/drei";
 import { AttentionGuide } from "./AttentionGuide";
 import { DirectorCore } from "./DirectorCore";
@@ -17,6 +19,12 @@ export function DirectorScene({
   reduceMotion: boolean;
   mobile: boolean;
 }) {
+  const invalidate = useThree((state) => state.invalidate);
+
+  useEffect(() => {
+    invalidate();
+  }, [invalidate, activeSection, highlightedMissionId, highlightedSkill, mobile, reduceMotion]);
+
   const formation = formations[activeSection];
   const activeNode = sectionNodeFocus[activeSection];
   const missionNode = highlightedMissionId ? missionNodeMap[highlightedMissionId] : null;

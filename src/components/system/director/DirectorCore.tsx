@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import type { Group } from "three";
 import { Vector3 } from "three";
 import type { Formation } from "./types";
+import { approach } from "./rig";
 
 export function DirectorCore({
   formation,
@@ -25,12 +26,12 @@ export function DirectorCore({
     }
 
     targetVector.current.set(...formation.core);
-    groupRef.current.position.lerp(targetVector.current, reduceMotion ? 0.35 : 0.07);
+    approach(groupRef.current.position, targetVector.current, reduceMotion, 0.07);
 
     const rhythm = reduceMotion ? 0 : Math.sin(state.clock.elapsedTime * (pulse ? 3.8 : 1.8)) * 0.045;
     const targetScale = (mobile ? 0.72 : 0.9) * formation.coreScale + rhythm;
     scaleVector.current.set(targetScale, targetScale, targetScale);
-    groupRef.current.scale.lerp(scaleVector.current, reduceMotion ? 0.35 : 0.08);
+    approach(groupRef.current.scale, scaleVector.current, reduceMotion, 0.08);
 
     if (!reduceMotion) {
       groupRef.current.rotation.z += delta * 0.22;

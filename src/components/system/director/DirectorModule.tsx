@@ -3,6 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import type { Group } from "three";
 import { Vector3 } from "three";
 import { SemanticCategorySymbol } from "./symbols";
+import { approach } from "./rig";
 import type { DirectorNode } from "./types";
 
 export function DirectorModule({
@@ -32,14 +33,14 @@ export function DirectorModule({
     }
 
     targetVector.current.set(target[0], target[1], target[2] + (highlighted ? 0.56 : active ? 0.22 : 0));
-    groupRef.current.position.lerp(targetVector.current, reduceMotion ? 0.35 : 0.075);
+    approach(groupRef.current.position, targetVector.current, reduceMotion, 0.075);
 
     const pulse = reduceMotion ? 0 : Math.sin(state.clock.elapsedTime * 2.8) * (highlighted ? 0.06 : 0.03);
     const baseScale = quiet ? (mobile ? 0.58 : 0.74) : (mobile ? 0.76 : 0.98);
     const stateScale = highlighted ? (quiet ? 1.24 : 1.5) : active ? (quiet ? 1.08 : 1.28) : quiet ? 0.72 : 0.95;
     const targetScale = baseScale * stateScale + pulse;
     scaleVector.current.set(targetScale, targetScale, targetScale);
-    groupRef.current.scale.lerp(scaleVector.current, reduceMotion ? 0.35 : 0.08);
+    approach(groupRef.current.scale, scaleVector.current, reduceMotion, 0.08);
 
     if (!reduceMotion) {
       groupRef.current.rotation.x += delta * (active ? 0.38 : 0.18);

@@ -27,6 +27,14 @@ export function applyGroupOpacity(group: Group, opacity: number) {
   });
 }
 
+export function approach(current: Vector3, target: Vector3, reduceMotion: boolean, factor: number) {
+  if (reduceMotion) {
+    current.copy(target);
+  } else {
+    current.lerp(target, factor);
+  }
+}
+
 export function useSemanticRig({
   active,
   reduceMotion,
@@ -70,11 +78,11 @@ export function useSemanticRig({
     }
 
     targetPosition.current.set(...position);
-    groupRef.current.position.lerp(targetPosition.current, reduceMotion ? 0.35 : 0.08);
+    approach(groupRef.current.position, targetPosition.current, reduceMotion, 0.08);
 
     const scale = (mobile ? 0.82 : 1) * (active ? activeScale : idleScale);
     targetScale.current.set(scale, scale, scale);
-    groupRef.current.scale.lerp(targetScale.current, reduceMotion ? 0.35 : 0.08);
+    approach(groupRef.current.scale, targetScale.current, reduceMotion, 0.08);
 
     if (!reduceMotion && active) {
       groupRef.current.rotation.y += delta * rotationSpeed;
