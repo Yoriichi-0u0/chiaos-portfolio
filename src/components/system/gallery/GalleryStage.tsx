@@ -87,7 +87,7 @@ export function GalleryStage({
       <pointLight position={[3, -1, 2]} color="#FFD400" intensity={6} distance={10} />
       <group position={[0, 0, -1.1]}>
         <KernelDial
-          radius={mobile ? 1.62 : 1.78}
+          radius={mobile ? 1.42 : 1.5}
           tube={0.012}
           accents={dialAccents}
           activeIndex={Math.max(0, galleryArtifacts.findIndex((item) => item.id === selected))}
