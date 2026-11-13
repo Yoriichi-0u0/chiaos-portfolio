@@ -282,6 +282,12 @@ const sectionNodeFocus: Record<SystemSectionKey, DirectorNodeKey> = {
 };
 
 const missionNodeMap: Record<string, DirectorNodeKey> = {
+  "earth-fm": "cloud",
+  fingence: "database",
+  "bird-species-classification": "ai",
+  "sarawak-tourism-information-system": "software",
+  pagepilot: "cyber",
+  "little-orbit": "networking",
   "cos30049-computing-technology-innovation-project": "ai",
   "aws-cloud-architecture": "cloud",
   "automated-negotiation-system": "software",
@@ -324,23 +330,11 @@ const missionModules: Array<{
   key: DirectorNodeKey;
   position: [number, number, number];
 }> = [
-  {
-    id: "cos30049-computing-technology-innovation-project",
-    key: "ai",
-    position: [-1.25, 0.76, 0.2],
-  },
-  { id: "aws-cloud-architecture", key: "cloud", position: [0.2, 1.02, -0.08] },
-  {
-    id: "automated-negotiation-system",
-    key: "software",
-    position: [1.52, 0.56, 0.14],
-  },
-  { id: "database-design-project", key: "database", position: [-0.5, -0.72, 0.08] },
-  {
-    id: "networking-switching-portfolio",
-    key: "networking",
-    position: [1.12, -0.88, -0.06],
-  },
+  { id: "earth-fm", key: "cloud", position: [-1.25, 0.76, 0.2] },
+  { id: "fingence", key: "database", position: [0.2, 1.02, -0.08] },
+  { id: "bird-species-classification", key: "ai", position: [1.52, 0.56, 0.14] },
+  { id: "sarawak-tourism-information-system", key: "software", position: [-0.5, -0.72, 0.08] },
+  { id: "pagepilot", key: "cyber", position: [1.12, -0.88, -0.06] },
 ];
 
 function applyGroupOpacity(group: Group, opacity: number) {

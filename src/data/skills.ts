@@ -18,7 +18,8 @@ export const skillGroups: SkillGroup[] = [
       },
       {
         name: "AI project delivery",
-        evidence: "Represented most strongly by COS30049 and ongoing AI-related design project work.",
+        evidence:
+          "Fine-tuned EfficientNetB3 for 200 bird species (76.41% Top-1 on the official test set), plus COS30049 AI integration work.",
         stage: "Building",
       },
     ],

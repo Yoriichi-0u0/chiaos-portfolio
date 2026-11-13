@@ -23,20 +23,42 @@ export type MissionCategory =
   | "Design"
   | "Negotiation"
   | "Database"
-  | "Networking";
+  | "Networking"
+  | "Fintech"
+  | "Space"
+  | "Product";
+
+export type MissionLink = {
+  label: string;
+  href: string;
+};
+
+export type MissionCaseStudy = {
+  problem: string;
+  contribution: string;
+  architecture: string[];
+  challenges: string[];
+  results: string[];
+  limits: string;
+  evidence: string;
+};
 
 export type Mission = {
   id: string;
   title: string;
   category: MissionCategory;
   summary: string;
+  period?: string;
   role?: string;
   proof: string[];
   technologies: string[];
-  status: "Built" | "In progress" | "Portfolio proof";
+  status: "Built" | "In progress" | "Portfolio proof" | "Live prototype" | "Live product";
   note?: string;
   linkLabel: string;
   href: string;
+  links?: MissionLink[];
+  featured?: boolean;
+  caseStudy?: MissionCaseStudy;
 };
 
 export type SkillGroup = {

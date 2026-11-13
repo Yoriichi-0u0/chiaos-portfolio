@@ -23,6 +23,7 @@ export function MissionFiles({
     []
   );
   const [activeCategory, setActiveCategory] = useState<FilterValue>("All");
+  const featuredMissions = missions.filter((mission) => mission.featured).slice(0, 3);
 
   const filteredMissions =
     activeCategory === "All"
@@ -43,8 +44,9 @@ export function MissionFiles({
               Project proof, ranked for signal.
             </h2>
             <p className="mt-4 text-[#AAB4C0]">
-              COS30049, COS30018, and COS40007 lead the archive. The rest of the
-              files stay available without pretending every placeholder is finished.
+              Earth FM, FinGence, and the bird classifier lead the archive. Each
+              featured file opens a case study with its measured results and stated
+              limits, so the proof stays checkable.
             </p>
           </div>
           <div
@@ -61,6 +63,7 @@ export function MissionFiles({
                 key={category}
                 type="button"
                 onClick={() => setActiveCategory(category)}
+                aria-pressed={activeCategory === category}
                 className={cn(
                   "h-9 shrink-0 rounded-full px-3 text-sm font-medium transition",
                   activeCategory === category
@@ -74,7 +77,7 @@ export function MissionFiles({
           </div>
         </div>
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
-          {missions.slice(0, 3).map((mission, index) => (
+          {featuredMissions.map((mission, index) => (
             <a
               key={mission.id}
               href={`#${mission.id}`}
