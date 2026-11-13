@@ -1,0 +1,33 @@
+import { chromium } from 'playwright';
+const unified = process.argv.includes('--unified'); const desktop = process.argv.includes('--desktop');
+const browser = await chromium.launch({ args: ['--use-angle=swiftshader','--enable-unsafe-swiftshader','--js-flags=--expose-gc'] });
+const ctx = await browser.newContext(desktop ? { viewport:{width:1440,height:900} } : { viewport:{width:390,height:844}, deviceScaleFactor:3, isMobile:true, hasTouch:true });
+await ctx.addInitScript(() => { const o = HTMLCanvasElement.prototype.getContext; window.__ctxCreated = 0; HTMLCanvasElement.prototype.getContext = function (t, ...a) { if (/webgl/.test(t) && !this.__c) { this.__c = 1; window.__ctxCreated++; } return o.call(this, t, ...a); }; });
+const page = await ctx.newPage(); const errors = []; page.on('pageerror', e => errors.push(String(e).slice(0,120)));
+const cdp = await ctx.newCDPSession(page); await cdp.send('Performance.enable');
+if (!desktop) await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
+await page.goto('http://localhost:3217/system?perf' + (unified ? '&renderer=unified' : ''), { waitUntil: 'networkidle' });
+await page.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto'; });
+await page.waitForTimeout(1500);
+const count = () => page.evaluate(() => window.__chiaosGalleryDraws ?? window.__chiaosPerf?.gallery?.frames.length ?? 0);
+const reset = () => page.evaluate(() => { window.__mark = window.__chiaosGalleryDraws ?? 0; if (window.__chiaosPerf?.gallery) window.__chiaosPerf.gallery.frames.length = 0; });
+const ready = () => page.waitForFunction(() => (window.__chiaosGalleryDraws !== undefined ? window.__chiaosGalleryDraws - window.__mark : window.__chiaosPerf?.gallery?.frames.length ?? 0) >= 3, null, { timeout: 30000 }).then(() => true, () => false);
+const toGallery = () => page.locator('[role=tablist]').evaluate(e => window.scrollTo(0, e.getBoundingClientRect().top + scrollY - 70));
+const heap = async () => { await page.evaluate(() => window.gc?.()); const m = (await cdp.send('Performance.getMetrics')).metrics.find(x => x.name === 'JSHeapUsedSize'); return +(m.value / 1048576).toFixed(1); };
+const res = async () => page.evaluate(() => { const g = window.__chiaosPerf?.gallery?.info; return g ? { geo: g.geometries, tex: g.textures, prog: g.programs } : null; });
+const out = { unified, desktop, heapStart: await heap() };
+await reset(); let t0 = Date.now(); await toGallery(); out.coldEntryMs = (await ready()) ? Date.now() - t0 : '>30000';
+await page.waitForTimeout(1000); out.resAfterCold = await res();
+out.warm = [];
+for (let i = 0; i < 6; i += 1) {
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight)); await page.waitForTimeout(1500);
+  const c0 = await count(); await page.waitForTimeout(1000); const c1 = await count();
+  const canv = await page.locator('canvas').count();
+  await reset(); t0 = Date.now(); await toGallery(); const ok = await ready();
+  out.warm.push({ canvasesAway: canv, galleryFramesWhileAway1s: c1 - c0, returnMs: ok ? Date.now() - t0 : '>30000' });
+  await page.waitForTimeout(800);
+}
+out.resAfterWarm = await res(); out.heapEnd = await heap();
+out.webglContextsCreated = await page.evaluate(() => window.__ctxCreated); out.errors = errors;
+console.log(JSON.stringify(out));
+await browser.close();
