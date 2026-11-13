@@ -31,7 +31,7 @@ export function BootScreen() {
           initial={reduceMotion ? false : { opacity: 0, y: -16 }}
           animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="system-grid overflow-hidden rounded-[1.75rem] border border-white/12 bg-[#0B0F17]/86 shadow-2xl shadow-[rgba(0,217,255,0.12)]"
+          className="system-grid overflow-hidden rounded-[1.75rem] border border-white/12 bg-[#0B0F17] shadow-2xl shadow-[rgba(0,217,255,0.12)]"
         >
           <div className="grid gap-0 lg:grid-cols-[1fr_0.72fr]">
             <div className="p-4 sm:p-5">
@@ -58,14 +58,14 @@ export function BootScreen() {
                     initial={reduceMotion ? false : { opacity: 0, x: -10 }}
                     animate={reduceMotion ? undefined : { opacity: 1, x: 0 }}
                     transition={{ duration: 0.35, delay: index * 0.08 }}
-                    className="rounded-2xl border border-white/10 bg-[#05070B]/48 px-3 py-3 font-code text-xs text-[#AAB4C0]"
+                    className="rounded-2xl border border-white/10 bg-[#05070B] px-3 py-3 font-code text-xs text-[#AAB4C0]"
                   >
                     <span className="text-[#FFD400]">0{index + 1}</span> / {line}
                   </motion.div>
                 ))}
               </div>
             </div>
-            <div className="border-t border-white/12 bg-[#101624]/78 p-4 sm:p-5 lg:border-l lg:border-t-0">
+            <div className="border-t border-white/12 bg-[#101624] p-4 sm:p-5 lg:border-l lg:border-t-0">
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="font-code text-xs uppercase text-[#FFD400]">
@@ -81,7 +81,7 @@ export function BootScreen() {
                 {bootStats.map((stat) => (
                   <div
                     key={stat.label}
-                    className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-[#05070B]/42 px-3 py-2"
+                    className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-[#05070B] px-3 py-2"
                   >
                     <span className="flex items-center gap-2 text-sm text-[#AAB4C0]">
                       <CheckCircle2 className="h-4 w-4 text-[#00D9FF]" aria-hidden />

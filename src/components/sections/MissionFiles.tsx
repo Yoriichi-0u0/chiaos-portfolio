@@ -37,7 +37,7 @@ export function MissionFiles({
       className="system-section px-4 py-16 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col gap-6">
           <div className="max-w-3xl">
             <p className="font-code text-sm uppercase text-[#00D9FF]">mission files</p>
             <h2 className="mt-3 font-display text-4xl font-semibold text-[#F8FAFC] sm:text-5xl">
@@ -50,7 +50,7 @@ export function MissionFiles({
             </p>
           </div>
           <div
-            className="flex max-w-full items-center gap-2 overflow-x-auto rounded-full border border-white/12 bg-[#0B0F17]/72 p-1 scrollbar-hide"
+            className="flex w-fit max-w-full flex-wrap items-center gap-1.5 rounded-2xl border border-white/12 bg-[#0B0F17] p-1.5"
             role="group"
             aria-label="Filter missions by category"
           >
@@ -86,7 +86,7 @@ export function MissionFiles({
               onFocus={() => onMissionHover?.(mission.id)}
               onBlur={() => onMissionHover?.(null)}
               className={cn(
-                "group rounded-2xl border bg-[#0B0F17]/74 p-5 transition hover:border-[#00D9FF]/45",
+                "group rounded-2xl border bg-[#0B0F17] p-5 transition hover:border-[#00D9FF]/45",
                 highlightedMissionId === mission.id
                   ? "border-[#FFD400]/55 shadow-[0_0_28px_rgba(255,212,0,0.12)]"
                   : "border-white/12"

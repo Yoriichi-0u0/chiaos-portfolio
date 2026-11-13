@@ -44,7 +44,7 @@ export function Navbar({ onCommandOpen }: NavbarProps) {
   }, [mobileMenuOpen]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/12 bg-[#05070B]/86 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-white/12 bg-[#05070B]/94 backdrop-blur-xl">
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <div className="flex min-w-0 items-center gap-3">
           <a href="#hero" className="font-display text-lg font-semibold text-white">
@@ -118,7 +118,7 @@ export function Navbar({ onCommandOpen }: NavbarProps) {
                 </a>
               ))}
             </nav>
-            <div className="mt-3 grid gap-3 rounded-2xl border border-white/12 bg-[#0B0F17]/92 p-3">
+            <div className="mt-3 grid gap-3 rounded-2xl border border-white/12 bg-[#0B0F17] p-3">
               <ChiaOSVersionBadge showHint className="justify-center" />
               <Link
                 href="/"

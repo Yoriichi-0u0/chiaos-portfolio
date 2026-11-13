@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { DirectorScene } from "./director/DirectorScene";
-import { formations } from "./director/formations";
 import type { SystemDirectorProps } from "./director/types";
 
 export function SystemDirector({
@@ -16,9 +15,6 @@ export function SystemDirector({
   const reduceMotion = Boolean(useReducedMotion());
   const [mobile, setMobile] = useState(false);
   const [webglAvailable, setWebglAvailable] = useState<boolean | null>(null);
-  const formation = formations[activeSection];
-  const directorLabel = useMemo(() => formation.label, [formation.label]);
-  const directorStatus = useMemo(() => formation.status, [formation.status]);
 
   useEffect(() => {
     const query = window.matchMedia("(max-width: 767px)");
@@ -76,7 +72,7 @@ export function SystemDirector({
         />
       </div>
       <div
-        className="system-director-visual pointer-events-none fixed inset-0 z-[12] overflow-hidden"
+        className="system-director-visual pointer-events-none fixed inset-0 z-[5] overflow-hidden"
         aria-hidden="true"
       >
         {webglAvailable ? (
@@ -130,24 +126,8 @@ export function SystemDirector({
               <div className="absolute left-[12%] top-1/2 h-1 w-[76%] -translate-y-1/2 rotate-[-10deg] bg-gradient-to-r from-[#00D9FF]/20 via-[#FFD400]/70 to-[#00D9FF]/30" />
               <div className="absolute left-[18%] top-[58%] h-1 w-[64%] rotate-[18deg] bg-gradient-to-r from-[#FFD400]/20 via-[#00D9FF]/70 to-[#FFD400]/30" />
             </div>
-            <div className="absolute bottom-24 right-5 max-w-[18rem] rounded-2xl border border-[#00D9FF]/32 bg-[#05070B]/72 p-4 text-right shadow-[0_0_42px_rgba(0,217,255,0.24)] backdrop-blur-xl">
-              <p className="font-code text-[10px] uppercase tracking-[0.28em] text-[#00D9FF]">
-                Fallback Director
-              </p>
-              <p className="mt-1 font-display text-lg font-semibold text-white">{directorLabel}</p>
-            </div>
           </div>
         )}
-      </div>
-      <div
-        className="pointer-events-none fixed bottom-5 right-4 z-[13] hidden max-w-xs rounded-2xl border border-[#00D9FF]/30 bg-[#05070B]/68 p-4 text-right shadow-[0_0_48px_rgba(0,217,255,0.22)] backdrop-blur-xl lg:block"
-        aria-hidden="true"
-      >
-        <p className="font-code text-xs uppercase tracking-[0.28em] text-[#00D9FF]">
-          System Director
-        </p>
-        <p className="mt-1 font-display text-lg font-semibold text-[#F8FAFC]">{directorLabel}</p>
-        <p className="mt-1 text-xs leading-5 text-[#AAB4C0]">{directorStatus}</p>
       </div>
     </>
   );

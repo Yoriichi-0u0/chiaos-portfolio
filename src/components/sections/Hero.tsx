@@ -96,7 +96,7 @@ export function Hero() {
             {cockpitReadouts.map((readout) => (
               <div
                 key={readout.label}
-                className="rounded-2xl border border-white/12 bg-[#0B0F17]/72 px-4 py-3"
+                className="rounded-2xl border border-white/12 bg-[#0B0F17] px-4 py-3"
               >
                 <p className="font-code text-[11px] uppercase text-[#AAB4C0]">
                   {readout.label}
@@ -115,7 +115,7 @@ export function Hero() {
                 <a
                   key={route.href}
                   href={route.href}
-                  className="group rounded-2xl border border-white/12 bg-[#0B0F17]/72 p-4 transition hover:border-[#00D9FF]/45 hover:bg-[#101624]/88"
+                  className="group rounded-2xl border border-white/12 bg-[#0B0F17] p-4 transition hover:border-[#00D9FF]/45 hover:bg-[#101624]"
                 >
                   <div className="flex items-center justify-between gap-4">
                     <Icon className="h-5 w-5 text-[#00D9FF]" aria-hidden />
@@ -140,7 +140,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="relative"
         >
-          <div className="rounded-[2rem] border border-[#00D9FF]/24 bg-[#0B0F17]/76 p-5 shadow-2xl shadow-[rgba(0,217,255,0.14)] backdrop-blur">
+          <div className="rounded-[2rem] border border-[#00D9FF]/24 bg-[#0B0F17] p-5 shadow-2xl shadow-[rgba(0,217,255,0.14)] backdrop-blur">
             <div className="flex items-center justify-between gap-4 border-b border-white/12 pb-4">
               <div>
                 <p className="font-code text-xs uppercase text-[#00D9FF]">
@@ -163,7 +163,7 @@ export function Hero() {
               {directorReadouts.map((readout) => (
                 <div
                   key={readout.label}
-                  className="flex items-center justify-between gap-4 rounded-2xl border border-white/12 bg-[#101624]/74 px-4 py-3"
+                  className="flex items-center justify-between gap-4 rounded-2xl border border-white/12 bg-[#101624] px-4 py-3"
                 >
                   <p className="font-code text-xs uppercase text-[#AAB4C0]">
                     {readout.label}
@@ -174,14 +174,14 @@ export function Hero() {
             </div>
           </div>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            <div className="rounded-2xl border border-white/12 bg-[#0B0F17]/72 p-4">
+            <div className="rounded-2xl border border-white/12 bg-[#0B0F17] p-4">
               <div className="flex items-center justify-between">
                 <p className="font-code text-xs uppercase text-[#00D9FF]">Identity</p>
                 <Sparkles className="h-4 w-4 text-[#00D9FF]" aria-hidden />
               </div>
               <p className="mt-2 text-sm leading-6 text-[#AAB4C0]">{profile.identity}</p>
             </div>
-            <div className="rounded-2xl border border-white/12 bg-[#0B0F17]/72 p-4">
+            <div className="rounded-2xl border border-white/12 bg-[#0B0F17] p-4">
               <div className="flex items-center justify-between">
                 <p className="font-code text-xs uppercase text-[#FFD400]">Core signal</p>
                 <Gauge className="h-4 w-4 text-[#FFD400]" aria-hidden />

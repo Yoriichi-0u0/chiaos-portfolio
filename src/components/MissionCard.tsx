@@ -35,7 +35,7 @@ export function MissionCard({
       onFocusCapture={() => onHover?.(mission.id)}
       onBlurCapture={() => onHover?.(null)}
       className={cn(
-        "group relative overflow-hidden rounded-2xl border bg-[#101624]/90 p-5 shadow-2xl shadow-black/25 transition hover:border-[#00D9FF]/45 hover:shadow-[0_0_34px_rgba(0,217,255,0.14)]",
+        "group relative overflow-hidden rounded-2xl border bg-[#101624] p-5 shadow-2xl shadow-black/25 transition hover:border-[#00D9FF]/45 hover:shadow-[0_0_34px_rgba(0,217,255,0.14)]",
         highlighted
           ? "border-[#FFD400]/55 shadow-[0_0_38px_rgba(255,212,0,0.14)]"
           : "border-white/12"

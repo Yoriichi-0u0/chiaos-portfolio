@@ -9,7 +9,7 @@ type MissionCaseStudyProps = {
 
 const tones = {
   system: {
-    details: "border-white/12 bg-[#05070B]/55",
+    details: "border-white/12 bg-[#05070B]",
     summary: "text-[#B7F7FF] hover:text-white",
     heading: "text-[#00D9FF]",
     body: "text-[#AAB4C0]",
