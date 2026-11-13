@@ -9,7 +9,7 @@ export const education: Education = {
   firstSemester: "September 2024",
   currentStage: "Year 2, Semester 2 / fourth semester out of six",
   expectedGraduation: "Around June or July 2027, if everything goes well",
-  cgpaSnapshot: "Unofficial CGPA snapshot: approximately 3.52",
+  cgpaSnapshot: "Cumulative CGPA 3.51 as of the last completed semester",
   focus: [
     "AI systems and model workflows",
     "Cybersecurity and networking foundations",

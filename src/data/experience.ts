@@ -4,7 +4,7 @@ export const experience: Experience[] = [
   {
     organization: "Realfun Learning Centre",
     location: "Miri Branch",
-    role: "Part-time Admin / Operations Support",
+    role: "Part-time Admin / Hotline Handler",
     startDate: "May 2023",
     endDate: "Present",
     summary:
