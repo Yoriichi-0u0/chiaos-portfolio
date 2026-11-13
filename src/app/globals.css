@@ -212,6 +212,24 @@ textarea {
   scrollbar-width: none;
 }
 
+/* Experimental unified renderer (?renderer=unified). The canvas sits below the content so the
+   gallery viewport shows through the transparent stage; mask and opacity are applied in-shader. */
+.system-director-visual.system-director-visual--unified {
+  z-index: 0;
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+
+.system-director--unified {
+  z-index: 0;
+}
+
+.system-director-visual.system-director-visual--unified canvas {
+  mask-image: none;
+  opacity: 1;
+  filter: saturate(1.25);
+}
+
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
 }
