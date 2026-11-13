@@ -60,6 +60,10 @@ export function MissionLinks({ mission, tone = "system" }: MissionCaseStudyProps
   const palette = tones[tone];
   const links = mission.links ?? [{ label: mission.linkLabel, href: mission.href }];
 
+  if (links.length === 0) {
+    return null;
+  }
+
   return (
     <div className="flex flex-wrap gap-2">
       {links.map((link) => {

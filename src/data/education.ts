@@ -7,7 +7,7 @@ export const education: Education = {
   location: "Kuching, Sarawak, Malaysia",
   orientation: "August 2024",
   firstSemester: "September 2024",
-  currentStage: "Year 2, Semester 2 / fourth semester out of six",
+  currentStage: "Year 3, Semester 1 / fifth semester out of six (Semester 2, 2026)",
   expectedGraduation: "Around June or July 2027, if everything goes well",
   cgpaSnapshot: "Cumulative CGPA 3.51 as of the last completed semester",
   focus: [

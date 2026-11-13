@@ -33,6 +33,12 @@ export type MissionLink = {
   href: string;
 };
 
+export type MissionScreenshot = {
+  src: string;
+  alt: string;
+  capturedOn: string;
+};
+
 export type MissionCaseStudy = {
   problem: string;
   contribution: string;
@@ -59,6 +65,7 @@ export type Mission = {
   links?: MissionLink[];
   featured?: boolean;
   caseStudy?: MissionCaseStudy;
+  screenshot?: MissionScreenshot;
 };
 
 export type SkillGroup = {
