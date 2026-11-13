@@ -19,7 +19,7 @@ export function Roadmap() {
           {roadmap.map((item, index) => (
             <article
               key={item.horizon}
-              className="rounded-2xl border border-white/12 bg-[#101624]/78 p-5 shadow-lg shadow-black/20"
+              className="rounded-2xl border border-white/12 bg-[#101624] p-5 shadow-lg shadow-black/20"
             >
               <div className="flex items-center justify-between gap-4">
                 <p className="font-code text-sm uppercase text-[#FFD400]">{item.horizon}</p>

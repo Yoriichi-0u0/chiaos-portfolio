@@ -60,6 +60,17 @@ const corpus: CorpusItem[] = [
       "portfolio",
       "built",
       "proof",
+      "earth",
+      "nasa",
+      "space",
+      "fingence",
+      "finance",
+      "bird",
+      "classifier",
+      "pagepilot",
+      "pdf",
+      "tourism",
+      "sarawak",
       "cos30049",
       "cos30018",
       "automated",
@@ -73,9 +84,16 @@ const corpus: CorpusItem[] = [
       "github",
     ],
     text: missions
-      .map((mission) => `${mission.title} ${mission.category} ${mission.summary} ${mission.proof.join(" ")} ${mission.technologies.join(" ")} ${mission.href}`)
+      .map((mission) => `${mission.title} ${mission.category} ${mission.period ?? ""} ${mission.summary} ${mission.proof.join(" ")} ${mission.technologies.join(" ")} ${mission.href}`)
       .join(" "),
-    answer: `My flagship mission file is COS30049 Computing Technology Innovation Project, currently the university project I am most satisfied with. Repo: https://github.com/jostinchok/my-react-app.git. COS30018 Automated Negotiation System is an Intelligent Systems mission with a public copy coming soon at https://github.com/Yoriichi-0u0/cos30018-assignment.git, though the final repo name may change. COS40007 is AI-related design/project work with no public link yet, so ChiaOS describes it first and links it later.`,
+    answer: () =>
+      `My featured missions are ${missions
+        .filter((mission) => mission.featured)
+        .map((mission) => `${mission.title} (${mission.summary} ${mission.href})`)
+        .join("; ")}. The archive also includes ${missions
+        .filter((mission) => !mission.featured)
+        .map((mission) => mission.title)
+        .join(", ")}. Each featured file has a case study with its stated limits.`,
   },
   {
     source: "Skills",

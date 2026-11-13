@@ -148,7 +148,7 @@ textarea {
 
 .system-director-visual {
   mix-blend-mode: screen;
-  opacity: 0.74;
+  opacity: 0.86;
 }
 
 .system-director-visual canvas {
@@ -157,9 +157,8 @@ textarea {
   width: 100% !important;
   height: 100% !important;
   filter:
-    drop-shadow(0 0 28px rgba(0, 217, 255, 0.55))
-    drop-shadow(0 0 44px rgba(255, 212, 0, 0.24))
-    saturate(1.35);
+    drop-shadow(0 0 22px rgba(0, 217, 255, 0.45))
+    saturate(1.25);
   mask-image: linear-gradient(
     90deg,
     rgba(0, 0, 0, 0.06),

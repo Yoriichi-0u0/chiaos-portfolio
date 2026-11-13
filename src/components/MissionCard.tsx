@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowUpRight, Cpu, Layers3, ShieldCheck } from "lucide-react";
+import { Cpu, Layers3, ShieldCheck } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import { MissionCaseStudy, MissionLinks } from "@/components/MissionCaseStudy";
 import type { Mission } from "@/types/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -19,7 +20,6 @@ export function MissionCard({
   onHover,
 }: MissionCardProps) {
   const reduceMotion = useReducedMotion();
-  const isExternalLink = mission.href.startsWith("http");
 
   return (
     <motion.article
@@ -35,7 +35,7 @@ export function MissionCard({
       onFocusCapture={() => onHover?.(mission.id)}
       onBlurCapture={() => onHover?.(null)}
       className={cn(
-        "group relative overflow-hidden rounded-2xl border bg-[#101624]/90 p-5 shadow-2xl shadow-black/25 transition hover:border-[#00D9FF]/45 hover:shadow-[0_0_34px_rgba(0,217,255,0.14)]",
+        "group relative overflow-hidden rounded-2xl border bg-[#101624] p-5 shadow-2xl shadow-black/25 transition hover:border-[#00D9FF]/45 hover:shadow-[0_0_34px_rgba(0,217,255,0.14)]",
         highlighted
           ? "border-[#FFD400]/55 shadow-[0_0_38px_rgba(255,212,0,0.14)]"
           : "border-white/12"
@@ -47,6 +47,7 @@ export function MissionCard({
         <div>
           <p className="font-code text-xs uppercase text-[#00D9FF]">
             {mission.category}
+            {mission.period ? <span className="text-[#AAB4C0]"> · {mission.period}</span> : null}
           </p>
           <h3 className="mt-3 font-display text-2xl font-semibold text-[#F8FAFC]">
             {mission.title}
@@ -94,15 +95,14 @@ export function MissionCard({
           </span>
         ))}
       </div>
-      <a
-        href={mission.href}
-        target={isExternalLink ? "_blank" : undefined}
-        rel={isExternalLink ? "noreferrer" : undefined}
-        className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#00D9FF] transition group-hover:gap-3"
-      >
-        {mission.linkLabel}
-        <ArrowUpRight className="h-4 w-4" aria-hidden />
-      </a>
+      {mission.caseStudy ? (
+        <div className="mt-5">
+          <MissionCaseStudy mission={mission} />
+        </div>
+      ) : null}
+      <div className="mt-5">
+        <MissionLinks mission={mission} />
+      </div>
     </motion.article>
   );
 }

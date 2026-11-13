@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MissionCaseStudy, MissionLinks } from "@/components/MissionCaseStudy";
 import {
   ArrowRight,
   AtSign,
@@ -7,7 +8,6 @@ import {
   CheckCircle2,
   Cpu,
   Download,
-  ExternalLink,
   Fingerprint,
   GitBranch,
   GraduationCap,
@@ -28,7 +28,7 @@ import { profile } from "@/data/profile";
 import { skillGroups } from "@/data/skills";
 
 const realfun = experience[0];
-const priorityMissions = missions.slice(0, 3);
+const priorityMissions = missions.filter((mission) => mission.featured).slice(0, 3);
 
 const navLinks = [
   ["Identity", "#identity"],
@@ -70,9 +70,9 @@ const snapshotCards = [
     icon: MessageSquare,
   },
   {
-    label: "Flagship build",
-    value: "COS30049",
-    detail: "AI, full-stack, and system integration proof-of-work.",
+    label: "Latest build",
+    value: "Earth FM",
+    detail: "NASA Space Apps 2026 team leader: NASA data turned into sound.",
     icon: Layers3,
   },
   {
@@ -532,7 +532,7 @@ export function LandingPage() {
                   Featured projects
                 </p>
                 <h2 className="mt-3 font-display text-3xl font-semibold sm:text-4xl">
-                  Three proof files on the setup screen.
+                  Recent work, with the evidence attached.
                 </h2>
               </div>
               <Link
@@ -545,18 +545,15 @@ export function LandingPage() {
             </div>
 
             <div className="mt-8 grid gap-4 lg:grid-cols-3">
-              {priorityMissions.map((mission) => {
-                const external = isExternalHref(mission.href);
-
-                return (
+              {priorityMissions.map((mission) => (
                   <article
                     key={mission.id}
-                    className="rounded-lg border border-[#D8DADC] bg-[#F5F5F7] p-6 shadow-[0_18px_54px_rgba(29,29,31,0.08)]"
+                    className="flex flex-col rounded-lg border border-[#D8DADC] bg-[#F5F5F7] p-6 shadow-[0_18px_54px_rgba(29,29,31,0.08)]"
                   >
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="font-code text-xs uppercase tracking-[0.14em] text-[#0071E3]">
-                          {mission.category}
+                          {mission.period ?? mission.category}
                         </p>
                         <h3 className="mt-3 text-2xl font-semibold leading-tight">
                           {mission.title}
@@ -582,22 +579,12 @@ export function LandingPage() {
                         </span>
                       ))}
                     </div>
-                    <a
-                      href={mission.href}
-                      target={external ? "_blank" : undefined}
-                      rel={external ? "noreferrer" : undefined}
-                      className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-[#0071E3]"
-                    >
-                      {mission.linkLabel}
-                      {external ? (
-                        <ExternalLink className="h-4 w-4" aria-hidden />
-                      ) : (
-                        <ArrowRight className="h-4 w-4" aria-hidden />
-                      )}
-                    </a>
+                    <div className="mt-auto grid gap-4 pt-6">
+                      <MissionCaseStudy mission={mission} tone="setup" />
+                      <MissionLinks mission={mission} tone="setup" />
+                    </div>
                   </article>
-                );
-              })}
+              ))}
             </div>
           </div>
         </section>

@@ -23,6 +23,7 @@ export function MissionFiles({
     []
   );
   const [activeCategory, setActiveCategory] = useState<FilterValue>("All");
+  const featuredMissions = missions.filter((mission) => mission.featured).slice(0, 3);
 
   const filteredMissions =
     activeCategory === "All"
@@ -36,19 +37,20 @@ export function MissionFiles({
       className="system-section px-4 py-16 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col gap-6">
           <div className="max-w-3xl">
             <p className="font-code text-sm uppercase text-[#00D9FF]">mission files</p>
             <h2 className="mt-3 font-display text-4xl font-semibold text-[#F8FAFC] sm:text-5xl">
               Project proof, ranked for signal.
             </h2>
             <p className="mt-4 text-[#AAB4C0]">
-              COS30049, COS30018, and COS40007 lead the archive. The rest of the
-              files stay available without pretending every placeholder is finished.
+              Earth FM, FinGence, and the bird classifier lead the archive. Each
+              featured file opens a case study with its measured results and stated
+              limits, so the proof stays checkable.
             </p>
           </div>
           <div
-            className="flex max-w-full items-center gap-2 overflow-x-auto rounded-full border border-white/12 bg-[#0B0F17]/72 p-1 scrollbar-hide"
+            className="flex w-fit max-w-full flex-wrap items-center gap-1.5 rounded-2xl border border-white/12 bg-[#0B0F17] p-1.5"
             role="group"
             aria-label="Filter missions by category"
           >
@@ -61,6 +63,7 @@ export function MissionFiles({
                 key={category}
                 type="button"
                 onClick={() => setActiveCategory(category)}
+                aria-pressed={activeCategory === category}
                 className={cn(
                   "h-9 shrink-0 rounded-full px-3 text-sm font-medium transition",
                   activeCategory === category
@@ -74,7 +77,7 @@ export function MissionFiles({
           </div>
         </div>
         <div className="mt-8 grid gap-4 lg:grid-cols-3">
-          {missions.slice(0, 3).map((mission, index) => (
+          {featuredMissions.map((mission, index) => (
             <a
               key={mission.id}
               href={`#${mission.id}`}
@@ -83,7 +86,7 @@ export function MissionFiles({
               onFocus={() => onMissionHover?.(mission.id)}
               onBlur={() => onMissionHover?.(null)}
               className={cn(
-                "group rounded-2xl border bg-[#0B0F17]/74 p-5 transition hover:border-[#00D9FF]/45",
+                "group rounded-2xl border bg-[#0B0F17] p-5 transition hover:border-[#00D9FF]/45",
                 highlightedMissionId === mission.id
                   ? "border-[#FFD400]/55 shadow-[0_0_28px_rgba(255,212,0,0.12)]"
                   : "border-white/12"

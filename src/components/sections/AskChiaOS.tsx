@@ -48,14 +48,14 @@ export function AskChiaOS() {
                   setQuestion(starter);
                   setAnswer(answerFromLocalData(starter));
                 }}
-                className="rounded-full border border-white/12 bg-[#101624]/60 px-3 py-2 text-sm text-[#F8FAFC] transition hover:border-[#00D9FF]/50"
+                className="rounded-full border border-white/12 bg-[#101624] px-3 py-2 text-sm text-[#F8FAFC] transition hover:border-[#00D9FF]/50"
               >
                 {starter}
               </button>
             ))}
           </div>
         </div>
-        <div className="min-w-0 rounded-3xl border border-[#00D9FF]/24 bg-[#0B0F17]/88 p-5 shadow-2xl shadow-[rgba(0,217,255,0.12)]">
+        <div className="min-w-0 rounded-3xl border border-[#00D9FF]/24 bg-[#0B0F17] p-5 shadow-2xl shadow-[rgba(0,217,255,0.12)]">
           <div className="flex items-center gap-3 border-b border-white/12 pb-4">
             <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#00D9FF]/30 bg-[#00D9FF]/10 text-[#00D9FF]">
               <Bot className="h-5 w-5" aria-hidden />
@@ -74,7 +74,7 @@ export function AskChiaOS() {
               value={question}
               onChange={(event) => setQuestion(event.target.value)}
               placeholder="Ask about projects, skills, education, or roadmap"
-              className="min-w-0 flex-1 rounded-full border border-white/12 bg-[#05070B]/70 px-4 text-sm text-white outline-none transition placeholder:text-[#71717A] focus:border-[#00D9FF]/60"
+              className="min-w-0 flex-1 rounded-full border border-white/12 bg-[#05070B]/90 px-4 text-sm text-white outline-none transition placeholder:text-[#71717A] focus:border-[#00D9FF]/60"
             />
             <button
               type="submit"
@@ -84,7 +84,7 @@ export function AskChiaOS() {
               <Send className="h-4 w-4" aria-hidden />
             </button>
           </form>
-          <div className="mt-5 rounded-2xl border border-white/12 bg-[#101624]/72 p-4">
+          <div className="mt-5 rounded-2xl border border-white/12 bg-[#101624] p-4">
             <div className="flex items-center gap-2 text-sm font-medium text-[#FFD400]">
               <ShieldCheck className="h-4 w-4" aria-hidden />
               {answer.confident ? "Matched local data" : "Insufficient local data"}

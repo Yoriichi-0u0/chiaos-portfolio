@@ -31,7 +31,7 @@ export function CareerTimeline() {
               whileInView={reduceMotion ? undefined : { opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.45, delay: index * 0.04 }}
-              className="grid gap-4 rounded-2xl border border-white/12 bg-[#0B0F17]/76 p-5 shadow-lg shadow-black/20 md:grid-cols-[120px_1fr]"
+              className="grid gap-4 rounded-2xl border border-white/12 bg-[#0B0F17] p-5 shadow-lg shadow-black/20 md:grid-cols-[120px_1fr]"
             >
               <div>
                 <p className="font-code text-3xl text-[#FFD400]">{item.stage}</p>

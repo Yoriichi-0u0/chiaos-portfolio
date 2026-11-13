@@ -31,6 +31,7 @@ export function ChiaOSApp() {
       className="relative min-h-screen overflow-x-hidden bg-[#05070B] text-[#F8FAFC]"
       data-system-state="activated"
     >
+      <div className="system-radial pointer-events-none fixed inset-0 z-0" aria-hidden="true" />
       <SystemScrollProgress />
       <SystemDirector
         activeSection={activeSection}
@@ -46,7 +47,7 @@ export function ChiaOSApp() {
         onOpenChange={setCommandOpen}
       />
       <main id="main-content" tabIndex={-1} className="relative z-10">
-        <div className="system-radial overflow-hidden">
+        <div className="overflow-hidden">
           <BootScreen />
           <Hero />
           <CareerSnapshot />

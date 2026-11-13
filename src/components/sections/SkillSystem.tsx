@@ -46,7 +46,7 @@ export function SkillSystem({
               return (
                 <article
                   key={stat.label}
-                  className="rounded-2xl border border-white/12 bg-[#0B0F17]/78 p-4"
+                  className="rounded-2xl border border-white/12 bg-[#0B0F17] p-4"
                 >
                   <Icon className="h-5 w-5 text-[#FFD400]" aria-hidden />
                   <p className="mt-3 font-code text-xs uppercase text-[#AAB4C0]">
@@ -64,7 +64,7 @@ export function SkillSystem({
           {skillGroups.map((group, groupIndex) => (
             <article
               key={group.title}
-              className="rounded-2xl border border-white/12 bg-[#0B0F17]/78 p-5 shadow-lg shadow-black/20"
+              className="rounded-2xl border border-white/12 bg-[#0B0F17] p-5 shadow-lg shadow-black/20"
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
@@ -91,7 +91,7 @@ export function SkillSystem({
                     onBlur={() => onSkillHover?.(null)}
                     onClick={() => onSkillHover?.(skill.name)}
                     className={cn(
-                      "w-full rounded-2xl border bg-[#101624]/72 p-4 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D9FF]",
+                      "w-full rounded-2xl border bg-[#101624] p-4 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00D9FF]",
                       highlightedSkill === skill.name
                         ? "border-[#FFD400]/55 shadow-[0_0_28px_rgba(255,212,0,0.12)]"
                         : "border-white/12"

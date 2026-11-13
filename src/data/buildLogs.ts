@@ -2,8 +2,15 @@ import type { BuildLog } from "@/types/portfolio";
 
 export const buildLogs: BuildLog[] = [
   {
+    title: "Mission archive refresh",
+    dateLabel: "November 2026",
+    summary:
+      "Added Earth FM, FinGence, the bird classifier and the Sarawak tourism prototype as evidence-backed case studies with their stated limits, plus PagePilot and Little Orbit as public project entries.",
+    tags: ["Projects", "Case studies", "Evidence"],
+  },
+  {
     title: "ChiaOS v1 planning",
-    dateLabel: "Current build",
+    dateLabel: "June 2026",
     summary:
       "Defined the personal career operating system concept, Original Setup route, Activated System route, local data model, and deployment path.",
     tags: ["Portfolio", "Planning", "Next.js"],

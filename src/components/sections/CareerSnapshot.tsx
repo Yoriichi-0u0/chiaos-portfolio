@@ -71,7 +71,7 @@ export function CareerSnapshot() {
             return (
               <article
                 key={item.label}
-                className="group relative overflow-hidden rounded-2xl border border-white/12 bg-[#101624]/82 p-5 shadow-lg shadow-black/20 transition hover:border-[#00D9FF]/35"
+                className="group relative overflow-hidden rounded-2xl border border-white/12 bg-[#101624] p-5 shadow-lg shadow-black/20 transition hover:border-[#00D9FF]/35"
               >
                 <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#00D9FF]/70 to-transparent opacity-0 transition group-hover:opacity-100" />
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#00D9FF]/30 bg-[#00D9FF]/10 text-[#00D9FF]">
@@ -90,7 +90,7 @@ export function CareerSnapshot() {
             );
           })}
         </div>
-        <div className="mt-5 rounded-2xl border border-[#FFD400]/18 bg-[#FFD400]/8 p-5">
+        <div className="mt-5 rounded-2xl border border-[#FFD400]/18 bg-[#0B0F17] bg-gradient-to-br from-[#FFD400]/10 to-[#FFD400]/3 p-5">
           <p className="font-code text-xs uppercase tracking-[0.14em] text-[#FFD400]">
             Education route
           </p>

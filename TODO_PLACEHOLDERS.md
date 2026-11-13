@@ -18,3 +18,15 @@ Replace these before treating the public site as final:
 - Real Open Graph image to replace `public/og-placeholder.svg`
 - COS30018 final public repo name/link confirmation
 - Other project links not known yet
+
+## Needs Chia's Confirmation (added 13 November 2026)
+
+- Education stage still says "Year 2, Semester 2 / fourth semester out of six" (June 2026). Confirm the current semester and CGPA snapshot.
+- Realfun role still says "May 2023 to Present". Confirm it is current.
+- Earth FM: confirm Chia's split of work within team BoboMimi (site currently says only "Team leader").
+- FinGence: confirm the wider contribution wording with teammates (site currently says only "data ingestion owner").
+- Bird classifier: confirm individual or group work. The Streamlit app redirects visitors to a sign-in page, so it is not linked.
+- Sarawak Tourism Information System and Little Orbit: confirm individual or team work and Chia's exact role.
+- PagePilot: source is private. The site uses only public live-site and privacy-page facts. Approve a fuller case study if wanted.
+- COS40007 has no public link; AWS, database and networking missions still point to `#contact`.
+- Real screenshots for the featured missions (Earth FM, FinGence, bird classifier, tourism, PagePilot).

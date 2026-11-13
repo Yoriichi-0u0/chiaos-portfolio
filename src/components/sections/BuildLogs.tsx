@@ -19,7 +19,7 @@ export function BuildLogs() {
           {buildLogs.map((log) => (
             <article
               key={log.title}
-              className="rounded-2xl border border-white/12 bg-[#0B0F17]/78 p-5 shadow-lg shadow-black/20"
+              className="rounded-2xl border border-white/12 bg-[#0B0F17] p-5 shadow-lg shadow-black/20"
             >
               <span className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[#00D9FF]/30 bg-[#00D9FF]/10 text-[#00D9FF]">
                 <ScrollText className="h-5 w-5" aria-hidden />
