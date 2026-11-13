@@ -1,0 +1,199 @@
+{
+ "mode": "headed Chromium, Apple GPU (Metal ANGLE)",
+ "lowpower": false,
+ "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M2, Unspecified Version)",
+ "hero": {
+  "label": "hero, director only",
+  "canvases": 1,
+  "mainThreadBusyPct": 4.5,
+  "scriptPct": 2.8,
+  "heapMB": 17.8,
+  "probes": {
+   "director": {
+    "n": 241,
+    "fps": 60,
+    "meanMs": 16.67,
+    "p95Ms": 17.6,
+    "maxMs": 26.8,
+    "over33": 0,
+    "calls": 72,
+    "triangles": 28630,
+    "geometries": 72,
+    "textures": 1,
+    "programs": 3
+   }
+  }
+ },
+ "galleryEarth": {
+  "label": "gallery Earth FM + director",
+  "canvases": 2,
+  "mainThreadBusyPct": 5.3,
+  "scriptPct": 4.1,
+  "heapMB": 35.4,
+  "probes": {
+   "director": {
+    "n": 240,
+    "fps": 60,
+    "meanMs": 16.66,
+    "p95Ms": 17.6,
+    "maxMs": 17.8,
+    "over33": 0,
+    "calls": 114,
+    "triangles": 35814,
+    "geometries": 147,
+    "textures": 1,
+    "programs": 4
+   },
+   "gallery": {
+    "n": 240,
+    "fps": 60,
+    "meanMs": 16.66,
+    "p95Ms": 17.5,
+    "maxMs": 18,
+    "over33": 0,
+    "calls": 8,
+    "triangles": 4560,
+    "geometries": 8,
+    "textures": 2,
+    "programs": 4
+   }
+  }
+ },
+ "playing": {
+  "label": "Earth FM playing + director",
+  "canvases": 2,
+  "mainThreadBusyPct": 7.9,
+  "scriptPct": 4.6,
+  "heapMB": 24.1,
+  "probes": {
+   "director": {
+    "n": 180,
+    "fps": 60,
+    "meanMs": 16.67,
+    "p95Ms": 17.6,
+    "maxMs": 44.8,
+    "over33": 1,
+    "calls": 114,
+    "triangles": 35814,
+    "geometries": 147,
+    "textures": 1,
+    "programs": 4
+   },
+   "gallery": {
+    "n": 180,
+    "fps": 60,
+    "meanMs": 16.67,
+    "p95Ms": 17.6,
+    "maxMs": 45,
+    "over33": 1,
+    "calls": 8,
+    "triangles": 4560,
+    "geometries": 8,
+    "textures": 2,
+    "programs": 4
+   }
+  }
+ },
+ "perArtifact": {
+  "fingence": {
+   "fps": 60,
+   "p95Ms": 17.6,
+   "calls": 27,
+   "tris": 2614,
+   "directorFps": 60,
+   "mainPct": 6.3
+  },
+  "bird-species-classification": {
+   "fps": 60,
+   "p95Ms": 17.7,
+   "calls": 2,
+   "tris": 84,
+   "directorFps": 60,
+   "mainPct": 4.9
+  },
+  "sarawak-tourism-information-system": {
+   "fps": 60,
+   "p95Ms": 17.5,
+   "calls": 10,
+   "tris": 19556,
+   "directorFps": 60,
+   "mainPct": 5.3
+  },
+  "pagepilot": {
+   "fps": 60,
+   "p95Ms": 17.6,
+   "calls": 41,
+   "tris": 608,
+   "directorFps": 60,
+   "mainPct": 6.5
+  },
+  "little-orbit": {
+   "fps": 60,
+   "p95Ms": 17.6,
+   "calls": 19,
+   "tris": 3196,
+   "directorFps": 60,
+   "mainPct": 5.1
+  }
+ },
+ "geometriesPerCycleAtEarthFm": [
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8,
+  8
+ ],
+ "switching": {
+  "cycles": 60,
+  "heapStartMB": 31.3,
+  "heapEndMB": 40.8,
+  "gpuResourcesBefore": {
+   "g": 19,
+   "t": 1
+  },
+  "gpuResourcesAfter": {
+   "g": 8,
+   "t": 2
+  }
+ },
+ "remount": [
+  {
+   "canvasesWhileAway": 1,
+   "firstFramesMs": 128
+  },
+  {
+   "canvasesWhileAway": 1,
+   "firstFramesMs": 148
+  },
+  {
+   "canvasesWhileAway": 1,
+   "firstFramesMs": 128
+  },
+  {
+   "canvasesWhileAway": 1,
+   "firstFramesMs": 125
+  },
+  {
+   "canvasesWhileAway": 1,
+   "firstFramesMs": 125
+  }
+ ],
+ "remountHeapMB": 27.9,
+ "backgroundTab": {
+  "simulatedHidden": true,
+  "framesWhileHidden3s": {
+   "director": 0,
+   "gallery": 0
+  },
+  "framesAfterVisible": {
+   "director": 30,
+   "gallery": 30
+  }
+ },
+ "errors": []
+}

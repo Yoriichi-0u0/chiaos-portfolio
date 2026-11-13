@@ -1,0 +1,52 @@
+{
+ "desktop": {
+  "canvasesBefore": 1,
+  "canvasesAtGallery": 1,
+  "endKey": "Little Orbit",
+  "homeKey": "Earth FM",
+  "sliderHome": "1880 · −0.18 °C",
+  "sliderEnd": "2025 · +1.19 °C",
+  "playButton": 1,
+  "fallback": 0,
+  "overflow": 0,
+  "caseStudyHash": "#fingence",
+  "canvasesAfterLeaving": 1,
+  "errors": []
+ },
+ "mobile": {
+  "canvasesBefore": 1,
+  "canvasesAtGallery": 1,
+  "endKey": "Little Orbit",
+  "homeKey": "Earth FM",
+  "sliderHome": "1880 · −0.18 °C",
+  "sliderEnd": "2025 · +1.19 °C",
+  "playButton": 1,
+  "fallback": 0,
+  "overflow": 0,
+  "caseStudyHash": "#fingence",
+  "canvasesAfterLeaving": 1,
+  "errors": []
+ },
+ "reduced": {
+  "canvasesBefore": 1,
+  "canvasesAtGallery": 2,
+  "endKey": "Little Orbit",
+  "homeKey": "Earth FM",
+  "sliderHome": "1880 · −0.18 °C",
+  "sliderEnd": "2025 · +1.19 °C",
+  "playButton": 0,
+  "fallback": 0,
+  "overflow": 0,
+  "caseStudyHash": "#fingence",
+  "canvasesAfterLeaving": 1,
+  "errors": []
+ },
+ "landing": {
+  "h1": "Welcome to ChiaOS.",
+  "overflow": 0,
+  "icons": [
+   "/icon.svg?icon.0d19z1qszn1tb.svg",
+   "/apple-icon.png?apple-icon.30c_qnfwuthcv.png"
+  ]
+ }
+}
