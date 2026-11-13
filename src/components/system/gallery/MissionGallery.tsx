@@ -44,6 +44,7 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
   const [year, setYear] = useState(gistempAnnual.length - 1);
   const [playing, setPlaying] = useState(false);
   const [nearViewport, setNearViewport] = useState(false);
+  const [hasBeenNear, setHasBeenNear] = useState(false);
   const [mobile, setMobile] = useState(false);
   const stageRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -65,9 +66,15 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
     if (!stage) {
       return;
     }
-    const observer = new IntersectionObserver(([entry]) => setNearViewport(entry.isIntersecting), {
-      rootMargin: "300px 0px",
-    });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setNearViewport(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setHasBeenNear(true);
+        }
+      },
+      { rootMargin: "300px 0px" },
+    );
     observer.observe(stage);
     return () => observer.disconnect();
   }, []);
@@ -165,6 +172,7 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
       >
         <div
           ref={stageRef}
+          data-gallery-stage
           className="relative aspect-[4/3] min-h-[18rem] overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_50%_45%,#132036_0%,#070A10_70%)] lg:aspect-auto lg:min-h-[30rem] lg:border-b-0 lg:border-r"
           style={{ touchAction: "pan-y" }}
         >
@@ -173,7 +181,7 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
             style={{ background: `radial-gradient(ellipse at 50% 100%, ${artifact.accent}33, transparent 70%)` }}
             aria-hidden
           />
-          {webgl && nearViewport ? (
+          {webgl && hasBeenNear ? (
             <div className="absolute inset-0" aria-hidden>
               <GalleryStage
                 selected={selected}
@@ -181,6 +189,7 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
                 playing={playing}
                 reduceMotion={reduceMotion}
                 mobile={mobile}
+                active={nearViewport}
                 onYearChange={handleYearChange}
                 onPlaybackEnd={handlePlaybackEnd}
               />

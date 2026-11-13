@@ -24,6 +24,7 @@ export function GalleryStage({
   playing,
   reduceMotion,
   mobile,
+  active = true,
   onYearChange,
   onPlaybackEnd,
 }: {
@@ -32,6 +33,7 @@ export function GalleryStage({
   playing: boolean;
   reduceMotion: boolean;
   mobile: boolean;
+  active?: boolean;
   onYearChange: (index: number, fromPointer: boolean) => void;
   onPlaybackEnd: () => void;
 }) {
@@ -70,10 +72,10 @@ export function GalleryStage({
       className="absolute inset-0 h-full w-full"
       camera={{ position: [0, 0, mobile ? 4.6 : 4.1], fov: 42 }}
       dpr={mobile ? [1, 1.5] : [1, 2]}
-      frameloop={!visible ? "never" : reduceMotion ? "demand" : "always"}
+      frameloop={!visible || !active ? "never" : reduceMotion ? "demand" : "always"}
       gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
     >
-      <DemandInvalidator deps={[selected, year, playing, mobile]} />
+      <DemandInvalidator deps={[selected, year, playing, mobile, active]} />
       <PerfProbe name="gallery" />
       <ambientLight intensity={0.7} />
       <directionalLight position={[3, 4, 5]} intensity={2.2} />

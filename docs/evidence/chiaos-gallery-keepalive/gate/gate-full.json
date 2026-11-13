@@ -1,0 +1,111 @@
+{
+ "beforeNear": {
+  "galleryCanvas": null,
+  "canvases": 1
+ },
+ "afterNear": {
+  "galleryCanvas": true,
+  "canvases": 2
+ },
+ "offscreen": {
+  "framesIn2s": 0,
+  "sameCanvas": true
+ },
+ "returned": {
+  "sameCanvas": true,
+  "framesAfterReturn": 19,
+  "yearPreserved": "1940 · +0.12 °C -> 1940 · +0.12 °C"
+ },
+ "blankFrameCheck": {
+  "immediateVsSteadyMAD": 4.59,
+  "laterVsSteadyMAD": 4.87
+ },
+ "selectionPreserved": "gallery-tab-pagepilot",
+ "hiddenTabFrames": 0,
+ "afterVisibleFrames": 22,
+ "afterFreezeResumeFrames": 11,
+ "contextLost": true,
+ "contextRestored": {
+  "lost": false,
+  "frames": 9,
+  "sameCanvas": true
+ },
+ "sliderAfterRestore": "2000 · +0.39 °C",
+ "landscape": {
+  "overflow": 0,
+  "canvasCss": [
+   794,
+   794,
+   1588
+  ]
+ },
+ "portrait": {
+  "overflow": 0,
+  "canvasCss": [
+   384,
+   384,
+   576
+  ]
+ },
+ "unmount": {
+  "url": "/",
+  "canvases": 0,
+  "probes": [],
+  "heldContextsLost": [
+   true,
+   true
+  ]
+ },
+ "webglContextsCreated": 4,
+ "errors": [
+  "warning: [.WebGL-0x124001a5000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+  "warning: [.WebGL-0x124001a6e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+  "warning: THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+  "warning: [.WebGL-0x124001a7a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels",
+  "warning: [.WebGL-0x124001a7a00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)",
+  "warning: THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: deleteVertexArray: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: deleteVertexArray: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: deleteVertexArray: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: deleteVertexArray: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: deleteVertexArray: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: deleteVertexArray: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: deleteVertexArray: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: delete: object does not belong to this context",
+  "warning: WebGL: INVALID_OPERATION: deleteVertexArray: object does not belong to this context"
+ ]
+}
