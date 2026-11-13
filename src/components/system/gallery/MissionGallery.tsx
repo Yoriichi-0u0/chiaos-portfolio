@@ -9,6 +9,8 @@ import { missions } from "@/data/missions";
 import { useWebGLAvailable } from "@/hooks/useWebGLAvailable";
 import { setGalleryActive } from "@/hooks/galleryActivity";
 import { cn } from "@/lib/utils";
+import { setGallerySlot } from "../unified/gallerySlot";
+import { useRendererMode } from "../unified/rendererMode";
 import { anomalyColor, galleryArtifacts, toHex, type GalleryArtifactId } from "./galleryData";
 
 const GalleryStage = dynamic(() => import("./GalleryStage").then((module) => module.GalleryStage), {
@@ -40,6 +42,7 @@ function EarthRecordPoster({ year }: { year: number }) {
 export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | null) => void }) {
   const reduceMotion = Boolean(useReducedMotion());
   const webgl = useWebGLAvailable();
+  const unified = useRendererMode() === "unified" && webgl === true;
   const [selected, setSelected] = useState<GalleryArtifactId>("earth-fm");
   const [year, setYear] = useState(gistempAnnual.length - 1);
   const [playing, setPlaying] = useState(false);
@@ -93,6 +96,23 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
 
   const handlePlaybackEnd = useCallback(() => setPlaying(false), []);
 
+  useEffect(() => {
+    if (!unified) {
+      return;
+    }
+    setGallerySlot({
+      track: stageRef,
+      near: nearViewport,
+      props: { selected, year, playing, reduceMotion, mobile, onYearChange: handleYearChange, onPlaybackEnd: handlePlaybackEnd },
+    });
+  }, [unified, nearViewport, selected, year, playing, reduceMotion, mobile, handleYearChange, handlePlaybackEnd]);
+
+  useEffect(() => {
+    if (unified) {
+      return () => setGallerySlot(null);
+    }
+  }, [unified]);
+
   function select(id: GalleryArtifactId) {
     setSelected(id);
     setPlaying(false);
@@ -122,11 +142,14 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
   const value = gistempAnnual[year] ?? 0;
 
   return (
-    <div className="mt-8 overflow-hidden rounded-3xl border border-white/12 bg-[#0B0F17]">
+    <div className={cn("mt-8 overflow-hidden rounded-3xl border border-white/12", !unified && "bg-[#0B0F17]")}>
       <div
         role="tablist"
         aria-label="Featured mission artifacts"
-        className="flex gap-1 overflow-x-auto border-b border-white/10 p-2 [scrollbar-width:none]"
+        className={cn(
+          "flex gap-1 overflow-x-auto border-b border-white/10 p-2 [scrollbar-width:none]",
+          unified && "bg-[#0B0F17]"
+        )}
       >
         {galleryArtifacts.map((item, index) => {
           const TabIcon = item.icon;
@@ -165,15 +188,21 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
       >
         <div
           ref={stageRef}
-          className="relative aspect-[4/3] min-h-[18rem] overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_50%_45%,#132036_0%,#070A10_70%)] lg:aspect-auto lg:min-h-[30rem] lg:border-b-0 lg:border-r"
+          data-gallery-stage
+          className={cn(
+            "relative aspect-[4/3] min-h-[18rem] overflow-hidden border-b border-white/10 lg:aspect-auto lg:min-h-[30rem] lg:border-b-0 lg:border-r",
+            !unified && "bg-[radial-gradient(circle_at_50%_45%,#132036_0%,#070A10_70%)]"
+          )}
           style={{ touchAction: "pan-y" }}
         >
-          <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 opacity-60"
-            style={{ background: `radial-gradient(ellipse at 50% 100%, ${artifact.accent}33, transparent 70%)` }}
-            aria-hidden
-          />
-          {webgl && nearViewport ? (
+          {!unified ? (
+            <div
+              className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 opacity-60"
+              style={{ background: `radial-gradient(ellipse at 50% 100%, ${artifact.accent}33, transparent 70%)` }}
+              aria-hidden
+            />
+          ) : null}
+          {webgl && nearViewport && !unified ? (
             <div className="absolute inset-0" aria-hidden>
               <GalleryStage
                 selected={selected}
@@ -210,7 +239,7 @@ export function MissionGallery({ onSelect }: { onSelect?: (missionId: string | n
           ) : null}
         </div>
 
-        <div className="flex flex-col gap-5 p-5 sm:p-7">
+        <div className={cn("flex flex-col gap-5 p-5 sm:p-7", unified && "bg-[#0B0F17]")}>
           <div>
             <p className="font-code text-xs uppercase tracking-[0.14em]" style={{ color: artifact.accent }}>
               {mission?.category}

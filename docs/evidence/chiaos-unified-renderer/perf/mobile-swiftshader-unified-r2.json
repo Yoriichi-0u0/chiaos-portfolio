@@ -1,0 +1,200 @@
+{
+ "mode": "headless SwiftShader (software)",
+ "lowpower": true,
+ "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+ "hero": {
+  "label": "hero, director only",
+  "canvases": 1,
+  "mainThreadBusyPct": 48,
+  "scriptPct": 41.6,
+  "heapMB": 10,
+  "probes": {
+   "director": {
+    "n": 87,
+    "fps": 28.4,
+    "meanMs": 35.19,
+    "p95Ms": 38.8,
+    "maxMs": 364.1,
+    "over33": 19,
+    "calls": 30,
+    "triangles": 10515,
+    "geometries": 37,
+    "textures": 1,
+    "programs": 5
+   }
+  }
+ },
+ "galleryEarth": {
+  "label": "gallery Earth FM + director",
+  "canvases": 1,
+  "mainThreadBusyPct": 21.8,
+  "scriptPct": 18.9,
+  "heapMB": 13.3,
+  "probes": {
+   "director": {
+    "n": 30,
+    "fps": 6.4,
+    "meanMs": 155.6,
+    "p95Ms": 740.7,
+    "maxMs": 764.2,
+    "over33": 28,
+    "calls": 54,
+    "triangles": 19496,
+    "geometries": 74,
+    "textures": 2,
+    "programs": 9
+   },
+   "gallery": {
+    "n": 27,
+    "fps": 7.3,
+    "meanMs": 137.19,
+    "p95Ms": 315.7,
+    "maxMs": 764.2,
+    "over33": 25,
+    "calls": 54,
+    "triangles": 19496,
+    "geometries": 74,
+    "textures": 2,
+    "programs": 9
+   }
+  }
+ },
+ "playing": {
+  "label": "Earth FM playing + director",
+  "canvases": 1,
+  "mainThreadBusyPct": 41.7,
+  "scriptPct": 27.1,
+  "heapMB": 15.2,
+  "probes": {
+   "director": {
+    "n": 16,
+    "fps": 5.3,
+    "meanMs": 190.26,
+    "p95Ms": 297.8,
+    "maxMs": 297.8,
+    "over33": 16,
+    "calls": 54,
+    "triangles": 19496,
+    "geometries": 71,
+    "textures": 2,
+    "programs": 9
+   },
+   "gallery": {
+    "n": 16,
+    "fps": 5.3,
+    "meanMs": 190.26,
+    "p95Ms": 297.8,
+    "maxMs": 297.8,
+    "over33": 16,
+    "calls": 54,
+    "triangles": 19496,
+    "geometries": 71,
+    "textures": 2,
+    "programs": 9
+   }
+  }
+ },
+ "perArtifact": {
+  "fingence": {
+   "fps": 4.7,
+   "p95Ms": 794.7,
+   "calls": 75,
+   "tris": 17562,
+   "directorFps": 4.7,
+   "mainPct": 8.6
+  },
+  "bird-species-classification": {
+   "fps": 5.3,
+   "p95Ms": 725.6,
+   "calls": 46,
+   "tris": 13488,
+   "directorFps": 5.3,
+   "mainPct": 9.6
+  },
+  "sarawak-tourism-information-system": {
+   "fps": 2.5,
+   "p95Ms": 1548,
+   "calls": 50,
+   "tris": 32012,
+   "directorFps": 2.5,
+   "mainPct": 5.6
+  },
+  "pagepilot": {
+   "fps": 3.2,
+   "p95Ms": 1211.7,
+   "calls": 74,
+   "tris": 11160,
+   "directorFps": 3.2,
+   "mainPct": 8.5
+  },
+  "little-orbit": {
+   "fps": 3.1,
+   "p95Ms": 1165.3,
+   "calls": 55,
+   "tris": 14018,
+   "directorFps": 3.1,
+   "mainPct": 4
+  }
+ },
+ "geometriesPerCycleAtEarthFm": [
+  106,
+  101,
+  112,
+  104,
+  104,
+  104,
+  104,
+  92,
+  115,
+  104
+ ],
+ "switching": {
+  "cycles": 60,
+  "heapStartMB": 14.1,
+  "heapEndMB": 17.3,
+  "gpuResourcesBefore": {
+   "g": 88,
+   "t": 1
+  },
+  "gpuResourcesAfter": {
+   "g": 105,
+   "t": 2
+  }
+ },
+ "remount": [
+  {
+   "canvasesWhileAway": 1,
+   "firstFramesMs": 177
+  },
+  {
+   "canvasesWhileAway": 1,
+   "firstFramesMs": 54
+  },
+  {
+   "canvasesWhileAway": 1,
+   "firstFramesMs": 15
+  },
+  {
+   "canvasesWhileAway": 1,
+   "firstFramesMs": 19
+  },
+  {
+   "canvasesWhileAway": 1,
+   "firstFramesMs": 19
+  }
+ ],
+ "remountHeapMB": 16.3,
+ "backgroundTab": {
+  "simulatedHidden": true,
+  "framesWhileHidden3s": {
+   "director": 0,
+   "gallery": 0
+  },
+  "framesAfterVisible": {
+   "director": 18,
+   "gallery": 18
+  }
+ },
+ "errors": [],
+ "contexts": 1
+}

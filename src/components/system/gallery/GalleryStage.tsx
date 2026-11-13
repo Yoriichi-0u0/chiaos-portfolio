@@ -18,15 +18,7 @@ function DemandInvalidator({ deps }: { deps: unknown[] }) {
   return null;
 }
 
-export function GalleryStage({
-  selected,
-  year,
-  playing,
-  reduceMotion,
-  mobile,
-  onYearChange,
-  onPlaybackEnd,
-}: {
+export type GallerySceneProps = {
   selected: GalleryArtifactId;
   year: number;
   playing: boolean;
@@ -34,8 +26,17 @@ export function GalleryStage({
   mobile: boolean;
   onYearChange: (index: number, fromPointer: boolean) => void;
   onPlaybackEnd: () => void;
-}) {
-  const visible = usePageVisible();
+};
+
+export function GalleryScene({
+  selected,
+  year,
+  playing,
+  reduceMotion,
+  mobile,
+  onYearChange,
+  onPlaybackEnd,
+}: GallerySceneProps) {
   let artifact: ReactNode;
   switch (selected) {
     case "earth-fm":
@@ -66,13 +67,7 @@ export function GalleryStage({
   }
 
   return (
-    <Canvas
-      className="absolute inset-0 h-full w-full"
-      camera={{ position: [0, 0, mobile ? 4.6 : 4.1], fov: 42 }}
-      dpr={mobile ? [1, 1.5] : [1, 2]}
-      frameloop={!visible ? "never" : reduceMotion ? "demand" : "always"}
-      gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
-    >
+    <>
       <DemandInvalidator deps={[selected, year, playing, mobile]} />
       <PerfProbe name="gallery" />
       <ambientLight intensity={0.7} />
@@ -90,6 +85,22 @@ export function GalleryStage({
       >
         {artifact}
       </PresentationControls>
+    </>
+  );
+}
+
+export function GalleryStage(props: GallerySceneProps) {
+  const visible = usePageVisible();
+  const { mobile, reduceMotion } = props;
+  return (
+    <Canvas
+      className="absolute inset-0 h-full w-full"
+      camera={{ position: [0, 0, mobile ? 4.6 : 4.1], fov: 42 }}
+      dpr={mobile ? [1, 1.5] : [1, 2]}
+      frameloop={!visible ? "never" : reduceMotion ? "demand" : "always"}
+      gl={{ antialias: true, powerPreference: "high-performance", alpha: true }}
+    >
+      <GalleryScene {...props} />
     </Canvas>
   );
 }

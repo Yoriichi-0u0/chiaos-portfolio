@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import { Canvas } from "@react-three/fiber";
 import { useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
@@ -8,6 +9,12 @@ import { usePageVisible } from "@/hooks/usePageVisible";
 import { useGalleryActive } from "@/hooks/galleryActivity";
 import { DirectorScene } from "./director/DirectorScene";
 import type { SystemDirectorProps } from "./director/types";
+import { useRendererMode } from "./unified/rendererMode";
+
+const UnifiedCanvas = dynamic(() => import("./unified/UnifiedCanvas").then((module) => module.UnifiedCanvas), {
+  ssr: false,
+  loading: () => null,
+});
 
 export function SystemDirector({
   activeSection,
@@ -17,6 +24,7 @@ export function SystemDirector({
   const reduceMotion = Boolean(useReducedMotion());
   const visible = usePageVisible();
   const galleryActive = useGalleryActive();
+  const unified = useRendererMode() === "unified";
   const [mobile, setMobile] = useState(false);
   const [webglAvailable, setWebglAvailable] = useState<boolean | null>(null);
 
@@ -50,7 +58,10 @@ export function SystemDirector({
   return (
     <>
       <div
-        className="system-director pointer-events-none fixed inset-0 z-[1] overflow-hidden"
+        className={cn(
+          "system-director pointer-events-none fixed inset-0 z-[1] overflow-hidden",
+          unified && webglAvailable && "system-director--unified"
+        )}
         aria-hidden="true"
       >
         <div
@@ -76,10 +87,22 @@ export function SystemDirector({
         />
       </div>
       <div
-        className="system-director-visual pointer-events-none fixed inset-0 z-[5] overflow-hidden"
+        className={cn(
+          "system-director-visual pointer-events-none fixed inset-0 z-[5] overflow-hidden",
+          unified && webglAvailable && "system-director-visual--unified"
+        )}
         aria-hidden="true"
       >
-        {webglAvailable ? (
+        {webglAvailable && unified ? (
+          <UnifiedCanvas
+            visible={visible}
+            activeSection={activeSection}
+            highlightedMissionId={highlightedMissionId}
+            highlightedSkill={highlightedSkill}
+            reduceMotion={reduceMotion}
+            mobile={mobile}
+          />
+        ) : webglAvailable ? (
           <Canvas
             aria-label="Scroll-guided ChiaOS System Director"
             className="absolute inset-0 h-full w-full"
